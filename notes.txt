@@ -1,0 +1,23 @@
+npm init -> server.js
+
+create dev and prod dbs on MongoDB (unique auth credentials ideal)
+
+mkdir config
+
+touch config/keys.js config/dev.js config/prod.js
+
+touch .gitignore -> node_modules && config/dev.js
+
+npm i express express-validator bcryptjs jsonwebtoken mongoose concurrently
+
+touch server.js
+
+package.json
+
+"scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+}
+
+create git repositories for dev and prod projects
+
