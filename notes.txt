@@ -6,7 +6,16 @@ mkdir config
 
 touch config/keys.js config/dev.js config/prod.js
 
+add key/value pair in config/dev.js for mongo_uri
+
+add key/value pair in config/dev.js for jwt_secret
+
+node
+require('crypto').randomBytes(64).toString('hex')
+
 touch .gitignore -> node_modules && config/dev.js
+
+create git repository for project
 
 npm i express express-validator bcryptjs jsonwebtoken mongoose concurrently
 
@@ -19,5 +28,16 @@ package.json
     "dev": "nodemon server.js"
 }
 
-create git repositories for dev and prod projects
+mkdir models
 
+touch models/User.js
+
+mkdir routes
+
+touch routes/auth.js
+
+mkdir middleware
+
+touch middleware/auth.js
+
+test login route in postman (Content-Type: application/json)

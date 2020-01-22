@@ -6,8 +6,7 @@ const app = express();
 app.use(express.json());
 
 
-// MODELS
-// require("./models/User");
+
 
 
 mongoose
@@ -23,8 +22,8 @@ mongoose
 mongoose.set("debug", true);
 
 // ROUTES
-// const auth = require("./routes/auth");
-// app.use("/auth", auth);
+const auth = require("./routes/auth");
+app.use("/auth", auth);
 
 
 if (process.env.NODE_ENV === "production") {
