@@ -24,6 +24,8 @@ mongoose.set("debug", true);
 // ROUTES
 const auth = require("./routes/auth");
 app.use("/auth", auth);
+const profile = require("./routes/profile");
+app.use("/profile", profile);
 
 
 if (process.env.NODE_ENV === "production") {

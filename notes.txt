@@ -40,4 +40,5 @@ mkdir middleware
 
 touch middleware/auth.js
 
-test login route in postman (Content-Type: application/json)
+create and test routes in postman (Content-Type: application/json)
+
