@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-// @route GET profile/current
+// @route GET /profiles/current
 // @desc Get Active User's Profile
 // @access  Private
 router.get("/active", auth, async (req, res) => {
@@ -25,7 +25,7 @@ router.get("/active", auth, async (req, res) => {
   }
 });
 
-// @route POST profile
+// @route POST /profiles
 // @desc Create User Profile
 // @access  Private
 router.post(
@@ -96,7 +96,7 @@ router.post(
   }
 );
 
-// @route PATCH profile
+// @route PATCH /profiles
 // @desc Update User Profile
 // @access  Private
 router.put(
@@ -166,7 +166,7 @@ router.put(
   }
 );
 
-// @route DELETE profile
+// @route DELETE /profiles
 // @desc Deletes related user, profile and posts
 // @access  Private
 router.delete("/", auth, async (req, res) => {
@@ -181,7 +181,7 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
-// @route GET profile
+// @route GET /profiles
 // @desc GET ALL User Profiles
 // @access  Public
 router.get("/", async (req, res) => {
@@ -199,8 +199,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// @route GET profile/user/:user_id
-// @desc Get Profile by User ID
+// @route GET /profiles/user/:user_id
+// @desc Get Profiles by User ID
 // @access  Public
 router.get("/user/:user_id", async (req, res) => {
   try {
@@ -219,7 +219,7 @@ router.get("/user/:user_id", async (req, res) => {
   }
 });
 
-// @route POST profile/experience
+// @route POST /profiles/experience
 // @desc Create profile experience
 // @access  Private
 router.post(
@@ -279,7 +279,7 @@ router.post(
   }
 );
 
-// @route PUT profile/experience/experience_id
+// @route PUT /profiles/experience/experience_id
 // @desc Update profile experience
 // @access  Private
 router.put(
@@ -341,7 +341,7 @@ router.put(
   }
 );
 
-// @route DELETE profile/experience/experience_id
+// @route DELETE /profiles/experience/experience_id
 // @desc Delete profile experience
 // @access  Private
 router.delete("/experience/:experience_id", auth, async (req, res) => {
@@ -428,7 +428,7 @@ router.post(
   }
 );
 
-// @route PUT profile/education/education_id
+// @route PUT /profiles/education/education_id
 // @desc Update profile education
 // @access  Private
 router.put(
@@ -493,7 +493,7 @@ router.put(
   }
 );
 
-// @route DELETE profile/education/education_id
+// @route DELETE /profiles/education/education_id
 // @desc Delete profile education
 // @access  Private
 router.delete("/education/:education_id", auth, async (req, res) => {

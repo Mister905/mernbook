@@ -24,8 +24,10 @@ mongoose
 // ROUTES
 const auth = require("./routes/auth");
 app.use("/auth", auth);
-const profile = require("./routes/profile");
-app.use("/profile", profile);
+const profiles = require("./routes/profiles");
+app.use("/profiles", profiles);
+const posts = require("./routes/posts");
+app.use("/posts", posts);
 
 
 if (process.env.NODE_ENV === "production") {

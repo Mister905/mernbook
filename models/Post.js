@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   user: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
   // We still want to show the post's user's name even if they've deleted their account
@@ -12,10 +12,6 @@ const PostSchema = new mongoose.Schema({
   last_name: {
     type: String
   },
-  title: {
-    type: String,
-    required: true
-  },
   text: {
     type: String,
     required: true
@@ -23,7 +19,7 @@ const PostSchema = new mongoose.Schema({
   likes: [
     {
       user: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User"
       }
     }
@@ -31,7 +27,7 @@ const PostSchema = new mongoose.Schema({
   comments: [
     {
       user: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User"
       },
       first_name: {
