@@ -5,10 +5,6 @@ const router = express.Router();
 const app = express();
 app.use(express.json());
 
-
-
-
-
 mongoose
   .connect(keys.mongo_uri, {
     useNewUrlParser: true,
@@ -19,7 +15,7 @@ mongoose
   })
   .catch(err => console.log("Error on start: " + err.stack));
 
-// mongoose.set("debug", true);
+mongoose.set("debug", true);
 
 // ROUTES
 const auth = require("./routes/auth");
@@ -28,7 +24,6 @@ const profiles = require("./routes/profiles");
 app.use("/profiles", profiles);
 const posts = require("./routes/posts");
 app.use("/posts", posts);
-
 
 if (process.env.NODE_ENV === "production") {
   // Express serves production assets like main.js
