@@ -1,0 +1,18 @@
+@import "../../components/layout/header/Header.scss";
+@import "../../components/layout/loader/Loader.scss";
+@import "../../components/landing/Landing.scss";
+@import "../../components/dashboard/Dashboard.scss";
+@import "../../components/auth/login/Login.scss";
+@import "../../components/auth/register/Register.scss";
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+.heading {
+    font-weight: 600;
+}

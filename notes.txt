@@ -25,7 +25,9 @@ package.json
 
 "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
 }
 
 mkdir models
@@ -41,4 +43,16 @@ mkdir middleware
 touch middleware/auth.js
 
 create and test routes in postman (see Mernbook in Postman)
+
+npx create-react-app client
+
+cd client
+
+delete .gitignore and README.md
+
+npm i axios react-router-dom redux react-redux redux-thunk moment react-moment http-proxy-middleware formik materialize-css moment node-sass
+
+client/src -> delete everything except App.js and index.js
+
+touch client/src/setupProxy.js
 
