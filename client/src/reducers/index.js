@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-// import authReducer from "./authReducer";
-// import surveysReducer from "./surveysReducer";
-let test;
+import authReducer from "./authReducer";
+import alertReducer from './alertReducer';
+
 export default combineReducers({
-//   auth: authReducer,
-//   surveys: surveysReducer
-    // test: () => {}
+  auth: authReducer,
+  alert: alertReducer
 });

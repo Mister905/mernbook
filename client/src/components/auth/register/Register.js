@@ -103,10 +103,39 @@ class Register extends Component {
                     type="password"
                     id="password"
                     name="password"
-                    className={errors.password && touched.password ? "invalid" : ""}
+                    className={
+                      errors.password && touched.password ? "invalid" : ""
+                    }
                   />
                   {errors.password && touched.password && (
-                    <span className="custom-helper-error">{errors.password}</span>
+                    <span className="custom-helper-error">
+                      {errors.password}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m6 offset-m3">
+                <div className="custom-input-field">
+                  <label
+                    for="confirm_password"
+                    className="custom-label mernbook-blue-text"
+                  >
+                    Confirm Password
+                  </label>
+                  <Field
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    className={
+                      errors.confirm_password && touched.confirm_password ? "invalid" : ""
+                    }
+                  />
+                  {errors.confirm_password && touched.confirm_password && (
+                    <span className="custom-helper-error">
+                      {errors.confirm_password}
+                    </span>
                   )}
                 </div>
               </div>
@@ -139,7 +168,8 @@ const FormikForm = withFormik({
     first_name: Yup.string().required("First Name is Required"),
     last_name: Yup.string().required("Last Name is Required"),
     email: Yup.string().required("Email is Required"),
-    password: Yup.string().required("Password is Required")
+    password: Yup.string().required("Password is Required"),
+    confirm_password: Yup.string().required("Confirm Password is Required")
   }),
   handleSubmit: (values, props) => {
     // const { setFieldError } = props;

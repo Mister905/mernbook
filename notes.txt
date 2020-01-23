@@ -50,9 +50,10 @@ cd client
 
 delete .gitignore and README.md
 
-npm i axios react-router-dom redux react-redux redux-thunk moment react-moment http-proxy-middleware formik materialize-css moment node-sass yup
+npm i axios react-router-dom redux react-redux redux-thunk moment react-moment http-proxy-middleware formik materialize-css moment node-sass yup react-alert uuid
 
 client/src -> delete everything except App.js and index.js
 
 touch client/src/setupProxy.js
 
+set up alert component, reducer, action and provider in App.js
