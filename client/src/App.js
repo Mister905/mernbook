@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import Header from "./components/layout/header/Header";
 import Landing from "./components/landing/Landing";
 import Dashboard from "./components/dashboard/Dashboard";
+import Login from './components/auth/login/Login';
+import Register from './components/auth/register/Register';
 
 class App extends Component {
   render() {
@@ -15,6 +17,8 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
           </Switch>
         </BrowserRouter>
       </div>

@@ -50,7 +50,7 @@ cd client
 
 delete .gitignore and README.md
 
-npm i axios react-router-dom redux react-redux redux-thunk moment react-moment http-proxy-middleware formik materialize-css moment node-sass
+npm i axios react-router-dom redux react-redux redux-thunk moment react-moment http-proxy-middleware formik materialize-css moment node-sass yup
 
 client/src -> delete everything except App.js and index.js
 

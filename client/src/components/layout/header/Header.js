@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import logo_nav from '../../../assets/img/mernbook_nav.PNG';
-
+import logo_nav from "../../../assets/img/mernbook_nav.PNG";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   render() {
@@ -8,15 +8,16 @@ class Header extends Component {
       <nav className="landing-nav">
         <div className="container">
           <div class="nav-wrapper">
-            <a href="#" class="brand-logo">
-              <img className="logo-nav" src={logo_nav} alt=""/>
-            </a>
+            <Link className="brand-logo" to={"/"}>
+              <img className="logo-nav" src={logo_nav} alt="" />
+            </Link>
+
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li>
-                <a href="sass.html">Login</a>
+                <Link to={"/register"}>Register</Link>
               </li>
               <li>
-                <a href="badges.html">Register</a>
+                <Link to={"/login"}>Login</Link>
               </li>
             </ul>
           </div>

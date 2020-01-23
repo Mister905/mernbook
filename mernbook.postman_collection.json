@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "d8c16221-43a8-47a0-acd5-00404b511ceb",
+		"name": "mernbook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jdoe@gmail.com\",\n\t\"password\": \"jdoe@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Returns JWT"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\": \"John\",\n\t\"last_name\": \"Doe\",\n\t\"email\": \"jdoe@gmail.com\",\n\t\"password\": \"jdoe@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "profiles",
+			"item": [
+				{
+					"name": "Get All Profiles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTgwMTUwMywiZXhwIjoxNTc5ODMwMzAzfQ.UclAzUs1yZGaDRp7ypr8fpRCwdxGjUq8vsuNkumd3FQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Active User Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTcwOTUzMCwiZXhwIjoxNTc5NzM4MzMwfQ.8TIbZaE2314GJZY1aEFTdYnGVM9ed5sveCWnerF-Dao",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location\": \"Hamilton\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/profiles/active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyOGE0NGQ4MzU3NzI0MzMwYjAyMDQ0In0sImlhdCI6MTU3OTcyMTgzNiwiZXhwIjoxNTc5NzUwNjM2fQ.fPBSpgwbp_6tHIWrXEu2Ofl7_U063kOlwQPXJpV-qtU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location\": \"Hamilton, Ontario\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile by User ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/profiles/user/5e287420504de04484d8f61e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles",
+								"user",
+								"5e287420504de04484d8f61e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTcwOTUzMCwiZXhwIjoxNTc5NzM4MzMwfQ.8TIbZaE2314GJZY1aEFTdYnGVM9ed5sveCWnerF-Dao"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location\": \"Hamilton, Ontario\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyOGE0NGQ4MzU3NzI0MzMwYjAyMDQ0In0sImlhdCI6MTU3OTcyMTgzNiwiZXhwIjoxNTc5NzUwNjM2fQ.fPBSpgwbp_6tHIWrXEu2Ofl7_U063kOlwQPXJpV-qtU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Experience",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTcyMzM0OSwiZXhwIjoxNTc5NzUyMTQ5fQ.cJlRzjnIWFAyd1gt4yxHh448EL6KYd7T52EWxAfmvJ8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Full-Stack Web Developer\",\n\t\"company\": \"Acme Corp.\",\n\t\"location\": \"Hamilton, Ontario\",\n\t\"from\": \"8-10-2010\",\n\t\"current\": true,\n\t\"description\": \"Create Full-Stack Web Applications\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/profiles/experience",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles",
+								"experience"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Experience",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTcyMzM0OSwiZXhwIjoxNTc5NzUyMTQ5fQ.cJlRzjnIWFAyd1gt4yxHh448EL6KYd7T52EWxAfmvJ8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Full-Stack Web Developer\",\n\t\"company\": \"Microsoft\",\n\t\"location\": \"Hamilton, Ontario\",\n\t\"from\": \"8-10-2010\",\n\t\"current\": true,\n\t\"description\": \"Create Full-Stack Web Applications\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/profiles/experience/5e28b0c41938d923b8b30b30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles",
+								"experience",
+								"5e28b0c41938d923b8b30b30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Experience",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTcyNTYzMiwiZXhwIjoxNTc5NzU0NDMyfQ.XU-RW22cxA4FWLjPnknjA4LGtXeGU3jKrPrNcJnzpuU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/profiles/experience/5e28afa71938d923b8b30b2f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles",
+								"experience",
+								"5e28afa71938d923b8b30b2f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Education",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTcyMzM0OSwiZXhwIjoxNTc5NzUyMTQ5fQ.cJlRzjnIWFAyd1gt4yxHh448EL6KYd7T52EWxAfmvJ8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"institution\": \"University of Toronto\",\n\t\"credential\": \"Bachelor of Arts\",\n\t\"field\": \"Political Science\",\n\t\"from\": \"8-2-2004\",\n\t\"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut massa quis odio facilisis molestie eu eu ligula. Suspendisse potenti. Praesent feugiat posuere nunc at dapibus. Morbi porta quam eget mollis bibendum. Vestibulum consequat mauris eu finibus mollis. Aenean sit amet interdum sem. Quisque mattis purus neque, gravida imperdiet ante sollicitudin sit amet. Etiam consectetur diam id convallis suscipit. Sed id ultricies lectus, nec feugiat dolor. Proin fermentum blandit ipsum in sollicitudin. Nam nec neque rutrum, vulputate ipsum nec, mattis urna. Integer dignissim placerat orci, eu ultrices augue ultrices at. Donec erat mi, faucibus a nisl vel, viverra cursus nisi. Vivamus in pharetra sem.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/profiles/education",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles",
+								"education"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Education",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTcyMzM0OSwiZXhwIjoxNTc5NzUyMTQ5fQ.cJlRzjnIWFAyd1gt4yxHh448EL6KYd7T52EWxAfmvJ8",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"institution\": \"University of Toronto\",\n\t\"credential\": \"Master of Arts\",\n\t\"field\": \"Political Science\",\n\t\"from\": \"8-2-2004\",\n\t\"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/profiles/education/5e28c117be64962b50aadc9f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"profiles",
+								"education",
+								"5e28c117be64962b50aadc9f"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\": \"DELETE ME\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/posts/5e28ec82e9002325148220ac",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"5e28ec82e9002325148220ac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/posts/5e28f278d3f0632a10689994",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"5e28f278d3f0632a10689994"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"SAVE ME\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/posts/5e28f2f5d3f0632a10689995",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"5e28f2f5d3f0632a10689995"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like a Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/posts/5e28f2f5d3f0632a10689995/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"5e28f2f5d3f0632a10689995",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlike a Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/posts/5e28f2f5d3f0632a10689995/unlike",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"5e28f2f5d3f0632a10689995",
+								"unlike"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\": \"This is a test comment\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/posts/5e28f2f5d3f0632a10689995/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"5e28f2f5d3f0632a10689995",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODc0MjA1MDRkZTA0NDg0ZDhmNjFlIn0sImlhdCI6MTU3OTczOTY5MSwiZXhwIjoxNTc5NzY4NDkxfQ.J3K6FSb8V_rq_Den6300_OyIs_LT0i8_gjUNMUGA6XQ"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/posts/5e28f2f5d3f0632a10689995/comments/5e29063b1be0604324640c0c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"5e28f2f5d3f0632a10689995",
+								"comments",
+								"5e29063b1be0604324640c0c"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

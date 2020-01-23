@@ -184,7 +184,7 @@ router.delete("/", auth, async (req, res) => {
 // @route GET /profiles
 // @desc GET ALL User Profiles
 // @access  Public
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const profiles = await Profile.find().populate(
       "user",

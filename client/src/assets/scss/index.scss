@@ -5,14 +5,64 @@
 @import "../../components/auth/login/Login.scss";
 @import "../../components/auth/register/Register.scss";
 
+* {
+  font-family: "Work Sans", sans-serif;
+}
+
 .mt-100 {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 .mt-50 {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
-.heading {
-    font-weight: 600;
+.component-heading {
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.mernbook-blue-text {
+  color: #224480;
+}
+
+.btn-mernbook {
+  background: #224480 !important;
+  &:hover {
+    background: #224480 !important;
+  }
+}
+
+.custom-label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* label focus color */
+.custom-input-field input:focus + label {
+  color: #031467 !important;
+}
+/* label underline focus color */
+.custom-input-field input:focus {
+  border-bottom: 1px solid #031467 !important;
+  box-shadow: 0 1px 0 0 #031467 !important;
+}
+
+/* label focus color */
+.custom-input-field textarea:focus + label {
+  color: #031467 !important;
+}
+/* label underline focus color */
+.custom-input-field textarea:focus {
+  border-bottom: 1px solid #031467 !important;
+  box-shadow: 0 1px 0 0 #031467 !important;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.custom-helper-error {
+  font-size: 12px;
+  color: #F44336;
 }
