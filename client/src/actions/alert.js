@@ -1,14 +1,14 @@
 import uuid from "uuid";
-import { SHOW_ALERT_MESSAGE } from "./types";
+import { DISPLAY_ALERT } from "./types";
 
-export const show_alert = (msg, type) => dispatch => {
+export const display_alert = (message, type) => dispatch => {
   const id = uuid.v4();
   dispatch({
-    type: SHOW_ALERT_MESSAGE,
+    type: DISPLAY_ALERT,
     payload: {
       id,
       show: true,
-      msg,
+      message,
       type
     }
   });

@@ -4,10 +4,11 @@ import { withAlert } from "react-alert";
 
 class Alert extends Component {
   componentDidUpdate = prevProps => {
-    if (this.props.alert.alert.id !== prevProps.alerts.alert.id) {
-      const alert = this.props.alert;
-      alert.show(this.props.alert.alert.msg, {
-        type: this.props.alert.alert.type
+    if (this.props.alert_state.alert.id !== prevProps.alert_state.alert.id) {
+      const new_alert = this.props.alert_state.alert;
+      const { alert } = this.props;
+      alert.show(new_alert.message, {
+        type: new_alert.type
       });
     }
   };
@@ -17,8 +18,10 @@ class Alert extends Component {
   }
 }
 
+const Alert_Component = withAlert()(Alert);
+
 const mapStateToProps = state => ({
-  alert: state.alert
+  alert_state: state.alert
 });
 
-export default withAlert()(connect(mapStateToProps)(Alert));
+export default connect(mapStateToProps)(Alert_Component);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo_nav from "../../../assets/img/mernbook_nav.PNG";
+import logo_nav from "../../../assets/img/mernbook_nav.png";
 import { Link } from "react-router-dom";
 
 class Header extends Component {
@@ -7,12 +7,12 @@ class Header extends Component {
     return (
       <nav className="landing-nav">
         <div className="container">
-          <div class="nav-wrapper">
+          <div className="nav-wrapper">
             <Link className="brand-logo" to={"/"}>
               <img className="logo-nav" src={logo_nav} alt="" />
             </Link>
 
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
                 <Link to={"/register"}>Register</Link>
               </li>

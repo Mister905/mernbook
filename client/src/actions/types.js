@@ -1,1 +1,3 @@
-export const SHOW_ALERT_MESSAGE = "SHOW_ALERT_MESSAGE";
+export const DISPLAY_ALERT = "DISPLAY_ALERT";
+export const REGISTER_USER = "REGISTER_USER";
+export const LOGIN_USER = "LOGIN_USER";

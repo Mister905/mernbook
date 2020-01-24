@@ -1,10 +1,10 @@
-import { SHOW_ALERT_MESSAGE } from "../actions/types";
+import { DISPLAY_ALERT } from "../actions/types";
 
 const initial_state = {
   alert: {
     id: "",
     show: false,
-    msg: "",
+    message: "",
     type: "info"
   }
 };
@@ -13,13 +13,13 @@ export default function(state = initial_state, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case SHOW_ALERT_MESSAGE:
+    case DISPLAY_ALERT:
       return {
         ...state,
         alert: {
           id: payload.id,
           show: true,
-          msg: payload.msg,
+          message: payload.message,
           type: payload.type
         }
       };

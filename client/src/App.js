@@ -13,7 +13,7 @@ import Alert from "./components/layout/alert/Alert";
 
 // https://www.npmjs.com/package/react-alert
 const options = {
-  position: positions.TOP_CENTER,
+  position: positions.MIDDLE_RIGHT,
   timeout: 5000,
   offset: "30px",
   transition: transitions.SCALE
@@ -23,7 +23,7 @@ const AlertTemplate = props => {
   const { type } = props.options;
   if (type === "error") {
     return (
-      <div className="card custom-alert custom-error bold-text">
+      <div className="card custom-alert custom-error">
         <i className="material-icons alert-icon">error_outline</i>
         {props.message}
       </div>
@@ -42,17 +42,18 @@ class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
-          <AlertProvider template={AlertTemplate} {...options}>
+        <AlertProvider template={AlertTemplate} {...options}>
+          <BrowserRouter>
             <Header />
             <Alert />
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
+              <Route exact path="/dashboard" component={Dashboard} />
             </Switch>
-          </AlertProvider>
-        </BrowserRouter>
+          </BrowserRouter>
+        </AlertProvider>
       </div>
     );
   }
