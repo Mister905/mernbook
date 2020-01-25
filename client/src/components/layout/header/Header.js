@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo_nav from "../../../assets/img/mernbook_nav.png";
+import test from '../../../assets/img/mernbook_nav.png'
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
