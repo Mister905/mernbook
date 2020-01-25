@@ -11,6 +11,5 @@ export const get_current_profile = () => async dispatch => {
     });
   } catch (error) {
     console.log(error.message);
-    dispatch(create_alert("error", "Failed to Load Profile"));
   }
 };

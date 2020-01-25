@@ -1,17 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { get_current_profile } from "../../actions/profile";
 
 class Dashboard extends Component {
-    render() {
-        return (
-            <div className="container mt-50">
-                <div className="row">
-                    <div className="col m12">
-                        <div className="component-heading center-align">Dashboard</div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+  componentDidMount = () => {
+    this.props.get_current_profile();
+  };
+
+  render() {
+    return (
+      <div className="container mt-50">
+        <div className="row">
+          <div className="col m12">
+            <div className="component-heading center-align">Dashboard</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default Dashboard
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { get_current_profile })(Dashboard);
