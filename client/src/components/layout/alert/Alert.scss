@@ -1,0 +1,25 @@
+.alert-error {
+  background: rgb(244, 67, 54);
+  background: linear-gradient(
+    0deg,
+    rgba(244, 67, 54, 1) 0%,
+    rgba(255, 104, 92, 1) 100%
+  );
+}
+
+.alert-success {
+  background: rgb(90, 118, 167);
+  background: linear-gradient(
+    0deg,
+    rgba(90, 118, 167, 1) 0%,
+    rgba(34, 68, 128, 1) 100%
+  );
+}
+
+.error-message {
+  margin-left: 5px !important;
+}
+
+.error-icon {
+  vertical-align: bottom;
+}

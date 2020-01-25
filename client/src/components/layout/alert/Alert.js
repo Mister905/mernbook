@@ -10,12 +10,18 @@ class Alert extends Component {
       alerts.length > 0 &&
       alerts.map(alert => {
         const { id, type, message } = alert;
+        let alert_html;
+        if (type == "error") {
+          alert_html = `<span><i class="material-icons error-icon">error</i></span><span class="error-message">${message}</span`;
+        } else {
+          alert_html = `<span></span><span class="error-message">${message}</span`;
+        }
         const options = {
-          html: `<span className="alert-${type}">${message}</span>`,
+          html: alert_html,
           inDuration: 300,
           outDuration: 375,
           displyLength: 4000,
-          classes: "rounded",
+          classes: `rounded alert-${type}`,
           completeCallback: () => {
             this.props.remove_alert(id);
           }
