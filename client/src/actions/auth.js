@@ -34,12 +34,11 @@ export const register_user = (form_data, history) => async dispatch => {
   try {
     const res = await axios.post("/auth/register", request_body, config);
 
-    dispatch(display_alert("Registration Successful", "success"));
+    
 
     history.push("/login");
   } catch (error) {
     console.log(error.message);
-    dispatch(display_alert("Registration Failed", "error"));
   }
 };
 
@@ -60,12 +59,10 @@ export const login_user = (form_data, history) => async dispatch => {
       payload: res.data
     });
 
-    dispatch(display_alert("Login Successful", "success"));
 
     history.push("/dashboard");
   } catch (error) {
     console.log(error.message);
-    dispatch(display_alert("Login Failed", "error"));
   }
 };
 
