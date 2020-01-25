@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import logo_nav from "../../../assets/img/mernbook_nav.png";
-import test from '../../../assets/img/mernbook_nav.png'
+
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -18,7 +17,8 @@ class Header extends Component {
         <div className="container">
           <div className="nav-wrapper">
             <Link className="brand-logo" to={is_authenticated ? "/dashboard" : "/"}>
-              <img className="logo-nav" src={logo_nav} alt="" />
+              {/* <img className="logo-nav" src={logo_nav} alt="" /> */}
+              DERP
             </Link>
             {is_authenticated ? (
               <ul id="nav-mobile" className="right hide-on-med-and-down">
