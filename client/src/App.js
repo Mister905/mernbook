@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
-import set_auth_token from "./utils/set_auth_token";
 import { load_user } from "./actions/auth";
 
 // COMPONENTS
