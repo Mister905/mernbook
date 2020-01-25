@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import logo_nav from '../../../assets/img/mernbook_nav.PNG';
+import logo_nav from "../../../assets/img/mernbook_nav.PNG";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { logout_user } from "../../../actions/auth";
+import { logout_user } from "../../../actcions/auth";
 
 class Header extends Component {
   handle_logout = () => {
@@ -16,9 +16,11 @@ class Header extends Component {
       <nav className="landing-nav">
         <div className="container">
           <div className="nav-wrapper">
-            <Link className="brand-logo" to={is_authenticated ? "/dashboard" : "/"}>
-              {/* <img className="logo-nav" src={logo_nav} alt="" /> */}
-              DERP
+            <Link
+              className="brand-logo"
+              to={is_authenticated ? "/dashboard" : "/"}
+            >
+              <img className="logo-nav" src={logo_nav} alt="" />
             </Link>
             {is_authenticated ? (
               <ul id="nav-mobile" className="right hide-on-med-and-down">
