@@ -1,7 +1,12 @@
-import { display_alert } from "../actions/alert";
-import { LOGIN_USER, USER_LOADED, LOGOUT_USER, AUTH_ERROR } from "./types";
+import {
+  LOGIN_USER,
+  USER_LOADED,
+  LOGOUT_USER,
+  AUTH_ERROR
+} from "./types";
 import axios from "axios";
 import set_auth_token from "../utils/set_auth_token";
+import { create_alert } from '../actions/alert';
 
 export const load_user = () => async dispatch => {
   if (localStorage.token) {
@@ -33,12 +38,11 @@ export const register_user = (form_data, history) => async dispatch => {
 
   try {
     const res = await axios.post("/auth/register", request_body, config);
-
-    
-
     history.push("/login");
+    dispatch(create_alert("success", "Registration Successfull"));
   } catch (error) {
     console.log(error.message);
+    create_alert("error", "Registration Error");
   }
 };
 
@@ -53,16 +57,14 @@ export const login_user = (form_data, history) => async dispatch => {
 
   try {
     const res = await axios.post("/auth/login", request_body, config);
-
     dispatch({
       type: LOGIN_USER,
       payload: res.data
     });
-
-
     history.push("/dashboard");
+    dispatch(create_alert("success", "Welcome Back"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(create_alert("error", "Login Error"));
   }
 };
 
