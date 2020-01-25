@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-// @route GET /profiles/current
+// @route GET /profiles/active
 // @desc Get Active User's Profile
 // @access  Private
 router.get("/active", auth, async (req, res) => {
