@@ -67,3 +67,7 @@ touch client/src/setupProxy.js
 set up alert component, reducer, action and provider in App.js
 
 create PrivateRoute component
+
+add heroku-postbuild script to server's package.json
+
+heroku create <appname>
