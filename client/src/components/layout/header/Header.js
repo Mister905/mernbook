@@ -16,7 +16,7 @@ class Header extends Component {
       <nav className="landing-nav">
         <div className="container">
           <div className="nav-wrapper">
-            <Link className="brand-logo" to={"/"}>
+            <Link className="brand-logo" to={is_authenticated ? "/dashboard" : "/"}>
               <img className="logo-nav" src={logo_nav} alt="" />
             </Link>
             {is_authenticated ? (

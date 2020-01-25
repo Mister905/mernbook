@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
 
 class Landing extends Component {
-
   constructor() {
     super();
     document.body.classList.add("landing-bg");
@@ -9,7 +11,7 @@ class Landing extends Component {
 
   componentWillUnmount = () => {
     document.body.classList.remove("landing-bg");
-  }
+  };
 
   render() {
     return (
@@ -20,4 +22,8 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default compose(connect(mapStateToProps), withRouter)(Landing);
