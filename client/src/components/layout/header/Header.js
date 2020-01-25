@@ -3,7 +3,7 @@ import logo_nav from "../../../assets/img/mernbook_nav.PNG";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { logout_user } from "../../../actcions/auth";
+import { logout_user } from "../../../actions/auth";
 
 class Header extends Component {
   handle_logout = () => {
