@@ -3,8 +3,12 @@ import React, { Component } from 'react'
 class Dashboard extends Component {
     render() {
         return (
-            <div>
-              Dashboard  
+            <div className="container">
+                <div className="row">
+                    <div className="col m12">
+                        <div className="component-heading center-align">Dashboard</div>
+                    </div>
+                </div>
             </div>
         )
     }

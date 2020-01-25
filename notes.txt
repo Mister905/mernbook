@@ -44,6 +44,14 @@ touch middleware/auth.js
 
 create and test routes in postman (see Mernbook in Postman)
 
+mkdir utils
+
+touch utils/set_auth_token.js (Includes Authorization token in each HTTP request)
+
+create auth/load_user action creator to maintain user in state
+
+the token is set in localStorage by the auth reducer
+
 npx create-react-app client
 
 cd client
@@ -57,3 +65,5 @@ client/src -> delete everything except App.js and index.js
 touch client/src/setupProxy.js
 
 set up alert component, reducer, action and provider in App.js
+
+create PrivateRoute component

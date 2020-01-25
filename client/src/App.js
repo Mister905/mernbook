@@ -2,14 +2,18 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import set_auth_token from "./utils/set_auth_token";
+import { load_user } from "./actions/auth";
 
 // COMPONENTS
+import LoadingScreen from './components/layout/loading_screen/LoadingScreen';
 import Header from "./components/layout/header/Header";
 import Landing from "./components/landing/Landing";
 import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import Alert from "./components/layout/alert/Alert";
+import PrivateRoute from './components/private_route/PrivateRoute';
 
 // https://www.npmjs.com/package/react-alert
 const options = {
@@ -39,7 +43,12 @@ const AlertTemplate = props => {
 };
 
 class App extends Component {
+  componentDidMount = () => {
+    this.props.load_user();
+  };
+
   render() {
+    const { loading_user } = this.props.auth;
     return (
       <div>
         <AlertProvider template={AlertTemplate} {...options}>
@@ -47,10 +56,11 @@ class App extends Component {
             <Header />
             <Alert />
             <Switch>
+              { loading_user && <LoadingScreen /> }
               <Route exact path="/" component={Landing} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-              <Route exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
           </BrowserRouter>
         </AlertProvider>
@@ -63,4 +73,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { load_user} )(App);

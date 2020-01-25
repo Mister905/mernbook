@@ -7,7 +7,22 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// @route POST auth/register
+// @route GET /auth/register
+// @desc Get Active User
+// @access  Private
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await (await User.findById(req.user.id)).isSelected(
+      "-password"
+    );
+    res.send(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route POST /auth/register
 // @desc User Registration
 // @access  Public
 router.post(
@@ -67,7 +82,7 @@ router.post(
   }
 );
 
-// @route POST auth/login
+// @route POST /auth/login
 // @desc User Login
 // @access  Public
 router.post(
