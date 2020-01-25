@@ -71,3 +71,5 @@ create PrivateRoute component
 add heroku-postbuild script to server's package.json
 
 heroku create <appname>
+
+add environment variables on heroku settings
