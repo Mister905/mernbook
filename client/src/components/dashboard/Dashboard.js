@@ -7,6 +7,8 @@ class Dashboard extends Component {
     this.props.get_current_profile();
   };
 
+  componentDidUpdate = prevProps => {};
+
   render() {
     return (
       <div className="container mt-50">
@@ -21,7 +23,10 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { get_current_profile })(Dashboard);
+export default connect(mapStateToProps, { get_current_profile})(
+  Dashboard
+);

@@ -18,6 +18,12 @@ class App extends Component {
     this.props.load_user();
   };
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.auth.token !== this.props.auth.token) {
+      this.props.load_user();
+    }
+  };
+
   render() {
     const { loading_user } = this.props.auth;
     return (

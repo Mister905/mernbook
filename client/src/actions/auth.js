@@ -1,19 +1,14 @@
-import {
-  LOGIN_USER,
-  USER_LOADED,
-  LOGOUT_USER,
-  AUTH_ERROR
-} from "./types";
+import { LOGIN_USER, USER_LOADED, LOGOUT_USER, AUTH_ERROR } from "./types";
 import axios from "axios";
 import set_auth_token from "../utils/set_auth_token";
-import { create_alert } from '../actions/alert';
+import { create_alert } from "../actions/alert";
 
 export const load_user = () => async dispatch => {
   if (localStorage.token) {
     set_auth_token(localStorage.token);
   }
   try {
-    const res = await axios.get("/auth");
+    const res = await axios.get("/auth/active_user");
 
     dispatch({
       type: USER_LOADED,

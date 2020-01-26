@@ -12,6 +12,7 @@ class Header extends Component {
 
   render() {
     const { is_authenticated } = this.props.auth;
+    
     return (
       <nav className="landing-nav">
         <div className="container">
@@ -24,6 +25,12 @@ class Header extends Component {
             </Link>
             {is_authenticated ? (
               <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li>
+                  <Link to={"/dashboard"}>Dasboard</Link>
+                </li>
+                <li>
+                  <a href=""></a>
+                </li>
                 <li>
                   <a onClick={this.handle_logout}>Logout</a>
                 </li>
