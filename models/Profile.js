@@ -5,13 +5,13 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  location: {
+  user_location: {
     type: String,
     default: null
   },
   status: {
     type: String,
-    default: null
+    default: "I'd Rather Not Say"
   },
   skills: {
     type: [String],
@@ -86,23 +86,28 @@ const ProfileSchema = new mongoose.Schema({
   ],
   social_media: {
     youtube: {
-      type: String
+      type: String,
+      default: null
     },
     twitter: {
-      type: String
+      type: String,
+      default: null
     },
     facebook: {
-      type: String
+      type: String,
+      default: null
     },
     linkedin: {
-      type: String
+      type: String,
+      default: null
     },
     instagram: {
-      type: String
+      type: String,
+      default: null
     }
   },
   profile_image_id: String,
-  date: {
+  created_on: {
     type: Date,
     default: Date.now()
   }

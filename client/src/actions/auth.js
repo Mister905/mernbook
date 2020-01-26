@@ -37,7 +37,7 @@ export const register_user = (form_data, history) => async dispatch => {
     dispatch(create_alert("success", "Registration Successfull"));
   } catch (error) {
     console.log(error.message);
-    create_alert("error", "Registration Error");
+    dispatch(create_alert("error", "Registration Error"));
   }
 };
 

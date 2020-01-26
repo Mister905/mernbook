@@ -13,3 +13,22 @@ export const get_current_profile = () => async dispatch => {
     console.log(error.message);
   }
 };
+
+export const update_profile = (form_data, history) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let request_body = JSON.stringify(form_data);
+
+  try {
+    const res = await axios.put("/profiles/update", request_body, config);
+    history.push("/dashboard");
+    dispatch(create_alert("success", "Update Successfull"));
+  } catch (error) {
+    console.log(error.message);
+    dispatch(create_alert("error", "Update Failed"));
+  }
+};

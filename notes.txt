@@ -58,7 +58,7 @@ cd client
 
 delete .gitignore and README.md
 
-npm i axios react-router-dom redux react-redux redux-thunk moment react-moment http-proxy-middleware formik materialize-css moment node-sass yup react-alert uuid
+npm i axios react-router-dom redux react-redux redux-thunk moment react-moment http-proxy-middleware formik materialize-css moment node-sass yup react-alert uuid react-load-script
 
 client/src -> delete everything except App.js and index.js
 
@@ -73,3 +73,7 @@ add heroku-postbuild script to server's package.json
 heroku create <appname>
 
 add environment variables on heroku settings
+
+Unfortunately, keeping any key in your React client, even if you are using gitignore and an .env file, is not secure. As pointed out by @ClaudiuCreanga, React environment variables are embedded in the build and are publicly accessible.
+
+You should really only save API keys or secrets in your backend such as Node / Express. You can have your client send a request to your backend API, which can then make the actual API call with the API key and send the data back to your client.

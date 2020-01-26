@@ -25,146 +25,61 @@ router.get("/active", auth, async (req, res) => {
   }
 });
 
-// @route POST /profiles
-// @desc Create User Profile
-// @access  Private
-router.post(
-  "/",
-  [
-    auth,
-    [
-      check("location", "Location is Required")
-        .not()
-        .isEmpty()
-    ]
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const {
-      location,
-      status,
-      skills,
-      interests,
-      biography,
-      youtube,
-      twitter,
-      facebook,
-      linkedin,
-      instagram
-    } = req.body;
-
-    let profile_build = {};
-
-    profile_build.user = req.user.id;
-
-    profile_build.location = location;
-
-    if (skills) {
-      profile_build.skills = skills.split(",").map(skill => skill.trim());
-    }
-
-    if (interests) {
-      profile_build.interests = interests
-        .split(",")
-        .map(interest => interest.trim());
-    }
-
-    profile_build.social = {};
-
-    if (youtube) profile_build.youtube = youtube;
-    if (twitter) profile_build.twitter = twitter;
-    if (facebook) profile_build.facebook = facebook;
-    if (linkedin) profile_build.linkedin = linkedin;
-    if (instagram) profile_build.instagram = instagram;
-
-    try {
-      let profile = await Profile.findOne({ user: req.user.id });
-      if (!profile) {
-        profile = new Profile(profile_build);
-        await profile.save();
-        return res.send(profile);
-      }
-      return res.status(500).send("Server Error");
-    } catch (error) {
-      console.log(error.message);
-      return res.status(500).send("Server Error");
-    }
-  }
-);
-
-// @route PATCH /profiles
+// @route PUT /profiles/update
 // @desc Update User Profile
 // @access  Private
-router.put(
-  "/",
-  [
-    auth,
-    [
-      check("location", "Location is Required")
-        .not()
-        .isEmpty()
-    ]
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+router.put("/update", auth, async (req, res) => {
+  const {
+    user_location,
+    status,
+    skills,
+    interests,
+    biography,
+    youtube,
+    twitter,
+    facebook,
+    linkedin,
+    instagram
+  } = req.body;
 
-    const {
-      location,
-      status,
-      skills,
-      interests,
-      biography,
-      youtube,
-      twitter,
-      facebook,
-      linkedin,
-      instagram
-    } = req.body;
+  let profile_build = {};
 
-    let profile_build = {};
+  profile_build.user = req.user.id;
 
-    profile_build.user = req.user.id;
-
-    profile_build.location = location;
-
-    if (skills) {
-      profile_build.skills = skills.split(",").map(skill => skill.trim());
-    }
-
-    if (interests) {
-      profile_build.interests = interests
-        .split(",")
-        .map(interest => interest.trim());
-    }
-
-    profile_build.social = {};
-
-    if (youtube) profile_build.youtube = youtube;
-    if (twitter) profile_build.twitter = twitter;
-    if (facebook) profile_build.facebook = facebook;
-    if (linkedin) profile_build.linkedin = linkedin;
-    if (instagram) profile_build.instagram = instagram;
-
-    try {
-      let profile = await Profile.findOneAndUpdate(
-        { user: req.user.id },
-        profile_build,
-        { new: true }
-      );
-      return res.send(profile);
-    } catch (error) {
-      console.log(error.message);
-      return res.status(500).send("Server Error");
-    }
+  if (user_location) {
+    profile_build.user_location = user_location;
   }
-);
+
+  if (skills) {
+    profile_build.skills = skills.split(",").map(skill => skill.trim());
+  }
+
+  if (interests) {
+    profile_build.interests = interests
+      .split(",")
+      .map(interest => interest.trim());
+  }
+
+  profile_build.social = {};
+
+  if (youtube) profile_build.youtube = youtube;
+  if (twitter) profile_build.twitter = twitter;
+  if (facebook) profile_build.facebook = facebook;
+  if (linkedin) profile_build.linkedin = linkedin;
+  if (instagram) profile_build.instagram = instagram;
+
+  try {
+    let profile = await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      profile_build,
+      { new: true }
+    );
+    return res.send(profile);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
 
 // @route DELETE /profiles
 // @desc Deletes related user, profile and posts

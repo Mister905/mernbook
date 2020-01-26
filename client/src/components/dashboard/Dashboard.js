@@ -39,7 +39,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="col m2 center-align">
                       <Link to={'edit-profile'}>
-                        <button className="btn btn-mernbook btn-edit-profile"><i class="material-icons">mode_edit</i></button>
+                        <button className="btn btn-mernbook btn-edit-profile"><i className="material-icons">mode_edit</i></button>
                       </Link>
                     </div>
                   </div>
