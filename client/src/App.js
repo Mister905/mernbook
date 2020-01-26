@@ -11,6 +11,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import Alert from "./components/layout/alert/Alert";
+import EditProfile from './components/profile/edit_profile/EditProfile';
 import PrivateRoute from "./components/private_route/PrivateRoute";
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           </Switch>
         </BrowserRouter>
       </div>

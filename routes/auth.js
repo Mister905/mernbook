@@ -6,6 +6,7 @@ const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const Profile = require("../models/Profile");
 
 // @route GET /auth/active_user
 // @desc Get Active User
@@ -71,6 +72,14 @@ router.post(
       new_user.password = await bcrypt.hash(password, salt);
 
       new_user = await new_user.save();
+
+      let profile_build = {};
+
+      profile_build.user = new_user.id;
+
+      const new_profile = new Profile(profile_build);
+
+      await new_profile.save();
 
       return res.send(new_user);
     } catch (error) {

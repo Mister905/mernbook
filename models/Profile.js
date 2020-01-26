@@ -7,23 +7,23 @@ const ProfileSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    required: true
+    default: null
   },
   status: {
-    type: String
+    type: String,
+    default: null
   },
   skills: {
-    type: [String]
+    type: [String],
+    default: null
   },
   interests: {
-    type: [String]
+    type: [String],
+    default: null
   },
   biography: {
-    type: String
-  },
-  created: {
-    type: Date,
-    default: Date.now
+    type: String,
+    default: null
   },
   experience: [
     {
@@ -101,10 +101,11 @@ const ProfileSchema = new mongoose.Schema({
       type: String
     }
   },
+  profile_image_id: String,
   date: {
-      type: Date,
-      default: Date.now()
+    type: Date,
+    default: Date.now()
   }
 });
 
-module.exports = Profile = mongoose.model("profiles", ProfileSchema);
+module.exports = mongoose.model("profiles", ProfileSchema);

@@ -8,14 +8,16 @@ app.use(express.json());
 mongoose
   .connect(keys.mongo_uri, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
   })
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch(err => console.log("Error on start: " + err.stack));
 
-mongoose.set("debug", true);
+// mongoose.set("debug", true);
 
 // ROUTES
 const auth = require("./routes/auth");
