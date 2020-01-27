@@ -14,13 +14,26 @@ import {
   FaLinkedin,
   FaInstagram
 } from "react-icons/fa";
+import M from "materialize-css";
+import { Link } from 'react-router-dom';
 
 class EditProfile extends Component {
+  componentDidMount() {
+    let biography = document.getElementById("biography");
+
+    M.textareaAutoResize(biography);
+  }
+
   render() {
     return (
       <div className="container mt-50">
         <div className="row">
-          <div className="col m12 center-align">
+          <div className="col m2 center-align">
+            <Link to={"/dashboard"} className="btn btn-mernbook">
+              <i class="material-icons">arrow_back</i>
+            </Link>
+          </div>
+          <div className="col m6 offset-m1 center-align">
             <div className="component-heading">Edit Profile</div>
           </div>
         </div>
@@ -93,6 +106,25 @@ class EditProfile extends Component {
                       id="interests"
                       name="interests"
                       placeholder="Comma-Separated Values e.g. Chemistry, History, Geography"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col m6 offset-m3">
+                  <div className="custom-input-field">
+                    <label
+                      htmlFor="interests"
+                      className="custom-label mernbook-blue-text"
+                    >
+                      Biography
+                    </label>
+                    <Field
+                      component="textarea"
+                      id="biography"
+                      name="biography"
+                      className="materialize-textarea"
                     />
                   </div>
                 </div>
@@ -264,6 +296,7 @@ const FormikForm = withFormik({
     status,
     skills,
     interests,
+    biography,
     youtube,
     twitter,
     facebook,
@@ -275,6 +308,7 @@ const FormikForm = withFormik({
       status: status || "",
       skills: skills || "",
       interests: interests || "",
+      biography: biography || "",
       youtube: youtube || "",
       twitter: twitter || "",
       facebook: facebook || "",

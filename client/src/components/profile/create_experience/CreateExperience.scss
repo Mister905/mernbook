@@ -1,0 +1,10 @@
+.current-col {
+    margin-left: 1rem !important;
+}
+
+#current-wrapper {
+    [type="checkbox"]:checked+span:not(.lever):before {
+        border-right: 2px solid #224480;
+        border-bottom: 2px solid #224480;
+    }
+}

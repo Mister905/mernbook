@@ -60,6 +60,10 @@ router.put("/update", auth, async (req, res) => {
       .map(interest => interest.trim());
   }
 
+  if (biography) {
+    profile_build.biography = biography;
+  }
+
   profile_build.social = {};
 
   if (youtube) profile_build.youtube = youtube;

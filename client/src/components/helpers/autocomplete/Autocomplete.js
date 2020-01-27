@@ -5,6 +5,7 @@ import AutocompleteHelper from "react-google-autocomplete";
 
 class Autocomplete extends Component {
   state = {
+    current_value: "",
     places_script_loading: true
   };
 
@@ -12,8 +13,23 @@ class Autocomplete extends Component {
     this.setState({ places_script_loading: false });
   };
 
+  handle_blur = e => {
+    const { setFieldError } = this.props.form;
+
+    const field_value = this.props.field_value;
+
+    if (field_value === "job_location") {
+      if (e.target.value.length === 0) {
+        setFieldError("job_location", "Job Location is Required");
+      }
+    }
+  };
+
   output = () => {
+    const { name } = this.props.field;
     const { field_value } = this.props;
+    const { errors } = this.props.form;
+
     return (
       <AutocompleteHelper
         onPlaceSelected={place => {
@@ -21,7 +37,9 @@ class Autocomplete extends Component {
           setFieldValue(field_value, place.formatted_address);
         }}
         fields={["formatted_address"]}
+        onBlur={this.handle_blur}
         placeholder=""
+        className={name in errors ? "invalid" : ""}
       />
     );
   };
