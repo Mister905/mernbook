@@ -6,7 +6,7 @@ const LoadingScreen = () => {
       <div className="row">
         <div className="col m12 center-align">
           <div className="preloader-wrapper big active">
-            <div className="spinner-layer spinner-blue-only">
+            <div className="spinner-layer custom-spinner-layer">
               <div className="circle-clipper left">
                 <div className="circle"></div>
               </div>

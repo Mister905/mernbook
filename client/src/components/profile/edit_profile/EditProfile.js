@@ -38,8 +38,9 @@ class EditProfile extends Component {
                     </label>
                     <Field
                       component={Autocomplete}
-                      id="location"
-                      name="location"
+                      id="user_location"
+                      name="user_location"
+                      field_value={"user_location"}
                     />
                   </div>
                 </div>

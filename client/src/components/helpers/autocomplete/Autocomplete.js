@@ -13,13 +13,15 @@ class Autocomplete extends Component {
   };
 
   output = () => {
+    const { field_value } = this.props;
     return (
       <AutocompleteHelper
         onPlaceSelected={place => {
           const { setFieldValue } = this.props.form;
-          setFieldValue("user_location", place.formatted_address);
+          setFieldValue(field_value, place.formatted_address);
         }}
         fields={["formatted_address"]}
+        placeholder=""
       />
     );
   };

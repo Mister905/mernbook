@@ -35,7 +35,7 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      location: {
+      job_location: {
         type: String,
         required: true
       },
