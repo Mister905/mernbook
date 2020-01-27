@@ -6,6 +6,8 @@
 @import "../../components/auth/register/Register.scss";
 @import "../../components/layout/alert/Alert.scss";
 @import "../../components/profile/edit_profile/EditProfile.scss";
+@import "../../components/profile/create_education/CreateEducation.scss";
+@import "../../components/profile/create_experience/CreateExperience.scss";
 
 * {
   font-family: "Work Sans", sans-serif;
@@ -17,6 +19,10 @@
 
 .mt-50 {
   margin-top: 50px;
+}
+
+.mt-25 {
+  margin-top: 25px;
 }
 
 .component-heading {

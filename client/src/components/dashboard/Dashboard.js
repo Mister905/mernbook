@@ -77,10 +77,34 @@ class Dashboard extends Component {
                       Interests
                     </div>
                     <div id="test-swipe-3" className="col m12">
-                      Experience
+                      <div className="row mt-25">
+                        <div className="col m6 offset-m2 center-align">
+                          <div className="tab-body-heading">Experience</div>
+                        </div>
+                        <div className="col m2 center-align">
+                          <Link
+                            to={"/create-experience"}
+                            className="btn btn-mernbook"
+                          >
+                            <i className="material-icons">add</i>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                     <div id="test-swipe-4" className="col m12">
-                      Education
+                      <div className="row mt-25">
+                        <div className="col m6 offset-m2 center-align">
+                          <div className="tab-body-heading">Education</div>
+                        </div>
+                        <div className="col m2 center-align">
+                          <Link
+                            to={"/create-education"}
+                            className="btn btn-mernbook"
+                          >
+                            <i className="material-icons">add</i>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                     <div id="test-swipe-5" className="col m12">
                       Social Media

@@ -2,18 +2,6 @@
   margin-top: 10px;
 }
 
-// #dashboard-tabs .tab a:hover,
-// .tabs .tab a.active {
-//   background-color: transparent;
-//   color: #224480;
-// }
-
-// #dashboard-tabs .tab a:focus,
-// .tabs .tab a:focus.active {
-//   background-color: rgba(34, 68, 128, 0.2);
-//   outline: none;
-// }
-
 #dashboard-tabs {
   .tab a.active {
     background-color: transparent;
@@ -33,4 +21,9 @@
   .indicator {
     background-color: #16171a;
   }
+}
+
+.tab-body-heading {
+  font-weight: 600;
+  font-size: 2rem;
 }
