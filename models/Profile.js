@@ -13,16 +13,16 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     default: "I'd Rather Not Say"
   },
+  biography: {
+    type: String,
+    default: null
+  },
   skills: {
     type: [String],
     default: null
   },
   interests: {
     type: [String],
-    default: null
-  },
-  biography: {
-    type: String,
     default: null
   },
   experience: [
