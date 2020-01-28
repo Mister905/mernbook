@@ -30,7 +30,7 @@ class EditProfile extends Component {
         <div className="row">
           <div className="col m2 center-align">
             <Link to={"/dashboard"} className="btn btn-mernbook">
-              <i class="material-icons">arrow_back</i>
+              <i className="material-icons">arrow_back</i>
             </Link>
           </div>
           <div className="col m6 offset-m1 center-align">
@@ -279,7 +279,9 @@ class EditProfile extends Component {
               </div>
               <div className="row">
                 <div className="col m6 offset-m3">
-                  <button className="btn btn-mernbook right">Update</button>
+                  <button type="submit" className="btn btn-mernbook right">
+                    Update
+                  </button>
                 </div>
               </div>
             </div>
@@ -291,23 +293,27 @@ class EditProfile extends Component {
 }
 
 const FormikForm = withFormik({
-  mapPropsToValues({
-    user_location,
-    status,
-    skills,
-    interests,
-    biography,
-    youtube,
-    twitter,
-    facebook,
-    linkedin,
-    instagram
-  }) {
+  mapPropsToValues: props => {
+    const {
+      user_location,
+      status,
+      skills,
+      interests,
+      biography
+    } = props.profile.profile;
+
+    const {
+      youtube,
+      twitter,
+      facebook,
+      linkedin,
+      instagram
+    } = props.profile.profile.social_media;
     return {
       user_location: user_location || "",
       status: status || "",
-      skills: skills || "",
-      interests: interests || "",
+      skills: skills.toString().replace(/,/g, ", ") || "",
+      interests: interests.toString().replace(/,/g, ", ") || "",
       biography: biography || "",
       youtube: youtube || "",
       twitter: twitter || "",
