@@ -3,24 +3,20 @@ import M from "materialize-css";
 
 class Datepicker extends Component {
   componentDidMount() {
-    let context = this;
+    const { field_name } = this.props;
+    const { setFieldValue } = this.props.form;
     const datePickerOptions = {
       autoClose: true,
-      // minDate: new Date(2018, 11, 3)
-      // defaultDate: new Date(2018, 1, 3),
-      // setDefaultDate: true
-      onSelect(date) {
-        console.log(date);
-        console.log(context.props.date);
+      onSelect: date => {
+        setFieldValue(field_name, date);
       }
     };
-    const dateElement = M.Datepicker.init(this.Datepicker, datePickerOptions);
-
-    // let instance = M.Datepicker.getInstance(this.Datepicker);
-    // instance.setDate(new Date(2018, 2, 3));
+    M.Datepicker.init(this.Datepicker, datePickerOptions);
   }
 
   render() {
+    const { field_name } = this.props;
+    const { errors } = this.props.form;
     return (
       <div id="datepicker-wrapper">
         <input
@@ -29,7 +25,7 @@ class Datepicker extends Component {
           }}
           id="date-picker"
           type="text"
-          className="datepicker"
+          className={field_name in errors ? "datepicker invalid" : "datepicker"}
         />
       </div>
     );

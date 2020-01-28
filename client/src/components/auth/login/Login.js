@@ -35,10 +35,10 @@ class Login extends Component {
                         id="email"
                         name="email"
                         className={
-                          errors.email && touched.email ? "invalid" : ""
+                          errors.email ? "invalid" : ""
                         }
                       />
-                      {errors.email && touched.email && (
+                      {errors.email && (
                         <span className="custom-helper-error">
                           {errors.email}
                         </span>
@@ -60,10 +60,10 @@ class Login extends Component {
                         id="password"
                         name="password"
                         className={
-                          errors.password && touched.password ? "invalid" : ""
+                          errors.password ? "invalid" : ""
                         }
                       />
-                      {errors.password && touched.password && (
+                      {errors.password && (
                         <span className="custom-helper-error">
                           {errors.password}
                         </span>
@@ -106,6 +106,8 @@ const FormikForm = withFormik({
       .required("Required"),
     password: Yup.string().required("Password is Required")
   }),
+  validateOnBlur: false,
+  validateOnChange: false,
   handleSubmit: (values, props) => {
     props.props.login_user(values, props.props.history);
   }

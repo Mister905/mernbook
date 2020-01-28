@@ -51,9 +51,9 @@ class CreateExperience extends Component {
                       type="text"
                       id="title"
                       name="title"
-                      className={errors.title && touched.title ? "invalid" : ""}
+                      className={errors.title ? "invalid" : ""}
                     />
-                    {errors.title && touched.title && (
+                    {errors.title && (
                       <span className="custom-helper-error">
                         {errors.title}
                       </span>
@@ -74,11 +74,9 @@ class CreateExperience extends Component {
                       type="text"
                       id="company"
                       name="company"
-                      className={
-                        errors.company && touched.company ? "invalid" : ""
-                      }
+                      className={errors.company ? "invalid" : ""}
                     />
-                    {errors.company && touched.company && (
+                    {errors.company && (
                       <span className="custom-helper-error">
                         {errors.company}
                       </span>
@@ -99,7 +97,7 @@ class CreateExperience extends Component {
                       component={Autocomplete}
                       id="job_location"
                       name="job_location"
-                      field_value={"job_location"}
+                      field_name={"job_location"}
                     />
                     {errors.job_location && (
                       <span className="custom-helper-error">
@@ -122,8 +120,13 @@ class CreateExperience extends Component {
                       component={Datepicker}
                       id="from_date"
                       name="from_date"
-                      field_value={"from_date"}
+                      field_name={"from_date"}
                     />
+                    {errors.from_date && (
+                      <span className="custom-helper-error">
+                        {errors.from_date}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="col m2 center-align current-col">
@@ -157,7 +160,7 @@ class CreateExperience extends Component {
                         component={Datepicker}
                         id="to_date"
                         name="to_date"
-                        field_value={"to_date"}
+                        field_name={"to_date"}
                       />
                     </div>
                   </div>
@@ -221,6 +224,8 @@ const FormikForm = withFormik({
     job_location: Yup.string().required("Location is Required"),
     from_date: Yup.string().required("From Date is Required")
   }),
+  validateOnBlur: false,
+  validateOnChange: false,
   handleSubmit: (values, props) => {
     props.props.create_experience(values, props.props.history);
   }

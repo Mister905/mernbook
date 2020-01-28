@@ -36,13 +36,9 @@ class Register extends Component {
                         type="text"
                         id="first_name"
                         name="first_name"
-                        className={
-                          errors.first_name && touched.first_name
-                            ? "invalid"
-                            : ""
-                        }
+                        className={errors.first_name ? "invalid" : ""}
                       />
-                      {errors.first_name && touched.first_name && (
+                      {errors.first_name && (
                         <span className="custom-helper-error">
                           {errors.first_name}
                         </span>
@@ -61,11 +57,9 @@ class Register extends Component {
                         type="text"
                         id="last_name"
                         name="last_name"
-                        className={
-                          errors.last_name && touched.last_name ? "invalid" : ""
-                        }
+                        className={errors.last_name ? "invalid" : ""}
                       />
-                      {errors.last_name && touched.last_name && (
+                      {errors.last_name && (
                         <span className="custom-helper-error">
                           {errors.last_name}
                         </span>
@@ -86,11 +80,9 @@ class Register extends Component {
                         type="email"
                         id="email"
                         name="email"
-                        className={
-                          errors.email && touched.email ? "invalid" : ""
-                        }
+                        className={errors.email ? "invalid" : ""}
                       />
-                      {errors.email && touched.email && (
+                      {errors.email && (
                         <span className="custom-helper-error">
                           {errors.email}
                         </span>
@@ -111,11 +103,9 @@ class Register extends Component {
                         type="password"
                         id="password"
                         name="password"
-                        className={
-                          errors.password && touched.password ? "invalid" : ""
-                        }
+                        className={errors.password ? "invalid" : ""}
                       />
-                      {errors.password && touched.password && (
+                      {errors.password && (
                         <span className="custom-helper-error">
                           {errors.password}
                         </span>
@@ -136,13 +126,9 @@ class Register extends Component {
                         type="password"
                         id="confirm_password"
                         name="confirm_password"
-                        className={
-                          errors.confirm_password && touched.confirm_password
-                            ? "invalid"
-                            : ""
-                        }
+                        className={errors.confirm_password ? "invalid" : ""}
                       />
-                      {errors.confirm_password && touched.confirm_password && (
+                      {errors.confirm_password && (
                         <span className="custom-helper-error">
                           {errors.confirm_password}
                         </span>
@@ -196,6 +182,8 @@ const FormikForm = withFormik({
     password: Yup.string().required("Password is Required"),
     confirm_password: Yup.string().required("Confirm Password is Required")
   }),
+  validateOnBlur: false,
+  validateOnChange: false,
   handleSubmit: (values, props) => {
     const { setFieldError } = props;
     const { password, confirm_password } = values;

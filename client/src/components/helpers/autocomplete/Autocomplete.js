@@ -13,34 +13,23 @@ class Autocomplete extends Component {
     this.setState({ places_script_loading: false });
   };
 
-  handle_blur = e => {
-    const { setFieldError } = this.props.form;
-
-    const field_value = this.props.field_value;
-
-    if (field_value === "job_location") {
-      if (e.target.value.length === 0) {
-        setFieldError("job_location", "Job Location is Required");
-      }
-    }
-  };
-
   output = () => {
-    const { name } = this.props.field;
-    const { field_value } = this.props;
+    const { field_name } = this.props;
     const { errors } = this.props.form;
 
     return (
-      <AutocompleteHelper
-        onPlaceSelected={place => {
-          const { setFieldValue } = this.props.form;
-          setFieldValue(field_value, place.formatted_address);
-        }}
-        fields={["formatted_address"]}
-        onBlur={this.handle_blur}
-        placeholder=""
-        className={name in errors ? "invalid" : ""}
-      />
+      <div>
+        <AutocompleteHelper
+          onPlaceSelected={place => {
+            const { setFieldValue } = this.props.form;
+            setFieldValue(field_name, place.formatted_address);
+          }}
+          fields={["formatted_address"]}
+          onBlur={this.handle_blur}
+          placeholder=""
+          className={field_name in errors ? "invalid" : ""}
+        />
+      </div>
     );
   };
 

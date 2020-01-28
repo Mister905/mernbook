@@ -15,7 +15,7 @@ import {
   FaInstagram
 } from "react-icons/fa";
 import M from "materialize-css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class EditProfile extends Component {
   componentDidMount() {
@@ -53,7 +53,7 @@ class EditProfile extends Component {
                       component={Autocomplete}
                       id="user_location"
                       name="user_location"
-                      field_value={"user_location"}
+                      field_name={"user_location"}
                     />
                   </div>
                 </div>
@@ -316,6 +316,8 @@ const FormikForm = withFormik({
       instagram: instagram || ""
     };
   },
+  validateOnBlur: false,
+  validateOnChange: false,
   handleSubmit: (values, props) => {
     props.props.update_profile(values, props.props.history);
   }
