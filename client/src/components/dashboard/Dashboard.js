@@ -9,7 +9,6 @@ import Loader from "../layout/loader/Loader";
 class Dashboard extends Component {
   componentDidMount = () => {
     this.props.get_current_profile();
-
     M.Tabs.init(this.Tabs);
   };
 
@@ -66,7 +65,33 @@ class Dashboard extends Component {
   };
 
   output_experience = () => {
-    return <div>EXPERIENCE</div>;
+    const { loading_profile } = this.props.profile;
+    if (loading_profile) {
+      return (
+        <div className="row">
+          <div className="col m12 center-align">
+            <Loader />
+          </div>
+        </div>
+      );
+    } else {
+      const { experience } = this.props.profile.active_profile;
+      const experience_items = experience.map(item => (
+        <div className="row">
+          <div className="col m12 card">
+            <div class="card-content">
+              <span class="card-title">{item.title}</span>
+              <div className="company">{item.company}</div>
+              <div className="job-location">{item.job_location}</div>
+              <div className="description">{item.description}</div>
+              <div className="from-date">{item.from_date}</div>
+              <div className="to-date">{item.to_date}</div>
+            </div>
+          </div>
+        </div>
+      ));
+      return experience_items;
+    }
   };
 
   output_education = () => {
