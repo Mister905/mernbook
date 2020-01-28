@@ -14,6 +14,7 @@ import Alert from "./components/layout/alert/Alert";
 import EditProfile from './components/profile/edit_profile/EditProfile';
 import CreateExperience from './components/profile/create_experience/CreateExperience';
 import CreateEducation from './components/profile/create_education/CreateEducation';
+import Sidenav from "./components/layout/sidenav/Sidenav";
 import PrivateRoute from "./components/private_route/PrivateRoute";
 
 class App extends Component {

@@ -5,8 +5,13 @@ import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
+import Sidenav from "../layout/sidenav/Sidenav";
 
 class Dashboard extends Component {
+  state = {
+    active_component: "profile"
+  };
+
   componentDidMount = () => {
     this.props.get_current_profile();
     M.Tabs.init(this.Tabs);
@@ -106,8 +111,9 @@ class Dashboard extends Component {
     const { first_name, last_name } = this.props.auth.user;
 
     return (
-      <div className="container mt-50">
-        <div className="row">
+      <div>
+        <div className="container mt-50">
+          {/* <div className="row">
           <div className="col m12">
             <div className="row">
               <div className="col m3">
@@ -204,7 +210,9 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
+        </div> */}
         </div>
+        <Sidenav />
       </div>
     );
   }

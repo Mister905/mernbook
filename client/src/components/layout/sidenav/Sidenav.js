@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
-import default_profile from '../../../assets/img/default_profile.png';
+import default_profile from "../../../assets/img/default_profile.png";
 
 class Sidenav extends Component {
   componentDidMount() {
@@ -24,45 +24,108 @@ class Sidenav extends Component {
             this.Sidenav = Sidenav;
           }}
           id="slide-out"
-          className="sidenav"
+          className="sidenav sidenav-fixed custom-sidenav"
         >
-          <li>
-            <div className="user-view">
-              <div className="background">
-                <img src={default_profile} />
-              </div>
-              {/* <a href="#user">
-                <img className="circle" src={image1} />
-              </a> */}
-              {/* <a href="#name">
-                <span className="white-text name">John Doe</span>
+          <li className="center-align">
+            <img src={default_profile} className="responsive-img " />
+          </li>
+          <div className="sidenav-section">
+            <li>
+              <div className="divider" />
+            </li>
+            <li>
+              <a href="#!" className="waves-effect">
+                Profile
               </a>
-              <a href="#email">
-                <span className="white-text email">jdandturk@gmail.com</span>
-              </a> */}
-            </div>
-          </li>
-          <li>
-            <a href="#!">
-              <i className="material-icons">cloud</i>First Link With Icon
-            </a>
-          </li>
-          <li>
-            <a href="#!">Second Link</a>
-          </li>
-          <li>
-            <div className="divider" />
-          </li>
-          <li>
-            <a className="subheader">Subheader</a>
-          </li>
-          <li>
-            <a className="waves-effect" href="#!">
-              Third Link With Waves
-            </a>
-          </li>
+            </li>
+            <li>
+              <div className="divider" />
+            </li>
+          </div>
+          <div className="sidenav-section">
+            <li>
+              <div className="divider" />
+            </li>
+            <li>
+              <a href="#!" className="waves-effect">
+                Posts
+              </a>
+            </li>
+            <li>
+              <div className="divider" />
+            </li>
+          </div>
+          <div className="sidenav-section">
+            <li>
+              <div className="divider" />
+            </li>
+            <li>
+              <a href="#!" className="waves-effect">
+                Skills
+              </a>
+            </li>
+            <li>
+              <div className="divider" />
+            </li>
+          </div>
+          <div className="sidenav-section">
+            <li>
+              <div className="divider" />
+            </li>
+            <li>
+              <a href="#!" className="waves-effect">
+                Interests
+              </a>
+            </li>
+            <li>
+              <div className="divider" />
+            </li>
+          </div>
+          <div className="sidenav-section">
+            <li>
+              <div className="divider" />
+            </li>
+            <li>
+              <a href="#!" className="waves-effect">
+                Experience
+              </a>
+            </li>
+            <li>
+              <div className="divider" />
+            </li>
+          </div>
+          <div className="sidenav-section">
+            <li>
+              <div className="divider" />
+            </li>
+            <li>
+              <a href="#!" className="waves-effect">
+                Education
+              </a>
+            </li>
+            <li>
+              <div className="divider" />
+            </li>
+          </div>
+          <div className="sidenav-section">
+            <li>
+              <div className="divider" />
+            </li>
+            <li>
+              <a href="#!" className="waves-effect">
+                Social Media
+              </a>
+            </li>
+            <li>
+              <div className="divider" />
+            </li>
+          </div>
         </ul>
-        <a href="#!" data-target="slide-out" className="sidenav-trigger">
+        <a
+          href="#!"
+          data-target="slide-out"
+          className="sidenav-trigger hide-on-med-and-up"
+        >
           <i className="material-icons">menu</i>
         </a>
       </div>
