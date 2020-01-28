@@ -17,7 +17,7 @@ mongoose
   })
   .catch(err => console.log("Error on start: " + err.stack));
 
-// mongoose.set("debug", true);
+mongoose.set("debug", true);
 
 // ROUTES
 const auth = require("./routes/auth");

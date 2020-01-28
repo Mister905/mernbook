@@ -152,7 +152,10 @@ router.post(
       check("company", "Company is Required")
         .not()
         .isEmpty(),
-      check("from", "From Date is Required")
+      check("job_location", "Job Location is Required")
+        .not()
+        .isEmpty(),
+      check("from_date", "From Date is Required")
         .not()
         .isEmpty()
     ]
@@ -160,26 +163,27 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors);
       return res.status(400).json({ errors: errors.array() });
     }
 
     const {
       title,
       company,
-      location,
-      from,
-      to,
-      current,
+      job_location,
+      from_date,
+      to_date,
+      is_current_job,
       description
     } = req.body;
 
     const experience_build = {
       title,
       company,
-      location,
-      from,
-      to,
-      current,
+      job_location,
+      from_date,
+      to_date,
+      is_current_job,
       description
     };
 

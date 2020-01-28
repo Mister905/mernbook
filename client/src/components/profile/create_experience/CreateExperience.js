@@ -25,6 +25,13 @@ class CreateExperience extends Component {
     });
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    const { setFieldValue } = this.props;
+    if (this.state.is_current_job !== prevState.is_current_job) {
+      setFieldValue("is_current_job", this.state.is_current_job);
+    }
+  };
+
   render() {
     const { values, errors, touched } = this.props;
     const { is_current_job } = this.state;
@@ -132,12 +139,13 @@ class CreateExperience extends Component {
                 <div className="col m2 center-align current-col">
                   <div id="current-wrapper">
                     <label>
-                      <input
+                      <Field
                         id="is_current_job"
                         name="is_current_job"
                         type="checkbox"
                         checked={is_current_job}
                         onChange={this.handle_current_checkbox}
+                        value={this.state.is_current_job}
                       />
                       <span className="custom-label mernbook-blue-text">
                         Current
@@ -214,7 +222,7 @@ const FormikForm = withFormik({
       job_location: job_location || "",
       from_date: from_date || "",
       to_date: to_date || "",
-      is_current_job: is_current_job || "",
+      is_current_job: is_current_job || true,
       description: description || ""
     };
   },

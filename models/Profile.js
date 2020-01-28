@@ -46,7 +46,7 @@ const ProfileSchema = new mongoose.Schema({
       to_date: {
         type: Date
       },
-      current: {
+      is_current_job: {
         type: Boolean,
         default: false
       },
