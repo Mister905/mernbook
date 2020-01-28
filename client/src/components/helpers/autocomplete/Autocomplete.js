@@ -5,12 +5,25 @@ import AutocompleteHelper from "react-google-autocomplete";
 
 class Autocomplete extends Component {
   state = {
-    current_value: "",
+    current_value: null,
     places_script_loading: true
+  };
+
+  componentDidMount = () => {
+    const { value } = this.props.field;
+    this.setState({
+      current_value: value
+    });
   };
 
   handle_script_load = () => {
     this.setState({ places_script_loading: false });
+  };
+
+  handle_change = e => {
+    this.setState({
+      current_value: e.target.value
+    });
   };
 
   output = () => {
@@ -22,12 +35,17 @@ class Autocomplete extends Component {
         <AutocompleteHelper
           onPlaceSelected={place => {
             const { setFieldValue } = this.props.form;
+            this.setState({
+              current_value: place.formatted_address
+            });
             setFieldValue(field_name, place.formatted_address);
           }}
           fields={["formatted_address"]}
           onBlur={this.handle_blur}
           placeholder=""
           className={field_name in errors ? "invalid" : ""}
+          value={this.state.current_value}
+          onChange={this.handle_change}
         />
       </div>
     );

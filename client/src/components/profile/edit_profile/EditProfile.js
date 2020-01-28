@@ -25,6 +25,7 @@ class EditProfile extends Component {
   }
 
   render() {
+    const { user_location } = this.props.profile.active_profile;
     return (
       <div className="container mt-50">
         <div className="row">
@@ -44,7 +45,7 @@ class EditProfile extends Component {
                 <div className="col m6 offset-m3">
                   <div className="custom-input-field">
                     <label
-                      htmlFor="location"
+                      htmlFor="user_location"
                       className="custom-label mernbook-blue-text"
                     >
                       Location
@@ -54,6 +55,7 @@ class EditProfile extends Component {
                       id="user_location"
                       name="user_location"
                       field_name={"user_location"}
+                      // user_location={user_location}
                     />
                   </div>
                 </div>
@@ -300,7 +302,7 @@ const FormikForm = withFormik({
       skills,
       interests,
       biography
-    } = props.profile.profile;
+    } = props.profile.active_profile;
 
     const {
       youtube,
@@ -308,7 +310,7 @@ const FormikForm = withFormik({
       facebook,
       linkedin,
       instagram
-    } = props.profile.profile.social_media;
+    } = props.profile.active_profile.social_media;
     return {
       user_location: user_location || "",
       status: status || "",

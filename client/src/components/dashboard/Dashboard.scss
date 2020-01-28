@@ -27,3 +27,36 @@
   font-weight: 600;
   font-size: 2rem;
 }
+
+.comma-list {
+  padding: 0;
+
+  & > * {
+    display: inline;
+
+    &:after {
+      content: ",";
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .comma-list {
+    list-style: square;
+    padding-left: 30px;
+
+    & > * {
+      display: list-item;
+      width: 33%;
+      float: left;
+
+      &:after {
+        content: "";
+      }
+    }
+  }
+}

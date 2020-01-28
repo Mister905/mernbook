@@ -6,7 +6,7 @@ import {
 } from "../actions/types";
 
 const initial_state = {
-  profile: null,
+  active_profile: null,
   profiles: [],
   loading_profile: true,
   loading_profiles: true
@@ -18,25 +18,25 @@ export default function(state = initial_state, action) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: payload,
+        active_profile: payload,
         loading_profile: false
       };
     case UPDATE_PROFILE:
       return {
         ...state,
-        profile: payload,
+        active_profile: payload,
         loading_profile: false
       };
     case CREATE_EXPERIENCE:
       return {
         ...state,
-        profile: payload,
+        active_profile: payload,
         loading_profile: false
       };
     case CREATE_EXPERIENCE:
       return {
         ...state,
-        profile: payload,
+        active_profile: payload,
         loading_profile: false
       };
     default:

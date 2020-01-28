@@ -4,6 +4,7 @@ import { get_current_profile } from "../../actions/profile";
 import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
+import Loader from "../layout/loader/Loader";
 
 class Dashboard extends Component {
   componentDidMount = () => {
@@ -13,11 +14,55 @@ class Dashboard extends Component {
   };
 
   output_skills = () => {
-    return <div>SKILLS</div>;
+    const { loading_profile } = this.props.profile;
+    if (loading_profile) {
+      return (
+        <div className="row">
+          <div className="col m12 center-align">
+            <Loader />
+          </div>
+        </div>
+      );
+    } else {
+      const { skills } = this.props.profile.active_profile;
+      const list_items = skills.map(skill => (
+        <li className="collection-item">{skill}</li>
+      ));
+      return (
+        <div className="row">
+          <div className="col m12">
+            {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
+            <ul className="comma-list">{list_items}</ul>
+          </div>
+        </div>
+      );
+    }
   };
 
   output_interests = () => {
-    return <div>INTERESTS</div>;
+    const { loading_profile } = this.props.profile;
+    if (loading_profile) {
+      return (
+        <div className="row">
+          <div className="col m12 center-align">
+            <Loader />
+          </div>
+        </div>
+      );
+    } else {
+      const { interests } = this.props.profile.active_profile;
+      const interest_items = interests.map(interest => (
+        <li className="collection-item">{interest}</li>
+      ));
+      return (
+        <div className="row">
+          <div className="col m12">
+            {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
+            <ul className="comma-list">{interest_items}</ul>
+          </div>
+        </div>
+      );
+    }
   };
 
   output_experience = () => {
@@ -34,13 +79,7 @@ class Dashboard extends Component {
 
   render() {
     const { first_name, last_name } = this.props.auth.user;
-    const {
-      skills,
-      interests,
-      experience,
-      education,
-      social_media
-    } = this.props.profile;
+
     return (
       <div className="container mt-50">
         <div className="row">
