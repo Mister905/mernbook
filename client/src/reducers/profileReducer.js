@@ -1,4 +1,9 @@
-import { GET_PROFILE, UPDATE_PROFILE } from "../actions/types";
+import {
+  GET_PROFILE,
+  UPDATE_PROFILE,
+  CREATE_EXPERIENCE,
+  CREATE_EDUCATION
+} from "../actions/types";
 
 const initial_state = {
   profile: null,
@@ -17,6 +22,18 @@ export default function(state = initial_state, action) {
         loading_profile: false
       };
     case UPDATE_PROFILE:
+      return {
+        ...state,
+        profile: payload,
+        loading_profile: false
+      };
+    case CREATE_EXPERIENCE:
+      return {
+        ...state,
+        profile: payload,
+        loading_profile: false
+      };
+    case CREATE_EXPERIENCE:
       return {
         ...state,
         profile: payload,

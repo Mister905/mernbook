@@ -12,11 +12,35 @@ class Dashboard extends Component {
     M.Tabs.init(this.Tabs);
   };
 
-  componentDidUpdate = prevProps => {};
+  output_skills = () => {
+    return <div>SKILLS</div>;
+  };
+
+  output_interests = () => {
+    return <div>INTERESTS</div>;
+  };
+
+  output_experience = () => {
+    return <div>EXPERIENCE</div>;
+  };
+
+  output_education = () => {
+    return <div>EDUCATION</div>;
+  };
+
+  output_social_media = () => {
+    return <div>SOCIAL MEDIA</div>;
+  };
 
   render() {
     const { first_name, last_name } = this.props.auth.user;
-    const { profile } = this.props.profile;
+    const {
+      skills,
+      interests,
+      experience,
+      education,
+      social_media
+    } = this.props.profile;
     return (
       <div className="container mt-50">
         <div className="row">
@@ -71,10 +95,10 @@ class Dashboard extends Component {
                     </ul>
 
                     <div id="test-swipe-1" className="col m12">
-                      Skills
+                      {this.output_skills()}
                     </div>
                     <div id="test-swipe-2" className="col m12">
-                      Interests
+                      {this.output_interests()}
                     </div>
                     <div id="test-swipe-3" className="col m12">
                       <div className="row mt-25">
@@ -90,6 +114,7 @@ class Dashboard extends Component {
                           </Link>
                         </div>
                       </div>
+                      {this.output_experience()}
                     </div>
                     <div id="test-swipe-4" className="col m12">
                       <div className="row mt-25">
@@ -105,9 +130,10 @@ class Dashboard extends Component {
                           </Link>
                         </div>
                       </div>
+                      {this.output_education()}
                     </div>
                     <div id="test-swipe-5" className="col m12">
-                      Social Media
+                      {this.output_social_media()}
                     </div>
                   </div>
                 </div>

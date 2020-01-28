@@ -33,7 +33,7 @@ class CreateExperience extends Component {
   };
 
   render() {
-    const { values, errors, touched } = this.props;
+    const { values, errors } = this.props;
     const { is_current_job } = this.state;
     return (
       <div className="container mt-50">

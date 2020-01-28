@@ -48,7 +48,7 @@ const ProfileSchema = new mongoose.Schema({
       },
       is_current_job: {
         type: Boolean,
-        default: false
+        default: true
       },
       description: {
         type: String
@@ -65,7 +65,7 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      field: {
+      field_of_study: {
         type: String
       },
       from_date: {
@@ -75,9 +75,9 @@ const ProfileSchema = new mongoose.Schema({
       to_date: {
         type: Date
       },
-      current: {
+      is_current_study: {
         type: Boolean,
-        default: false
+        default: true
       },
       description: {
         type: String

@@ -302,10 +302,10 @@ router.post(
       check("credential", "Credential is Required")
         .not()
         .isEmpty(),
-      check("field", "Field is Required")
+      check("field_of_study", "Field of Study is Required")
         .not()
         .isEmpty(),
-      check("from", "From Date is Required")
+      check("from_date", "From Date is Required")
         .not()
         .isEmpty()
     ]
@@ -319,20 +319,20 @@ router.post(
     const {
       institution,
       credential,
-      field,
-      from,
-      to,
-      current,
+      field_of_study,
+      from_date,
+      to_date,
+      is_current_study,
       description
     } = req.body;
 
     const education_build = {
       institution,
       credential,
-      field,
-      from,
-      to,
-      current,
+      field_of_study,
+      from_date,
+      to_date,
+      is_current_study,
       description
     };
 
