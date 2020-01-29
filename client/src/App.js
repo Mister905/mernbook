@@ -11,10 +11,11 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import Alert from "./components/layout/alert/Alert";
-import EditProfile from './components/profile/edit_profile/EditProfile';
-import CreateExperience from './components/profile/create_experience/CreateExperience';
-import CreateEducation from './components/profile/create_education/CreateEducation';
+import EditProfile from "./components/profile/edit_profile/EditProfile";
+import CreateExperience from "./components/profile/create_experience/CreateExperience";
+import CreateEducation from "./components/profile/create_education/CreateEducation";
 import Sidenav from "./components/layout/sidenav/Sidenav";
+import UpdateProfileImage from "./components/profile/update_profile_image/UpdateProfileImage";
 import PrivateRoute from "./components/private_route/PrivateRoute";
 
 class App extends Component {
@@ -42,8 +43,21 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-            <PrivateRoute exact path="/create-experience" component={CreateExperience} />
-            <PrivateRoute exact path="/create-education" component={CreateEducation} />
+            <PrivateRoute
+              exact
+              path="/create-experience"
+              component={CreateExperience}
+            />
+            <PrivateRoute
+              exact
+              path="/create-education"
+              component={CreateEducation}
+            />
+            <PrivateRoute
+              exact
+              path="/profiles/image/update"
+              component={UpdateProfileImage}
+            />
           </Switch>
         </BrowserRouter>
       </div>

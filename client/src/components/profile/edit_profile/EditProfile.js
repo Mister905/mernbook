@@ -55,7 +55,6 @@ class EditProfile extends Component {
                       id="user_location"
                       name="user_location"
                       field_name={"user_location"}
-                      // user_location={user_location}
                     />
                   </div>
                 </div>

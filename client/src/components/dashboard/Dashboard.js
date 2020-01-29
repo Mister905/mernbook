@@ -105,7 +105,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { first_name, last_name } = this.props.auth.user;
+    
 
     return (
       <div>
@@ -217,7 +217,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
+  sidenav: state.sidenav
 });
 
 export default connect(mapStateToProps, { get_current_profile })(Dashboard);

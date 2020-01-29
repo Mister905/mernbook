@@ -4,6 +4,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import default_profile from "../../../assets/img/default_profile.png";
 import { sidenav_click } from "../../../actions/sidenav";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Sidenav extends Component {
   componentDidMount() {
@@ -35,7 +36,14 @@ class Sidenav extends Component {
           className="sidenav sidenav-fixed custom-sidenav"
         >
           <li className="center-align">
-            <img src={default_profile} className="responsive-img " />
+            <div className="sidenav-img-container">
+              <img src={default_profile} alt="Avatar" className="image" />
+              <div className="sidenav-img-update-wrapper">
+                <Link to={"/profiles/image/update"}>
+                  <i className="material-icons add-photo-icon">add_a_photo</i>
+                </Link>
+              </div>
+            </div>
           </li>
           <div className="sidenav-section">
             <li>
