@@ -51,8 +51,8 @@ class Sidenav extends Component {
                 onClick={e => this.handle_sidenav_click(e)}
                 className={
                   active_component === "profile"
-                    ? "waves-effect active-sidenav-link"
-                    : "waves-effect"
+                    ? "waves-effect sidenav-link active-sidenav-link"
+                    : "waves-effect sidenav-link"
                 }
                 name="profile"
               >
@@ -66,8 +66,8 @@ class Sidenav extends Component {
                 onClick={e => this.handle_sidenav_click(e)}
                 className={
                   active_component === "posts"
-                    ? "waves-effect active-sidenav-link"
-                    : "waves-effect"
+                    ? "waves-effect sidenav-link active-sidenav-link"
+                    : "waves-effect sidenav-link"
                 }
                 name="posts"
               >
@@ -81,8 +81,8 @@ class Sidenav extends Component {
                 onClick={e => this.handle_sidenav_click(e)}
                 className={
                   active_component === "experience"
-                    ? "waves-effect active-sidenav-link"
-                    : "waves-effect"
+                    ? "waves-effect sidenav-link active-sidenav-link"
+                    : "waves-effect sidenav-link"
                 }
                 name="experience"
               >
@@ -96,8 +96,8 @@ class Sidenav extends Component {
                 onClick={e => this.handle_sidenav_click(e)}
                 className={
                   active_component === "education"
-                    ? "waves-effect active-sidenav-link"
-                    : "waves-effect"
+                    ? "waves-effect sidenav-link active-sidenav-link"
+                    : "waves-effect sidenav-link"
                 }
                 name="education"
               >

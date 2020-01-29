@@ -87,23 +87,23 @@ const ProfileSchema = new mongoose.Schema({
   social_media: {
     youtube: {
       type: String,
-      default: null
+      default: "https://www.youtube.com/"
     },
     twitter: {
       type: String,
-      default: null
+      default: "https://twitter.com/"
     },
     facebook: {
       type: String,
-      default: null
+      default: "https://www.facebook.com/"
     },
     linkedin: {
       type: String,
-      default: null
+      default: "https://www.linkedin.com/"
     },
     instagram: {
       type: String,
-      default: null
+      default: "https://www.instagram.com/"
     }
   },
   profile_image_id: String,

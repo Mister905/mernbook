@@ -47,7 +47,7 @@ class Header extends Component {
                   <li className="dropdown_menu-item">
                     <a className="dropdown-link valign-wrapper fw-600">
                       {first_name}
-                      <i class="material-icons right account-icon">
+                      <i className="material-icons right account-icon">
                         account_circle
                       </i>
                     </a>
@@ -55,19 +55,19 @@ class Header extends Component {
                       <ul className="dropdown_submenu">
                         <li className="dropdown_submenu-item ">
                           <a>
-                            <i class="material-icons left account-icon">menu</i>
+                            <i className="material-icons left account-icon">menu</i>
                             Dashboard
                           </a>
                         </li>
                         <li className="dropdown_submenu-item ">
                           <a>
-                            <i class="material-icons left account-icon">settings</i>
+                            <i className="material-icons left account-icon">settings</i>
                             Account
                           </a>
                         </li>
                         <li className="dropdown_submenu-item ">
                           <a>
-                            <i class="material-icons left account-icon">
+                            <i className="material-icons left account-icon">
                               exit_to_app
                             </i>
                             Logout

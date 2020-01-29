@@ -6,64 +6,170 @@ import M from "materialize-css";
 import { Link } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
 import Sidenav from "../layout/sidenav/Sidenav";
+import { IconContext } from "react-icons";
+import {
+  FaYoutubeSquare,
+  FaTwitterSquare,
+  FaFacebookSquare,
+  FaLinkedin,
+  FaInstagram
+} from "react-icons/fa";
 
 class Dashboard extends Component {
-
   componentDidMount = () => {
     this.props.get_current_profile();
     M.Tabs.init(this.Tabs);
   };
 
-  output_skills = () => {
+  display_dashboard_component = () => {
     const { loading_profile } = this.props.profile;
+
     if (loading_profile) {
       return (
-        <div className="row">
-          <div className="col m12 center-align">
-            <Loader />
+        <div className="container mt-50">
+          <div className="row">
+            <div className="col m12 center-align">
+              <Loader />
+            </div>
           </div>
         </div>
       );
     } else {
-      const { skills } = this.props.profile.active_profile;
-      const list_items = skills.map(skill => (
-        <li className="collection-item">{skill}</li>
-      ));
-      return (
-        <div className="row">
-          <div className="col m12">
-            {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
-            <ul className="comma-list">{list_items}</ul>
-          </div>
-        </div>
-      );
+      const { active_component } = this.props.sidenav;
+
+      switch (active_component) {
+        case "profile":
+          return this.output_profile();
+
+        default:
+          break;
+      }
     }
   };
 
-  output_interests = () => {
-    const { loading_profile } = this.props.profile;
-    if (loading_profile) {
-      return (
+  output_profile = () => {
+    const { first_name, last_name } = this.props.auth.user;
+    const {
+      youtube,
+      twitter,
+      facebook,
+      linkedin,
+      instagram
+    } = this.props.profile.active_profile.social_media;
+    const { skills } = this.props.profile.active_profile;
+    const skill_items = skills.map((skill, i) => (
+      <li key={i} className="collection-item">
+        {skill}
+      </li>
+    ));
+    const { interests } = this.props.profile.active_profile;
+    const interest_items = interests.map((interest, i) => (
+      <li key={i} className="collection-item">
+        {interest}
+      </li>
+    ));
+    return (
+      <div className="container mt-50">
         <div className="row">
-          <div className="col m12 center-align">
-            <Loader />
+          <div className="col m9 offset-m1">
+            <div className="component-heading">
+              {first_name} {last_name}
+            </div>
           </div>
         </div>
-      );
-    } else {
-      const { interests } = this.props.profile.active_profile;
-      const interest_items = interests.map(interest => (
-        <li className="collection-item">{interest}</li>
-      ));
-      return (
         <div className="row">
-          <div className="col m12">
+          <div className="col m9 offset-m1">
+            <div className="profile-subheading">Skills</div>
+            {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
+            <ul className="comma-list">{skill_items}</ul>
+          </div>
+          <div className="col m2 center-align">
+            <Link to={"/edit-profile"} className="btn btn-mernbook">
+              <i className="material-icons">mode_edit</i>
+            </Link>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col m9 offset-m1">
+            <div className="profile-subheading">Interests</div>
             {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
             <ul className="comma-list">{interest_items}</ul>
           </div>
         </div>
-      );
-    }
+        <div className="row">
+          <div className="col m9 offset-m1">
+            <div className="profile-subheading">Social Media</div>
+            <div className="row mt-15">
+              <div className="col m1">
+                <a href={youtube}>
+                  <IconContext.Provider
+                    value={{
+                      className: "social-media-icon youtube-icon"
+                    }}
+                  >
+                    <div>
+                      <FaYoutubeSquare />
+                    </div>
+                  </IconContext.Provider>
+                </a>
+              </div>
+              <div className="col m1">
+                <a href={twitter}>
+                  <IconContext.Provider
+                    value={{
+                      className: "social-media-icon twitter-icon"
+                    }}
+                  >
+                    <div>
+                      <FaTwitterSquare />
+                    </div>
+                  </IconContext.Provider>
+                </a>
+              </div>
+              <div className="col m1">
+                <a href={facebook}>
+                  <IconContext.Provider
+                    value={{
+                      className: "social-media-icon facebook-icon"
+                    }}
+                  >
+                    <div>
+                      <FaFacebookSquare />
+                    </div>
+                  </IconContext.Provider>
+                </a>
+              </div>
+              <div className="col m1">
+                <a href={linkedin}>
+                  <IconContext.Provider
+                    value={{
+                      className: "social-media-icon linkedin-icon"
+                    }}
+                  >
+                    <div>
+                      <FaLinkedin />
+                    </div>
+                  </IconContext.Provider>
+                </a>
+              </div>
+              <div className="col m1">
+                <a href={instagram}>
+                  <IconContext.Provider
+                    value={{
+                      className: "social-media-icon instagram-icon"
+                    }}
+                  >
+                    <div>
+                      <FaInstagram />
+                    </div>
+                  </IconContext.Provider>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   output_experience = () => {
@@ -81,8 +187,8 @@ class Dashboard extends Component {
       const experience_items = experience.map(item => (
         <div className="row">
           <div className="col m12 card">
-            <div class="card-content">
-              <span class="card-title">{item.title}</span>
+            <div className="card-content">
+              <span className="card-title">{item.title}</span>
               <div className="company">{item.company}</div>
               <div className="job-location">{item.job_location}</div>
               <div className="description">{item.description}</div>
@@ -105,110 +211,9 @@ class Dashboard extends Component {
   };
 
   render() {
-    
-
     return (
       <div>
-        <div className="container mt-50">
-          {/* <div className="row">
-          <div className="col m12">
-            <div className="row">
-              <div className="col m3">
-                <img
-                  src={default_logo}
-                  alt="Profile Image"
-                  className="responsive-img"
-                />
-              </div>
-              <div className="col m9">
-                <div className="row">
-                  <div className="col m10">
-                    <div className="component-heading">
-                      {first_name} {last_name}
-                    </div>
-                  </div>
-                  <div className="col m2 center-align">
-                    <Link to={"edit-profile"}>
-                      <button className="btn btn-mernbook btn-edit-profile">
-                        <i className="material-icons">mode_edit</i>
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col m12">
-                    <ul
-                      ref={Tabs => {
-                        this.Tabs = Tabs;
-                      }}
-                      id="dashboard-tabs"
-                      className="tabs"
-                    >
-                      <li className="tab col m2">
-                        <a href="#test-swipe-1">Skills</a>
-                      </li>
-                      <li className="tab col m2">
-                        <a href="#test-swipe-2">Interests</a>
-                      </li>
-                      <li className="tab col m2">
-                        <a href="#test-swipe-3">Experience</a>
-                      </li>
-                      <li className="tab col m2">
-                        <a href="#test-swipe-4">Education</a>
-                      </li>
-                      <li className="tab col m2">
-                        <a href="#test-swipe-5">Social Media</a>
-                      </li>
-                    </ul>
-
-                    <div id="test-swipe-1" className="col m12">
-                      {this.output_skills()}
-                    </div>
-                    <div id="test-swipe-2" className="col m12">
-                      {this.output_interests()}
-                    </div>
-                    <div id="test-swipe-3" className="col m12">
-                      <div className="row mt-25">
-                        <div className="col m6 offset-m2 center-align">
-                          <div className="tab-body-heading">Experience</div>
-                        </div>
-                        <div className="col m2 center-align">
-                          <Link
-                            to={"/create-experience"}
-                            className="btn btn-mernbook"
-                          >
-                            <i className="material-icons">add</i>
-                          </Link>
-                        </div>
-                      </div>
-                      {this.output_experience()}
-                    </div>
-                    <div id="test-swipe-4" className="col m12">
-                      <div className="row mt-25">
-                        <div className="col m6 offset-m2 center-align">
-                          <div className="tab-body-heading">Education</div>
-                        </div>
-                        <div className="col m2 center-align">
-                          <Link
-                            to={"/create-education"}
-                            className="btn btn-mernbook"
-                          >
-                            <i className="material-icons">add</i>
-                          </Link>
-                        </div>
-                      </div>
-                      {this.output_education()}
-                    </div>
-                    <div id="test-swipe-5" className="col m12">
-                      {this.output_social_media()}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        </div>
+        {this.display_dashboard_component()}
         <Sidenav />
       </div>
     );
