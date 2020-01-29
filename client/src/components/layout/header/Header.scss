@@ -16,10 +16,85 @@
   margin-top: 13px;
 }
 
-.nav-name {
-  margin-left: 5px;
-}
-
 .mr-35 {
   margin-right: 35px;
+}
+
+// *************************************************************
+
+/*
+This is the extracted copied part responsible for showing & hiding the submenu.
+*/
+
+.nav__submenu {
+  display: none;
+}
+
+.nav__menu-item:hover {
+  .nav__submenu {
+    display: block;
+  }
+}
+
+// DROPDOWN CSS
+
+$color-blue: #325086;
+$color-blue-dark: #0d2035;
+$submenu-width: 180px;
+
+.nav {
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.dropdown {
+  display: inline-block;
+  color: #fff;
+  text-align: left;
+
+  a {
+    display: flex;
+    padding: 0 16px;
+    line-height: inherit;
+    cursor: pointer;
+  }
+}
+
+.dropdown_menu-item {
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    .dropdown_submenu {
+      display: block;
+    }
+  }
+}
+
+.dropdown_submenu {
+  text-transform: none;
+  display: none;
+  position: absolute;
+  width: $submenu-width;
+  background-color: $color-blue;
+}
+
+.dropdown_submenu-item {
+  width: 100%;
+  &:hover {
+    background: rgba(#000, 0.1);
+  }
+}
+
+.dropdown-link {
+  min-height: 56px !important;
+  height: 100%;
+}
+
+.account-icon {
+  margin-left: 7px !important;
 }

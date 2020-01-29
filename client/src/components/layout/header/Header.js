@@ -6,14 +6,31 @@ import { compose } from "redux";
 import { logout_user } from "../../../actions/auth";
 
 class Header extends Component {
+  state = {
+    show_dropdown: false
+  };
+
   handle_logout = () => {
     this.props.logout_user(this.props.history);
+  };
+
+  show_dropdown = () => {
+    console.log("show_dropdown");
+    this.setState({
+      show_dropdown: true
+    });
+  };
+
+  hide_dropdown = () => {
+    console.log("hide_dropdown");
+    this.setState({
+      show_dropdown: false
+    });
   };
 
   render() {
     const { is_authenticated } = this.props.auth;
     const { first_name } = this.props.auth.user;
-
     return (
       <nav className="landing-nav">
         <div className="container">
@@ -25,29 +42,53 @@ class Header extends Component {
               <img className="logo-nav" src={logo_nav} alt="" />
             </Link>
             {is_authenticated ? (
-              <ul id="nav-mobile" className="right hide-on-med-and-down">
-                <li>
-                  <Link to={"/dashboard"} className="mr-35">
-                    Dasboard
-                  </Link>
-                </li>
-                <li>
-                  <div className="valign-wrapper mr-35">
-                    <i className="material-icons">account_circle</i>
-                    <span className="nav-name">{first_name}</span>
-                  </div>
-                </li>
-                <li>
-                  <a onClick={this.handle_logout}>Logout</a>
-                </li>
-              </ul>
+              <div className="dropdown right hide-on-med-and-down">
+                <ul className="dropdown_menu">
+                  <li className="dropdown_menu-item">
+                    <a className="dropdown-link valign-wrapper fw-600">
+                      {first_name}
+                      <i class="material-icons right account-icon">
+                        account_circle
+                      </i>
+                    </a>
+                    <div>
+                      <ul className="dropdown_submenu">
+                        <li className="dropdown_submenu-item ">
+                          <a>
+                            <i class="material-icons left account-icon">menu</i>
+                            Dashboard
+                          </a>
+                        </li>
+                        <li className="dropdown_submenu-item ">
+                          <a>
+                            <i class="material-icons left account-icon">settings</i>
+                            Account
+                          </a>
+                        </li>
+                        <li className="dropdown_submenu-item ">
+                          <a>
+                            <i class="material-icons left account-icon">
+                              exit_to_app
+                            </i>
+                            Logout
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             ) : (
               <ul id="nav-mobile" className="right hide-on-med-and-down">
                 <li>
-                  <Link to={"/register"} className="mr-35">Register</Link>
+                  <Link to={"/register"} className="mr-35 fw-600">
+                    Register
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/login"}>Login</Link>
+                  <Link to={"/login"} className="fw-600">
+                    Login
+                  </Link>
                 </li>
               </ul>
             )}
