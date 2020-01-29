@@ -24,8 +24,8 @@ class App extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (prevProps.auth.token !== this.props.auth.token) {
-      this.props.load_user();
+    if (this.props.auth.is_authenticated !== prevProps.auth.is_authenticated) {
+      if (this.props.auth.is_authenticated) this.props.load_user();
     }
   };
 

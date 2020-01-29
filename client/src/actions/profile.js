@@ -35,7 +35,7 @@ export const update_profile = (form_data, history) => async dispatch => {
       payload: res.data
     });
     history.push("/dashboard");
-    dispatch(create_alert("success", "Update Successfull"));
+    dispatch(create_alert("success", "Update Successful"));
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Update Failed"));

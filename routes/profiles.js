@@ -50,14 +50,18 @@ router.put("/update", auth, async (req, res) => {
     profile_build.user_location = user_location;
   }
 
-  if (skills) {
+  if (skills.length > 0) {
     profile_build.skills = skills.split(",").map(skill => skill.trim());
+  } else {
+    profile_build.skills = [];
   }
 
-  if (interests) {
+  if (interests.length > 0) {
     profile_build.interests = interests
       .split(",")
       .map(interest => interest.trim());
+  } else {
+    profile_build.interests = [];
   }
 
   if (biography) {

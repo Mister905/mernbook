@@ -40,7 +40,8 @@ class Dashboard extends Component {
       switch (active_component) {
         case "profile":
           return this.output_profile();
-
+        case "experience":
+          return this.output_experience();
         default:
           break;
       }
@@ -49,6 +50,7 @@ class Dashboard extends Component {
 
   output_profile = () => {
     const { first_name, last_name } = this.props.auth.user;
+
     const {
       youtube,
       twitter,
@@ -56,18 +58,37 @@ class Dashboard extends Component {
       linkedin,
       instagram
     } = this.props.profile.active_profile.social_media;
+
     const { skills } = this.props.profile.active_profile;
-    const skill_items = skills.map((skill, i) => (
-      <li key={i} className="collection-item">
-        {skill}
-      </li>
-    ));
+
+    let skills_output = null;
+
+    if (skills.length > 0) {
+      skills_output = skills.map((skill, i) => (
+        <li key={i} className="collection-item">
+          {skill}
+        </li>
+      ));
+    } else {
+      skills_output = "You haven't defined any skills";
+    }
+
     const { interests } = this.props.profile.active_profile;
-    const interest_items = interests.map((interest, i) => (
-      <li key={i} className="collection-item">
-        {interest}
-      </li>
-    ));
+
+    let interests_output = null;
+
+    if (interests.length > 0) {
+      interests_output = interests.map((interest, i) => (
+        <li key={i} className="collection-item">
+          {interest}
+        </li>
+      ));
+    } else {
+      interests_output = "You haven't defined any interests";
+    }
+
+    const { biography } = this.props.profile.active_profile;
+
     return (
       <div className="container mt-50">
         <div className="row">
@@ -75,13 +96,6 @@ class Dashboard extends Component {
             <div className="component-heading">
               {first_name} {last_name}
             </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col m9 offset-m1">
-            <div className="profile-subheading">Skills</div>
-            {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
-            <ul className="comma-list">{skill_items}</ul>
           </div>
           <div className="col m2 center-align">
             <Link to={"/edit-profile"} className="btn btn-mernbook">
@@ -91,9 +105,16 @@ class Dashboard extends Component {
         </div>
         <div className="row">
           <div className="col m9 offset-m1">
+            <div className="profile-subheading">Skills</div>
+            {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
+            <ul className="comma-list">{skills_output}</ul>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col m9 offset-m1">
             <div className="profile-subheading">Interests</div>
             {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
-            <ul className="comma-list">{interest_items}</ul>
+            <ul className="comma-list">{interests_output}</ul>
           </div>
         </div>
         <div className="row">
@@ -101,7 +122,7 @@ class Dashboard extends Component {
             <div className="profile-subheading">Social Media</div>
             <div className="row mt-15">
               <div className="col m1">
-                <a href={youtube}>
+                <a href={youtube} target="_blank">
                   <IconContext.Provider
                     value={{
                       className: "social-media-icon youtube-icon"
@@ -114,7 +135,7 @@ class Dashboard extends Component {
                 </a>
               </div>
               <div className="col m1">
-                <a href={twitter}>
+                <a href={twitter} target="_blank">
                   <IconContext.Provider
                     value={{
                       className: "social-media-icon twitter-icon"
@@ -127,7 +148,7 @@ class Dashboard extends Component {
                 </a>
               </div>
               <div className="col m1">
-                <a href={facebook}>
+                <a href={facebook} target="_blank">
                   <IconContext.Provider
                     value={{
                       className: "social-media-icon facebook-icon"
@@ -140,7 +161,7 @@ class Dashboard extends Component {
                 </a>
               </div>
               <div className="col m1">
-                <a href={linkedin}>
+                <a href={linkedin} target="_blank">
                   <IconContext.Provider
                     value={{
                       className: "social-media-icon linkedin-icon"
@@ -153,7 +174,7 @@ class Dashboard extends Component {
                 </a>
               </div>
               <div className="col m1">
-                <a href={instagram}>
+                <a href={instagram} target="_blank">
                   <IconContext.Provider
                     value={{
                       className: "social-media-icon instagram-icon"
@@ -166,6 +187,12 @@ class Dashboard extends Component {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col m9 offset-m1">
+            <div className="profile-subheading">Biography</div>
+            <p>{ biography }</p>
           </div>
         </div>
       </div>

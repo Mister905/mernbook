@@ -34,7 +34,7 @@ export const register_user = (form_data, history) => async dispatch => {
   try {
     const res = await axios.post("/auth/register", request_body, config);
     history.push("/login");
-    dispatch(create_alert("success", "Registration Successfull"));
+    dispatch(create_alert("success", "Registration Successful"));
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Registration Error"));

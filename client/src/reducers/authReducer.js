@@ -37,12 +37,13 @@ export default function(state = initial_state, action) {
         loading_user: false
       };
     case LOGOUT_USER:
-      localStorage.removeItem("token", payload);
+      localStorage.removeItem("token");
       return {
         ...state,
         token: null,
         is_authenticated: false,
-        loading_user: false
+        loading_user: false,
+        user: {}
       };
     default:
       return state;

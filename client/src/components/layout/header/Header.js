@@ -14,22 +14,9 @@ class Header extends Component {
     this.props.logout_user(this.props.history);
   };
 
-  show_dropdown = () => {
-    console.log("show_dropdown");
-    this.setState({
-      show_dropdown: true
-    });
-  };
-
-  hide_dropdown = () => {
-    console.log("hide_dropdown");
-    this.setState({
-      show_dropdown: false
-    });
-  };
-
   render() {
     const { is_authenticated } = this.props.auth;
+    console.log(is_authenticated)
     const { first_name } = this.props.auth.user;
     return (
       <nav className="landing-nav">
@@ -55,18 +42,22 @@ class Header extends Component {
                       <ul className="dropdown_submenu">
                         <li className="dropdown_submenu-item ">
                           <a>
-                            <i className="material-icons left account-icon">menu</i>
+                            <i className="material-icons left account-icon">
+                              menu
+                            </i>
                             Dashboard
                           </a>
                         </li>
                         <li className="dropdown_submenu-item ">
                           <a>
-                            <i className="material-icons left account-icon">settings</i>
+                            <i className="material-icons left account-icon">
+                              settings
+                            </i>
                             Account
                           </a>
                         </li>
                         <li className="dropdown_submenu-item ">
-                          <a>
+                          <a onClick={this.handle_logout}>
                             <i className="material-icons left account-icon">
                               exit_to_app
                             </i>
