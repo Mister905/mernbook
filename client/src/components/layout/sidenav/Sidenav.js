@@ -27,7 +27,14 @@ class Sidenav extends Component {
     const { active_component } = this.props.sidenav;
 
     return (
-      <div>
+      <div className="sidenav-wrapper">
+        <a
+          href="#!"
+          data-target="mernbook-sidenav"
+          className="top-nav sidenav-trigger full hide-on-large-only"
+        >
+          <i className="material-icons">menu</i>
+        </a>
         <ul
           ref={Sidenav => {
             this.Sidenav = Sidenav;
@@ -106,13 +113,7 @@ class Sidenav extends Component {
             </li>
           </div>
         </ul>
-        <a
-          href="#!"
-          data-target="mernbook-sidenav"
-          className="sidenav-trigger hide-on-med-and-up"
-        >
-          <i className="material-icons">menu</i>
-        </a>
+        
       </div>
     );
   }

@@ -13,16 +13,16 @@ class Login extends Component {
       <div>
         <div className="container mt-50">
           <div className="row">
-            <div className="col m4 offset-m4 center-align">
+            <div className="col m4 offset-m4 s12 center-align">
               <div className="component-heading mernbook-blue-text">Login</div>
             </div>
           </div>
 
           <Form>
             <div className="row mt-50">
-              <div className="col m10 offset-m1">
+              <div className="col m10 offset-m1 s6 offset-s3">
                 <div className="row">
-                  <div className="col m6 offset-m3">
+                  <div className="col m6 offset-m3 s12">
                     <div className="custom-input-field">
                       <label
                         htmlFor="email"
@@ -47,7 +47,7 @@ class Login extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col m6 offset-m3">
+                  <div className="col m6 offset-m3 s12">
                     <div className="custom-input-field">
                       <label
                         htmlFor="password"
@@ -73,7 +73,7 @@ class Login extends Component {
                 </div>
 
                 <div className="row">
-                  <div className="col m6 offset-m3">
+                  <div className="col m6 offset-m3 s12">
                     <button
                       type="submit"
                       className="btn btn-mernbook fw-600 right"

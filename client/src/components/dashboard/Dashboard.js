@@ -91,34 +91,40 @@ class Dashboard extends Component {
 
     return (
       <div className="container mt-50">
-        <div className="row">
-          <div className="col m9 offset-m1">
+        <div className="row valign-wrapper">
+          <div className="col m9 offset-m2 s6 offset-s3">
             <div className="component-heading">
               {first_name} {last_name}
             </div>
           </div>
-          <div className="col m2 center-align">
+          <div className="col m1 center-align">
             <Link to={"/edit-profile"} className="btn btn-mernbook">
               <i className="material-icons">mode_edit</i>
             </Link>
           </div>
         </div>
         <div className="row">
-          <div className="col m9 offset-m1">
+          <div className="col m9 offset-m2">
             <div className="profile-subheading">Skills</div>
             {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
             <ul className="comma-list">{skills_output}</ul>
           </div>
         </div>
         <div className="row">
-          <div className="col m9 offset-m1">
+          <div className="col m9 offset-m2">
             <div className="profile-subheading">Interests</div>
             {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
             <ul className="comma-list">{interests_output}</ul>
           </div>
         </div>
         <div className="row">
-          <div className="col m9 offset-m1">
+          <div className="col m9 offset-m2">
+            <div className="profile-subheading">Biography</div>
+            <p>{biography}</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col m9 offset-m2">
             <div className="profile-subheading">Social Media</div>
             <div className="row mt-15">
               <div className="col m1">
@@ -187,12 +193,6 @@ class Dashboard extends Component {
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col m9 offset-m1">
-            <div className="profile-subheading">Biography</div>
-            <p>{ biography }</p>
           </div>
         </div>
       </div>

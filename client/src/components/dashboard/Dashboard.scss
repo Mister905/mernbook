@@ -1,26 +1,10 @@
-.comma-list {
-  padding: 0;
-
-  & > * {
-    display: inline;
-
-    &:after {
-      content: ",";
-    }
-
-    &:last-child:after {
-      content: "";
-    }
-  }
-}
-
 @media (min-width: 768px) {
   .comma-list {
     list-style: square;
     padding-left: 30px;
 
     & > * {
-      display: list-item;
+      display: block;
       width: 33%;
       float: left;
 
