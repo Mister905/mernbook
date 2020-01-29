@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import default_profile from "../../../assets/img/default_profile.png";
+import { sidenav_click } from "../../../actions/sidenav";
+import { connect } from "react-redux";
 
 class Sidenav extends Component {
   componentDidMount() {
@@ -14,16 +16,22 @@ class Sidenav extends Component {
 
     let instance = M.Sidenav.getInstance(this.Sidenav);
     instance.open();
-    console.log(instance.isOpen);
   }
+
+  handle_sidenav_click = e => {
+    this.props.sidenav_click(e.target.name);
+  };
+
   render() {
+    const { active_component } = this.props.sidenav;
+
     return (
       <div>
         <ul
           ref={Sidenav => {
             this.Sidenav = Sidenav;
           }}
-          id="slide-out"
+          id="mernbook-sidenav"
           className="sidenav sidenav-fixed custom-sidenav"
         >
           <li className="center-align">
@@ -31,99 +39,68 @@ class Sidenav extends Component {
           </li>
           <div className="sidenav-section">
             <li>
-              <div className="divider" />
-            </li>
-            <li>
-              <a href="#!" className="waves-effect">
+              <a
+                onClick={e => this.handle_sidenav_click(e)}
+                className={
+                  active_component === "profile"
+                    ? "waves-effect active-sidenav-link"
+                    : "waves-effect"
+                }
+                name="profile"
+              >
                 Profile
               </a>
             </li>
-            <li>
-              <div className="divider" />
-            </li>
           </div>
           <div className="sidenav-section">
             <li>
-              <div className="divider" />
-            </li>
-            <li>
-              <a href="#!" className="waves-effect">
+              <a
+                onClick={e => this.handle_sidenav_click(e)}
+                className={
+                  active_component === "posts"
+                    ? "waves-effect active-sidenav-link"
+                    : "waves-effect"
+                }
+                name="posts"
+              >
                 Posts
               </a>
             </li>
-            <li>
-              <div className="divider" />
-            </li>
           </div>
           <div className="sidenav-section">
             <li>
-              <div className="divider" />
-            </li>
-            <li>
-              <a href="#!" className="waves-effect">
-                Skills
-              </a>
-            </li>
-            <li>
-              <div className="divider" />
-            </li>
-          </div>
-          <div className="sidenav-section">
-            <li>
-              <div className="divider" />
-            </li>
-            <li>
-              <a href="#!" className="waves-effect">
-                Interests
-              </a>
-            </li>
-            <li>
-              <div className="divider" />
-            </li>
-          </div>
-          <div className="sidenav-section">
-            <li>
-              <div className="divider" />
-            </li>
-            <li>
-              <a href="#!" className="waves-effect">
+              <a
+                onClick={e => this.handle_sidenav_click(e)}
+                className={
+                  active_component === "experience"
+                    ? "waves-effect active-sidenav-link"
+                    : "waves-effect"
+                }
+                name="experience"
+              >
                 Experience
               </a>
             </li>
-            <li>
-              <div className="divider" />
-            </li>
           </div>
           <div className="sidenav-section">
             <li>
-              <div className="divider" />
-            </li>
-            <li>
-              <a href="#!" className="waves-effect">
+              <a
+                onClick={e => this.handle_sidenav_click(e)}
+                className={
+                  active_component === "education"
+                    ? "waves-effect active-sidenav-link"
+                    : "waves-effect"
+                }
+                name="education"
+              >
                 Education
               </a>
-            </li>
-            <li>
-              <div className="divider" />
-            </li>
-          </div>
-          <div className="sidenav-section">
-            <li>
-              <div className="divider" />
-            </li>
-            <li>
-              <a href="#!" className="waves-effect">
-                Social Media
-              </a>
-            </li>
-            <li>
-              <div className="divider" />
             </li>
           </div>
         </ul>
         <a
           href="#!"
-          data-target="slide-out"
+          data-target="mernbook-sidenav"
           className="sidenav-trigger hide-on-med-and-up"
         >
           <i className="material-icons">menu</i>
@@ -133,4 +110,8 @@ class Sidenav extends Component {
   }
 }
 
-export default Sidenav;
+const mapStateToProps = state => ({
+  sidenav: state.sidenav
+});
+
+export default connect(mapStateToProps, { sidenav_click })(Sidenav);

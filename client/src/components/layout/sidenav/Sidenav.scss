@@ -3,3 +3,8 @@
     margin-top: 64px;
     padding-top: 10px;
 }
+
+#mernbook-sidenav li>a.active-sidenav-link {
+    color: #0D295B !important;
+    font-weight: 600;
+}

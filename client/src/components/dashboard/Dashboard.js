@@ -8,9 +8,6 @@ import Loader from "../layout/loader/Loader";
 import Sidenav from "../layout/sidenav/Sidenav";
 
 class Dashboard extends Component {
-  state = {
-    active_component: "profile"
-  };
 
   componentDidMount = () => {
     this.props.get_current_profile();
