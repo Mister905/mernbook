@@ -6,7 +6,8 @@ import { withFormik, Form, Field } from "formik";
 import {
   update_profile,
   get_active_experience,
-  delete_experience
+  delete_experience,
+  clear_active_experience
 } from "../../../../actions/profile";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
@@ -38,6 +39,10 @@ class EditExperience extends Component {
     if (this.state.is_current_job !== prevState.is_current_job) {
       setFieldValue("is_current_job", this.state.is_current_job);
     }
+  };
+
+  componentWillUnmount = () => {
+    this.props.clear_active_experience();
   };
 
   handle_current_checkbox = () => {
@@ -86,14 +91,14 @@ class EditExperience extends Component {
                 <p>Are you sure you want to delete this record?</p>
               </div>
               <div className="modal-footer">
-                <a className="modal-close waves-effect waves-red btn-flat">
-                  Disagree
+                <a className="modal-close btn btn-mernbook">
+                  <i class="material-icons">cancel</i>
                 </a>
                 <a
                   onClick={this.handle_delete_experience}
-                  className="modal-close waves-effect waves-green btn-flat"
+                  className="modal-close btn red btn-delete"
                 >
-                  Agree
+                  <i class="material-icons">delete</i>
                 </a>
               </div>
             </div>
@@ -337,7 +342,8 @@ export default compose(
   connect(mapStateToProps, {
     update_profile,
     get_active_experience,
-    delete_experience
+    delete_experience,
+    clear_active_experience
   }),
   withRouter
 )(FormikForm);

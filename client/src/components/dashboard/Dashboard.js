@@ -220,19 +220,19 @@ class Dashboard extends Component {
       if (experience.length > 0) {
         experience_output = experience.map(item => (
           <div className="row" key={item._id}>
-            <div className="col m10 s12 card">
+            <div className="col m12 s12 card">
               <div className="card-content">
                 <Link to={`/edit-experience/${item._id}`}>
-                  <span className="card-title">{item.title}</span>
+                  <span className="card-title profile-title">{item.title}</span>
                 </Link>
                 <div className="company">{item.company}</div>
                 <div className="job-location">{item.job_location}</div>
                 <div className="description">{item.description}</div>
-                <div className="from-date">
-                  {moment(item.from_date).format("YYYY")}
-                </div>
-                <div className="to-date">
-                  {moment(item.to_date).format("YYYY")}
+                <div className="era right">
+                  {moment(item.from_date).format("YYYY")} -
+                  {item.to_date
+                    ? moment(item.to_date).format(" YYYY")
+                    : " Current"}
                 </div>
               </div>
             </div>
@@ -286,16 +286,16 @@ class Dashboard extends Component {
             <div className="col m12 s12 card">
               <div className="card-content">
                 <Link to={`/edit-education/${item._id}`}>
-                  <span className="card-title">{item.institution}</span>
+                  <span className="card-title profile-title">{item.institution}</span>
                 </Link>
                 <div className="company">{item.credential}</div>
                 <div className="job-location">{item.field_of_study}</div>
                 <div className="description">{item.description}</div>
-                <div className="from-date">
-                  {moment(item.from_date).format("YYYY")}
-                </div>
-                <div className="to-date">
-                  {moment(item.to_date).format("YYYY")}
+                <div className="era right">
+                  {moment(item.from_date).format("YYYY")} -
+                  {item.to_date
+                    ? moment(item.to_date).format(" YYYY")
+                    : " Current"}
                 </div>
               </div>
             </div>

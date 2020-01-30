@@ -6,7 +6,8 @@ import { withFormik, Form, Field } from "formik";
 import {
   update_profile,
   get_active_education,
-  delete_education
+  delete_education,
+  clear_active_education
 } from "../../../../actions/profile";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
@@ -37,6 +38,10 @@ class EditEducation extends Component {
       let description = document.getElementById("description");
       M.textareaAutoResize(description);
     }
+  };
+
+  componentWillUnmount = () => {
+    this.props.clear_active_education();
   };
 
   handle_current_checkbox = () => {
@@ -84,11 +89,14 @@ class EditEducation extends Component {
                 <p>Are you sure you want to delete this record?</p>
               </div>
               <div className="modal-footer">
-                <a className="modal-close waves-effect waves-red btn-flat">
-                  Disagree
+                <a className="modal-close btn btn-mernbook">
+                  <i class="material-icons">cancel</i>
                 </a>
-                <a className="modal-close waves-effect waves-green btn-flat">
-                  Agree
+                <a
+                  onClick={this.handle_delete_education}
+                  className="modal-close btn red btn-delete"
+                >
+                  <i class="material-icons">delete</i>
                 </a>
               </div>
             </div>
@@ -317,7 +325,8 @@ export default compose(
   connect(mapStateToProps, {
     update_profile,
     get_active_education,
-    delete_education
+    delete_education,
+    clear_active_education
   }),
   withRouter
 )(FormikForm);

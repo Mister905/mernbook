@@ -11,8 +11,10 @@ class Datepicker extends Component {
 
     if (field_name === "from_date") {
       default_date = Moment(this.props.from_date).toDate();
+      setFieldValue(field_name, Moment(this.props.from_date).toDate());
     } else if (field_name === "to_date") {
       default_date = Moment(this.props.to_date).toDate();
+      setFieldValue(field_name, Moment(this.props.to_date).toDate());
     }
 
     const datePickerOptions = {

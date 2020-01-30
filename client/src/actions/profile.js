@@ -7,7 +7,9 @@ import {
   GET_EXPERIENCE_ITEM,
   GET_EDUCATION_ITEM,
   DELETE_EXPERIENCE_ITEM,
-  DELETE_EDUCATION_ITEM
+  DELETE_EDUCATION_ITEM,
+  CLEAR_ACTIVE_EXPERIENCE,
+  CLEAR_ACTIVE_EDUCATION
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
@@ -153,4 +155,16 @@ export const delete_education = (
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Education Item"));
   }
+};
+
+export const clear_active_experience = () => async dispatch => {
+  dispatch({
+    type: CLEAR_ACTIVE_EXPERIENCE
+  });
+};
+
+export const clear_active_education = () => async dispatch => {
+  dispatch({
+    type: CLEAR_ACTIVE_EDUCATION
+  });
 };

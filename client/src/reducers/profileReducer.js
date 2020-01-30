@@ -61,11 +61,13 @@ export default function(state = initial_state, action) {
       };
     case DELETE_EXPERIENCE_ITEM:
       return {
-        ...state
+        ...state,
+        loading_profile: true
       };
     case DELETE_EDUCATION_ITEM:
       return {
-        ...state
+        ...state,
+        loading_profile: true
       };
     default:
       return state;

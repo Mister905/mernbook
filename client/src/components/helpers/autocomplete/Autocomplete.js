@@ -10,12 +10,15 @@ class Autocomplete extends Component {
   };
 
   componentDidMount = () => {
+    const { field_name } = this.props;
     const { value } = this.props.field;
+    const { setFieldValue } = this.props.form;
 
     if (this.props.job_location) {
       this.setState({
         current_value: this.props.job_location
       });
+      setFieldValue(field_name, this.state.current_value);
     } else {
       this.setState({
         current_value: value
