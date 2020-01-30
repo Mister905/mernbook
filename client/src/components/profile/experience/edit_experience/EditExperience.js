@@ -5,7 +5,8 @@ import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import {
   update_profile,
-  get_active_experience
+  get_active_experience,
+  delete_experience
 } from "../../../../actions/profile";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
@@ -21,15 +22,21 @@ class EditExperience extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.get_active_experience(id);
+    M.Modal.init(this.Modal, null);
   }
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps, prevState) => {
     if (
       this.props.profile.loading_active_experience !==
       prevProps.profile.loading_active_experience
     ) {
       let description = document.getElementById("description");
       M.textareaAutoResize(description);
+    }
+
+    const { setFieldValue } = this.props;
+    if (this.state.is_current_job !== prevState.is_current_job) {
+      setFieldValue("is_current_job", this.state.is_current_job);
     }
   };
 
@@ -39,11 +46,9 @@ class EditExperience extends Component {
     });
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    const { setFieldValue } = this.props;
-    if (this.state.is_current_job !== prevState.is_current_job) {
-      setFieldValue("is_current_job", this.state.is_current_job);
-    }
+  handle_delete_experience = () => {
+    const { _id } = this.props.profile.active_experience_item;
+    this.props.delete_experience(_id, this.props.history);
   };
 
   render() {
@@ -60,6 +65,38 @@ class EditExperience extends Component {
           </div>
           <div className="col m6 offset-m1 center-align">
             <div className="component-heading">Edit Experience</div>
+          </div>
+          <div className="col m2 offset-m1 center-align">
+            <a
+              className="btn btn-mernbook modal-trigger"
+              data-target="mernbook-modal"
+            >
+              <i className="material-icons">delete</i>
+            </a>
+
+            <div
+              ref={Modal => {
+                this.Modal = Modal;
+              }}
+              id="mernbook-modal"
+              className="modal"
+            >
+              <div className="modal-content">
+                <h4>Warning</h4>
+                <p>Are you sure you want to delete this record?</p>
+              </div>
+              <div className="modal-footer">
+                <a className="modal-close waves-effect waves-red btn-flat">
+                  Disagree
+                </a>
+                <a
+                  onClick={this.handle_delete_experience}
+                  className="modal-close waves-effect waves-green btn-flat"
+                >
+                  Agree
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         {loading_active_experience ? (
@@ -229,7 +266,9 @@ class EditExperience extends Component {
 
                 <div className="row">
                   <div className="col m6 offset-m3">
-                    <button className="btn btn-mernbook right">Update</button>
+                    <button className="btn btn-mernbook right fw-600">
+                      Update
+                    </button>
                   </div>
                 </div>
               </div>
@@ -285,7 +324,7 @@ const FormikForm = withFormik({
   validateOnChange: false,
   enableReinitialize: true,
   handleSubmit: (values, props) => {
-    console.log(values)
+    console.log(values);
     // props.props.create_experience(values, props.props.history);
   }
 })(EditExperience);
@@ -297,7 +336,8 @@ const mapStateToProps = state => ({
 export default compose(
   connect(mapStateToProps, {
     update_profile,
-    get_active_experience
+    get_active_experience,
+    delete_experience
   }),
   withRouter
 )(FormikForm);

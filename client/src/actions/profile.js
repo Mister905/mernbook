@@ -5,7 +5,9 @@ import {
   CREATE_EXPERIENCE,
   CREATE_EDUCATION,
   GET_EXPERIENCE_ITEM,
-  GET_EDUCATION_ITEM
+  GET_EDUCATION_ITEM,
+  DELETE_EXPERIENCE_ITEM,
+  DELETE_EDUCATION_ITEM
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
@@ -114,5 +116,41 @@ export const get_active_experience = experience_item_id => async dispatch => {
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Get Experience Item"));
+  }
+};
+
+export const delete_experience = (
+  experience_item_id,
+  history
+) => async dispatch => {
+  try {
+    const res = await axios.delete(
+      `/profiles/experience/${experience_item_id}`
+    );
+    dispatch({
+      type: DELETE_EXPERIENCE_ITEM,
+      payload: res.data
+    });
+    history.push("/");
+  } catch (error) {
+    console.log(error.message);
+    dispatch(create_alert("error", "Failed to Delete Experience Item"));
+  }
+};
+
+export const delete_education = (
+  education_item_id,
+  history
+) => async dispatch => {
+  try {
+    const res = await axios.delete(`/profiles/education/${education_item_id}`);
+    dispatch({
+      type: DELETE_EDUCATION_ITEM,
+      payload: res.data
+    });
+    history.push("/");
+  } catch (error) {
+    console.log(error.message);
+    dispatch(create_alert("error", "Failed to Delete Education Item"));
   }
 };

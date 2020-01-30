@@ -5,7 +5,8 @@ import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import {
   update_profile,
-  get_active_education
+  get_active_education,
+  delete_education
 } from "../../../../actions/profile";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
@@ -21,9 +22,14 @@ class EditEducation extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.get_active_education(id);
+    M.Modal.init(this.Modal, null);
   }
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps, prevState) => {
+    const { setFieldValue } = this.props;
+    if (this.state.is_current_study !== prevState.is_current_study) {
+      setFieldValue("is_current_study", this.state.is_current_study);
+    }
     if (
       this.props.profile.loading_active_education !==
       prevProps.profile.loading_active_education
@@ -39,11 +45,9 @@ class EditEducation extends Component {
     });
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    const { setFieldValue } = this.props;
-    if (this.state.is_current_study !== prevState.is_current_study) {
-      setFieldValue("is_current_study", this.state.is_current_study);
-    }
+  handle_delete_education = () => {
+    const { _id } = this.props.profile.active_education_item;
+    this.props.delete_education(_id, this.props.history);
   };
 
   render() {
@@ -59,6 +63,35 @@ class EditEducation extends Component {
           </div>
           <div className="col m6 offset-m1 center-align">
             <div className="component-heading">Edit Education</div>
+          </div>
+          <div className="col m2 offset-m1 center-align">
+            <a
+              className="btn btn-mernbook modal-trigger"
+              data-target="mernbook-modal"
+            >
+              <i className="material-icons">delete</i>
+            </a>
+
+            <div
+              ref={Modal => {
+                this.Modal = Modal;
+              }}
+              id="mernbook-modal"
+              className="modal"
+            >
+              <div className="modal-content">
+                <h4>Warning</h4>
+                <p>Are you sure you want to delete this record?</p>
+              </div>
+              <div className="modal-footer">
+                <a className="modal-close waves-effect waves-red btn-flat">
+                  Disagree
+                </a>
+                <a className="modal-close waves-effect waves-green btn-flat">
+                  Agree
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         <Form>
@@ -215,7 +248,9 @@ class EditEducation extends Component {
 
               <div className="row">
                 <div className="col m6 offset-m3">
-                  <button className="btn btn-mernbook right">Update</button>
+                  <button className="btn btn-mernbook fw-600 right">
+                    Update
+                  </button>
                 </div>
               </div>
             </div>
@@ -228,7 +263,6 @@ class EditEducation extends Component {
 
 const FormikForm = withFormik({
   mapPropsToValues: props => {
-    console.log(props);
     const { loading_active_education } = props.profile;
     if (!loading_active_education) {
       const {
@@ -282,7 +316,8 @@ const mapStateToProps = state => ({
 export default compose(
   connect(mapStateToProps, {
     update_profile,
-    get_active_education
+    get_active_education,
+    delete_education
   }),
   withRouter
 )(FormikForm);

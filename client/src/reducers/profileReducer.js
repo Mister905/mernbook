@@ -4,7 +4,9 @@ import {
   CREATE_EXPERIENCE,
   CREATE_EDUCATION,
   GET_EXPERIENCE_ITEM,
-  GET_EDUCATION_ITEM
+  GET_EDUCATION_ITEM,
+  DELETE_EXPERIENCE_ITEM,
+  DELETE_EDUCATION_ITEM
 } from "../actions/types";
 
 const initial_state = {
@@ -56,6 +58,14 @@ export default function(state = initial_state, action) {
         ...state,
         active_education_item: payload,
         loading_active_education: false
+      };
+    case DELETE_EXPERIENCE_ITEM:
+      return {
+        ...state
+      };
+    case DELETE_EDUCATION_ITEM:
+      return {
+        ...state
       };
     default:
       return state;
