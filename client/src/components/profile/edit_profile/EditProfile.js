@@ -30,7 +30,7 @@ class EditProfile extends Component {
       <div className="container mt-50">
         <div className="row">
           <div className="col m2 center-align">
-            <Link to={"/dashboard"} className="btn btn-mernbook">
+            <Link to={"/"} className="btn btn-mernbook">
               <i className="material-icons">arrow_back</i>
             </Link>
           </div>

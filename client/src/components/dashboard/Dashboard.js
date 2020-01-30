@@ -42,6 +42,8 @@ class Dashboard extends Component {
           return this.output_profile();
         case "experience":
           return this.output_experience();
+        case "education":
+          return this.output_education();
         default:
           break;
       }
@@ -91,13 +93,13 @@ class Dashboard extends Component {
 
     return (
       <div className="container dashboard-container mt-50">
-        <div className="row valign-wrapper">
-          <div className="col m9 offset-m1 s8 offset-s2">
+        <div className="row">
+          <div className="col m8 offset-m1 s8 offset-s2">
             <div className="component-heading">
               {first_name} {last_name}
             </div>
           </div>
-          <div className="col m1 center-align">
+          <div className="col">
             <Link to={"/edit-profile"} className="btn btn-mernbook">
               <i className="material-icons">mode_edit</i>
             </Link>
@@ -201,6 +203,7 @@ class Dashboard extends Component {
 
   output_experience = () => {
     const { loading_profile } = this.props.profile;
+
     if (loading_profile) {
       return (
         <div className="row">
@@ -210,27 +213,108 @@ class Dashboard extends Component {
         </div>
       );
     } else {
+      const { first_name, last_name } = this.props.auth.user;
       const { experience } = this.props.profile.active_profile;
-      const experience_items = experience.map(item => (
-        <div className="row">
-          <div className="col m12 card">
-            <div className="card-content">
-              <span className="card-title">{item.title}</span>
-              <div className="company">{item.company}</div>
-              <div className="job-location">{item.job_location}</div>
-              <div className="description">{item.description}</div>
-              <div className="from-date">{item.from_date}</div>
-              <div className="to-date">{item.to_date}</div>
+      let experience_output = null;
+      if (experience.length > 0) {
+        const experience_output = experience.map(item => (
+          <div className="row">
+            <div className="col m12 card">
+              <div className="card-content">
+                <span className="card-title">{item.title}</span>
+                <div className="company">{item.company}</div>
+                <div className="job-location">{item.job_location}</div>
+                <div className="description">{item.description}</div>
+                <div className="from-date">{item.from_date}</div>
+                <div className="to-date">{item.to_date}</div>
+              </div>
+            </div>
+          </div>
+        ));
+      } else {
+        experience_output = "You haven't defined your experience";
+      }
+
+      return (
+        <div className="container dashboard-container mt-50">
+          <div className="row">
+            <div className="col m8 offset-m1 s9 offset-s2">
+              <div className="component-heading">
+                {first_name} {last_name}
+              </div>
+            </div>
+            <div className="col">
+              <Link to={"/edit-profile"} className="btn btn-mernbook">
+                <i className="material-icons">mode_edit</i>
+              </Link>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col m9 offset-m1 s6 offset-s3">
+              {experience_output}
             </div>
           </div>
         </div>
-      ));
-      return experience_items;
+      );
     }
   };
 
   output_education = () => {
-    return <div>EDUCATION</div>;
+    const { loading_profile } = this.props.profile;
+
+    if (loading_profile) {
+      return (
+        <div className="row">
+          <div className="col m12 center-align">
+            <Loader />
+          </div>
+        </div>
+      );
+    } else {
+      const { first_name, last_name } = this.props.auth.user;
+      const { education } = this.props.profile.active_profile;
+      let education_output = null;
+      if (education.length > 0) {
+        const education_output = education.map(item => (
+          <div className="row">
+            <div className="col m12 card">
+              <div className="card-content">
+                <span className="card-title">{item.institution}</span>
+                <div className="company">{item.credential}</div>
+                <div className="job-location">{item.field_of_study}</div>
+                <div className="description">{item.description}</div>
+                <div className="from-date">{item.from_date}</div>
+                <div className="to-date">{item.to_date}</div>
+              </div>
+            </div>
+          </div>
+        ));
+      } else {
+        education_output = "You haven't defined your education";
+      }
+
+      return (
+        <div className="container dashboard-container mt-50">
+          <div className="row">
+            <div className="col m8 offset-m1 s9 offset-s2">
+              <div className="component-heading">
+                {first_name} {last_name}
+              </div>
+            </div>
+            <div className="col">
+              <Link to={"/edit-profile"} className="btn btn-mernbook">
+                <i className="material-icons">mode_edit</i>
+              </Link>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col m9 offset-m1 s6 offset-s3">
+              {education_output}
+            </div>
+          </div>
+        </div>
+      );
+    }
   };
 
   output_social_media = () => {
