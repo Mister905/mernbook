@@ -14,6 +14,7 @@ import {
   FaLinkedin,
   FaInstagram
 } from "react-icons/fa";
+import moment from "moment";
 
 class Dashboard extends Component {
   componentDidMount = () => {
@@ -217,16 +218,22 @@ class Dashboard extends Component {
       const { experience } = this.props.profile.active_profile;
       let experience_output = null;
       if (experience.length > 0) {
-        const experience_output = experience.map(item => (
-          <div className="row">
-            <div className="col m12 card">
+        experience_output = experience.map(item => (
+          <div className="row" key={item._id}>
+            <div className="col m10 s12 card">
               <div className="card-content">
-                <span className="card-title">{item.title}</span>
+                <Link to={`/edit-experience/${item._id}`}>
+                  <span className="card-title">{item.title}</span>
+                </Link>
                 <div className="company">{item.company}</div>
                 <div className="job-location">{item.job_location}</div>
                 <div className="description">{item.description}</div>
-                <div className="from-date">{item.from_date}</div>
-                <div className="to-date">{item.to_date}</div>
+                <div className="from-date">
+                  {moment(item.from_date).format("YYYY")}
+                </div>
+                <div className="to-date">
+                  {moment(item.to_date).format("YYYY")}
+                </div>
               </div>
             </div>
           </div>
@@ -234,18 +241,18 @@ class Dashboard extends Component {
       } else {
         experience_output = "You haven't defined your experience";
       }
-
+      console.log(experience_output);
       return (
         <div className="container dashboard-container mt-50">
           <div className="row">
-            <div className="col m8 offset-m1 s9 offset-s2">
+            <div className="col m8 offset-m1 s6 offset-s3">
               <div className="component-heading">
                 {first_name} {last_name}
               </div>
             </div>
             <div className="col">
-              <Link to={"/edit-profile"} className="btn btn-mernbook">
-                <i className="material-icons">mode_edit</i>
+              <Link to={"/create-experience"} className="btn btn-mernbook">
+                <i className="material-icons">add</i>
               </Link>
             </div>
           </div>
@@ -275,16 +282,22 @@ class Dashboard extends Component {
       const { education } = this.props.profile.active_profile;
       let education_output = null;
       if (education.length > 0) {
-        const education_output = education.map(item => (
-          <div className="row">
-            <div className="col m12 card">
+        education_output = education.map(item => (
+          <div className="row" key={item._id}>
+            <div className="col m12 s12 card">
               <div className="card-content">
-                <span className="card-title">{item.institution}</span>
+                <Link to={`/edit-education/${item._id}`}>
+                  <span className="card-title">{item.institution}</span>
+                </Link>
                 <div className="company">{item.credential}</div>
                 <div className="job-location">{item.field_of_study}</div>
                 <div className="description">{item.description}</div>
-                <div className="from-date">{item.from_date}</div>
-                <div className="to-date">{item.to_date}</div>
+                <div className="from-date">
+                  {moment(item.from_date).format("YYYY")}
+                </div>
+                <div className="to-date">
+                  {moment(item.to_date).format("YYYY")}
+                </div>
               </div>
             </div>
           </div>
@@ -296,14 +309,14 @@ class Dashboard extends Component {
       return (
         <div className="container dashboard-container mt-50">
           <div className="row">
-            <div className="col m8 offset-m1 s9 offset-s2">
+            <div className="col m8 offset-m1 s6 offset-s3">
               <div className="component-heading">
                 {first_name} {last_name}
               </div>
             </div>
             <div className="col">
-              <Link to={"/edit-profile"} className="btn btn-mernbook">
-                <i className="material-icons">mode_edit</i>
+              <Link to={"/create-education"} className="btn btn-mernbook">
+                <i className="material-icons">add</i>
               </Link>
             </div>
           </div>

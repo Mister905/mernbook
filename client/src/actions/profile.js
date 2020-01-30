@@ -34,7 +34,7 @@ export const update_profile = (form_data, history) => async dispatch => {
       type: UPDATE_PROFILE,
       payload: res.data
     });
-    history.push("/dashboard");
+    history.push("/");
     dispatch(create_alert("success", "Update Successful"));
   } catch (error) {
     console.log(error.message);
@@ -57,7 +57,7 @@ export const create_experience = (form_data, history) => async dispatch => {
       type: CREATE_EXPERIENCE,
       payload: res.data
     });
-    history.push("/dashboard");
+    history.push("/");
     dispatch(create_alert("success", "Experience Created"));
   } catch (error) {
     console.log(error.message);
@@ -80,7 +80,7 @@ export const create_education = (form_data, history) => async dispatch => {
       type: CREATE_EDUCATION,
       payload: res.data
     });
-    history.push("/dashboard");
+    history.push("/");
     dispatch(create_alert("success", "Education Created"));
   } catch (error) {
     console.log(error.message);

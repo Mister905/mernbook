@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
-import { create_education } from "../../../actions/profile";
-import Autocomplete from "../../../components/helpers/autocomplete/Autocomplete";
-import Datepicker from "../../helpers/datepicker/Datepicker";
+import { create_education } from "../../../../actions/profile";
+import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
+import Datepicker from "../../../helpers/datepicker/Datepicker";
 import M from "materialize-css";
 import * as Yup from "yup";
 
@@ -38,7 +38,12 @@ class CreateEducation extends Component {
     return (
       <div className="container mt-50">
         <div className="row">
-          <div className="col m12 center-align">
+          <div className="col m2 center-align">
+            <Link to={"/"} className="btn btn-mernbook">
+              <i className="material-icons">arrow_back</i>
+            </Link>
+          </div>
+          <div className="col m6 offset-m1 center-align">
             <div className="component-heading">Create Education</div>
           </div>
         </div>

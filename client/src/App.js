@@ -12,8 +12,10 @@ import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import Alert from "./components/layout/alert/Alert";
 import EditProfile from "./components/profile/edit_profile/EditProfile";
-import CreateExperience from "./components/profile/create_experience/CreateExperience";
-import CreateEducation from "./components/profile/create_education/CreateEducation";
+import CreateExperience from "./components/profile/experience/create_experience/CreateExperience";
+import EditExperience from "./components/profile/experience/edit_experience/EditExperience";
+import CreateEducation from "./components/profile/education/create_education/CreateEducation";
+import EditEducation from "./components/profile/education/edit_education/EditEducation";
 import Sidenav from "./components/layout/sidenav/Sidenav";
 import UpdateProfileImage from "./components/profile/update_profile_image/UpdateProfileImage";
 import PrivateRoute from "./components/private_route/PrivateRoute";
@@ -45,7 +47,6 @@ class App extends Component {
             />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            {/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
             <PrivateRoute exact path="/edit-profile" component={EditProfile} />
             <PrivateRoute
               exact
@@ -54,8 +55,18 @@ class App extends Component {
             />
             <PrivateRoute
               exact
+              path="/edit-experience/:id"
+              component={EditExperience}
+            />
+            <PrivateRoute
+              exact
               path="/create-education"
               component={CreateEducation}
+            />
+            <PrivateRoute
+              exact
+              path="/edit-education/:id"
+              component={EditEducation}
             />
             <PrivateRoute
               exact
