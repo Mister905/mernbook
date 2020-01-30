@@ -1,4 +1,4 @@
-.custom-sidenav {
+.custom-sidenav-fixed {
   background: #edf0f5;
   margin-top: 65px;
   padding-top: 10px;
@@ -33,9 +33,23 @@
 }
 
 .add-photo-icon {
-  color: #FFF;
+  color: #fff;
 }
 
 .sidenav-link {
   font-size: 1rem !important;
+}
+
+.custom-nav-trigger {
+  position: fixed;
+  top: 18px;
+  z-index: 999;
+  left: 25px;
+  color: white;
+}
+
+@media only screen and (max-width: 1422px) {
+  .custom-sidenav-fixed {
+    transform: translateX(-105%) !important;
+  }
 }

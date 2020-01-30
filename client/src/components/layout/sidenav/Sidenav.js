@@ -7,6 +7,11 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class Sidenav extends Component {
+  state = {
+    width: 0,
+    height: 0
+  };
+
   componentDidMount() {
     const options = {
       inDuration: 250,
@@ -17,6 +22,26 @@ class Sidenav extends Component {
 
     let instance = M.Sidenav.getInstance(this.Sidenav);
     instance.open();
+
+    this.updateWindowDimensions();
+    window.addEventListener("resize", this.updateWindowDimensions);
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.state !== prevState) {
+      const { width } = this.state;
+      if (width <= 1466) {
+
+      }
+    }
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener("resize", this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
   handle_sidenav_click = e => {
@@ -27,20 +52,20 @@ class Sidenav extends Component {
     const { active_component } = this.props.sidenav;
 
     return (
-      <div className="sidenav-wrapper">
+      <div>
         <a
           href="#!"
           data-target="mernbook-sidenav"
-          className="top-nav sidenav-trigger full hide-on-large-only"
+          className="top-nav sidenav-trigger full hide-on-large-only custom-nav-trigger"
         >
-          <i className="material-icons">menu</i>
+          <i className="material-icons sidenav-icon">menu</i>
         </a>
         <ul
           ref={Sidenav => {
             this.Sidenav = Sidenav;
           }}
           id="mernbook-sidenav"
-          className="sidenav sidenav-fixed custom-sidenav"
+          className="sidenav sidenav-fixed custom-sidenav-fixed"
         >
           <li className="center-align">
             <div className="sidenav-img-container">
@@ -113,7 +138,6 @@ class Sidenav extends Component {
             </li>
           </div>
         </ul>
-        
       </div>
     );
   }

@@ -30,7 +30,7 @@ class App extends Component {
   };
 
   render() {
-    const { loading_user } = this.props.auth;
+    const { loading_user, is_authenticated } = this.props.auth;
     return (
       <div>
         <BrowserRouter>
@@ -38,10 +38,14 @@ class App extends Component {
           <Alert />
           <Switch>
             {loading_user && <LoadingScreen />}
-            <Route exact path="/" component={Landing} />
+            <Route
+              exact
+              path="/"
+              component={is_authenticated ? Dashboard : Landing}
+            />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            {/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
             <PrivateRoute exact path="/edit-profile" component={EditProfile} />
             <PrivateRoute
               exact

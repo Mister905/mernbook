@@ -18,13 +18,13 @@ class Header extends Component {
     const { is_authenticated } = this.props.auth;
     const { first_name } = this.props.auth.user;
     return (
-      <div class="navbar-fixed">
+      <div className="navbar-fixed custom-navbar-fixed">
         <nav className="landing-nav">
           <div className="container">
             <div className="nav-wrapper">
               <Link
                 className="brand-logo custom-brand-logo"
-                to={is_authenticated ? "/dashboard" : "/"}
+                to={"/"}
               >
                 <img className="logo-nav" src={logo_nav} alt="" />
               </Link>
@@ -41,12 +41,12 @@ class Header extends Component {
                       <div>
                         <ul className="dropdown_submenu">
                           <li className="dropdown_submenu-item ">
-                            <a>
+                            <Link to={"/"}>
                               <i className="material-icons left account-icon">
                                 menu
                               </i>
                               Dashboard
-                            </a>
+                            </Link>
                           </li>
                           <li className="dropdown_submenu-item ">
                             <a>

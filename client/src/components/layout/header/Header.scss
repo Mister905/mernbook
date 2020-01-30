@@ -1,4 +1,6 @@
 .landing-nav {
+  min-height: 64px !important;
+  position: fixed;
   background: #1e3c72; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -101,4 +103,8 @@ $submenu-width: 180px;
 
 .custom-brand-logo {
   left: 139px;
+}
+
+.custom-navbar-fixed {
+  
 }

@@ -40,9 +40,9 @@ class EditProfile extends Component {
         </div>
         <Form>
           <div className="row mt-50">
-            <div className="col m10 offset-m1">
+            <div className="col m10 offset-m1 s12">
               <div className="row">
-                <div className="col m6 offset-m3">
+                <div className="col m6 offset-m3 s12">
                   <div className="custom-input-field">
                     <label
                       htmlFor="user_location"
@@ -60,7 +60,7 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col m6 offset-m3">
+                <div className="col m6 offset-m3 s12">
                   <div
                     id="profile-status-select"
                     className="custom-input-field"
@@ -76,7 +76,7 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col m6 offset-m3">
+                <div className="col m6 offset-m3 s12">
                   <div className="custom-input-field">
                     <label
                       htmlFor="skills"
@@ -94,7 +94,7 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col m6 offset-m3">
+                <div className="col m6 offset-m3 s12">
                   <div className="custom-input-field">
                     <label
                       htmlFor="interests"
@@ -113,7 +113,7 @@ class EditProfile extends Component {
               </div>
 
               <div className="row">
-                <div className="col m6 offset-m3">
+                <div className="col m6 offset-m3 s12">
                   <div className="custom-input-field">
                     <label
                       htmlFor="interests"

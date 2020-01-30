@@ -56,7 +56,7 @@ export const login_user = (form_data, history) => async dispatch => {
       type: LOGIN_USER,
       payload: res.data
     });
-    history.push("/dashboard");
+    history.push("/");
     dispatch(create_alert("success", "Welcome Back"));
   } catch (error) {
     dispatch(create_alert("error", "Login Error"));

@@ -92,7 +92,7 @@ class Dashboard extends Component {
     return (
       <div className="container mt-50">
         <div className="row valign-wrapper">
-          <div className="col m9 offset-m2 s6 offset-s3">
+          <div className="col m9 offset-m1 s6 offset-s3">
             <div className="component-heading">
               {first_name} {last_name}
             </div>
@@ -104,30 +104,30 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col m9 offset-m2">
+          <div className="col m9 offset-m1 s6 offset-s3">
             <div className="profile-subheading">Skills</div>
             {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
             <ul className="comma-list">{skills_output}</ul>
           </div>
         </div>
         <div className="row">
-          <div className="col m9 offset-m2">
+          <div className="col m9 offset-m1 s6 offset-s3">
             <div className="profile-subheading">Interests</div>
             {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
             <ul className="comma-list">{interests_output}</ul>
           </div>
         </div>
         <div className="row">
-          <div className="col m9 offset-m2">
+          <div className="col m9 offset-m1 s6 offset-s3">
             <div className="profile-subheading">Biography</div>
             <p>{biography}</p>
           </div>
         </div>
         <div className="row">
-          <div className="col m9 offset-m2">
+          <div className="col m9 offset-m1 s6 offset-s3">
             <div className="profile-subheading">Social Media</div>
             <div className="row mt-15">
-              <div className="col m1">
+              <div className="col m2">
                 <a href={youtube} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -140,7 +140,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m1">
+              <div className="col m2">
                 <a href={twitter} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -153,7 +153,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m1">
+              <div className="col m2">
                 <a href={facebook} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -166,7 +166,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m1">
+              <div className="col m2">
                 <a href={linkedin} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -179,7 +179,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m1">
+              <div className="col m2">
                 <a href={instagram} target="_blank">
                   <IconContext.Provider
                     value={{
