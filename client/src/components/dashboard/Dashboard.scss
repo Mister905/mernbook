@@ -1,13 +1,40 @@
+.profile-subheading {
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.comma-list {
+  text-align: center;
+}
+
+@media only screen and (max-width: 1550px) {
+  .dashboard-container {
+    padding-left: 120px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .dashboard-container {
+    padding-left: 0px;
+  }
+  .component-heading {
+    text-align: center;
+  }
+
+  .profile-subheading {
+    text-align: center;
+  }
+}
+
 @media (min-width: 768px) {
   .comma-list {
     list-style: square;
     padding-left: 30px;
-
     & > * {
       display: block;
       width: 33%;
       float: left;
-
+      // text-align: center;
       &:after {
         content: "";
       }
@@ -15,7 +42,9 @@
   }
 }
 
-.profile-subheading {
-  font-weight: 600;
-  font-size: 2rem;
+@media (max-width: 601px) {
+  .social-media-col{
+    text-align: center !important;
+    margin-bottom: 15px;
+  }
 }

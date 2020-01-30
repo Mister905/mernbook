@@ -90,9 +90,9 @@ class Dashboard extends Component {
     const { biography } = this.props.profile.active_profile;
 
     return (
-      <div className="container mt-50">
+      <div className="container dashboard-container mt-50">
         <div className="row valign-wrapper">
-          <div className="col m9 offset-m1 s6 offset-s3">
+          <div className="col m9 offset-m1 s8 offset-s2">
             <div className="component-heading">
               {first_name} {last_name}
             </div>
@@ -127,7 +127,7 @@ class Dashboard extends Component {
           <div className="col m9 offset-m1 s6 offset-s3">
             <div className="profile-subheading">Social Media</div>
             <div className="row mt-15">
-              <div className="col m2">
+              <div className="col m2 offset-m1 s12 social-media-col">
                 <a href={youtube} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -140,7 +140,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m2">
+              <div className="col m2 s12 social-media-col">
                 <a href={twitter} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -153,7 +153,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m2">
+              <div className="col m2 s12 social-media-col">
                 <a href={facebook} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -166,7 +166,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m2">
+              <div className="col m2 s12 social-media-col">
                 <a href={linkedin} target="_blank">
                   <IconContext.Provider
                     value={{
@@ -179,7 +179,7 @@ class Dashboard extends Component {
                   </IconContext.Provider>
                 </a>
               </div>
-              <div className="col m2">
+              <div className="col m2 s12 social-media-col">
                 <a href={instagram} target="_blank">
                   <IconContext.Provider
                     value={{
