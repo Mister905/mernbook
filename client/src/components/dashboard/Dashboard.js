@@ -241,7 +241,6 @@ class Dashboard extends Component {
       } else {
         experience_output = "You haven't defined your experience";
       }
-      console.log(experience_output);
       return (
         <div className="container dashboard-container mt-50">
           <div className="row">

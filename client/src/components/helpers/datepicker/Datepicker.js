@@ -1,12 +1,24 @@
 import React, { Component } from "react";
 import M from "materialize-css";
+import Moment from "moment";
 
 class Datepicker extends Component {
   componentDidMount() {
     const { field_name } = this.props;
     const { setFieldValue } = this.props.form;
+
+    let default_date = null;
+
+    if (field_name === "from_date") {
+      default_date = Moment(this.props.from_date).toDate();
+    } else if (field_name === "to_date") {
+      default_date = Moment(this.props.to_date).toDate();
+    }
+
     const datePickerOptions = {
       autoClose: true,
+      defaultDate: default_date,
+      setDefaultDate: true,
       onSelect: date => {
         setFieldValue(field_name, date);
       }

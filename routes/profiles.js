@@ -268,8 +268,30 @@ router.put(
   }
 );
 
+// @route GET /profiles/experience/experience_id
+// @desc Get profile experience item
+// @access  Private
+router.get("/experience/:experience_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    const { experience_id } = req.params;
+
+    const experience_item = profile.experience.filter(item => {
+      if (item._id.toString() === experience_id) {
+        return item;
+      }
+    });
+
+    return res.send(experience_item[0]);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 // @route DELETE /profiles/experience/experience_id
-// @desc Delete profile experience
+// @desc Delete profile experience item
 // @access  Private
 router.delete("/experience/:experience_id", auth, async (req, res) => {
   try {
@@ -420,8 +442,30 @@ router.put(
   }
 );
 
+// @route GET /profiles/education/education_id
+// @desc Get profile education item
+// @access  Private
+router.get("/education/:education_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    const { education_id } = req.params;
+
+    const education_item = profile.education.filter(item => {
+      if (item._id.toString() === education_id) {
+        return item;
+      }
+    });
+
+    return res.send(education_item[0]);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 // @route DELETE /profiles/education/education_id
-// @desc Delete profile education
+// @desc Delete profile education item
 // @access  Private
 router.delete("/education/:education_id", auth, async (req, res) => {
   try {

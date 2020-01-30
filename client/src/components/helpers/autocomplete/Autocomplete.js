@@ -11,9 +11,16 @@ class Autocomplete extends Component {
 
   componentDidMount = () => {
     const { value } = this.props.field;
-    this.setState({
-      current_value: value
-    });
+
+    if (this.props.job_location) {
+      this.setState({
+        current_value: this.props.job_location
+      });
+    } else {
+      this.setState({
+        current_value: value
+      });
+    }
   };
 
   handle_script_load = () => {

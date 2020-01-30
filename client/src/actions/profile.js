@@ -1,8 +1,11 @@
-import { GET_PROFILE, 
-  UPDATE_PROFILE, 
-  CLEAR_PROFILE, 
+import {
+  GET_PROFILE,
+  UPDATE_PROFILE,
+  CLEAR_PROFILE,
   CREATE_EXPERIENCE,
-  CREATE_EDUCATION 
+  CREATE_EDUCATION,
+  GET_EXPERIENCE_ITEM,
+  GET_EDUCATION_ITEM
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
@@ -85,5 +88,31 @@ export const create_education = (form_data, history) => async dispatch => {
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Create Experience"));
+  }
+};
+
+export const get_active_education = education_item_id => async dispatch => {
+  try {
+    const res = await axios.get(`/profiles/education/${education_item_id}`);
+    dispatch({
+      type: GET_EDUCATION_ITEM,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+    dispatch(create_alert("error", "Failed to Get Education Item"));
+  }
+};
+
+export const get_active_experience = experience_item_id => async dispatch => {
+  try {
+    const res = await axios.get(`/profiles/experience/${experience_item_id}`);
+    dispatch({
+      type: GET_EXPERIENCE_ITEM,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+    dispatch(create_alert("error", "Failed to Get Experience Item"));
   }
 };
