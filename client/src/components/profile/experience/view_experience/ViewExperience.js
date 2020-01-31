@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
 import {
-  get_active_experience,
-  clear_active_experience
+  get_active_experience
 } from "../../../../actions/profile";
 import Loader from "../../../layout/loader/Loader";
 import Moment from "moment";
@@ -85,6 +84,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  get_active_experience,
-  clear_active_experience
+  get_active_experience
 })(ViewExperience);

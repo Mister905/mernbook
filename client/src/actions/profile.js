@@ -8,8 +8,6 @@ import {
   GET_EDUCATION_ITEM,
   DELETE_EXPERIENCE_ITEM,
   DELETE_EDUCATION_ITEM,
-  CLEAR_ACTIVE_EXPERIENCE,
-  CLEAR_ACTIVE_EDUCATION,
   UPDATE_EXPERIENCE_ITEM,
   UPDATE_EDUCATION_ITEM
 } from "./types";
@@ -147,9 +145,7 @@ export const update_experience = (
   history
 ) => async dispatch => {
   try {
-    const res = await axios.put(
-      `/profiles/experience/${experience_item_id}`
-    );
+    const res = await axios.put(`/profiles/experience/${experience_item_id}`);
     dispatch({
       type: UPDATE_EXPERIENCE_ITEM,
       payload: res.data
@@ -166,9 +162,7 @@ export const update_education = (
   history
 ) => async dispatch => {
   try {
-    const res = await axios.put(
-      `/profiles/education/${education_item_id}`
-    );
+    const res = await axios.put(`/profiles/education/${education_item_id}`);
     dispatch({
       type: UPDATE_EDUCATION_ITEM,
       payload: res.data
@@ -195,16 +189,4 @@ export const delete_education = (
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Education Item"));
   }
-};
-
-export const clear_active_experience = () => async dispatch => {
-  dispatch({
-    type: CLEAR_ACTIVE_EXPERIENCE
-  });
-};
-
-export const clear_active_education = () => async dispatch => {
-  dispatch({
-    type: CLEAR_ACTIVE_EDUCATION
-  });
 };

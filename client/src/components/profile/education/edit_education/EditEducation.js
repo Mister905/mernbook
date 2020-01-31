@@ -6,7 +6,6 @@ import { withFormik, Form, Field } from "formik";
 import {
   get_active_education,
   delete_education,
-  clear_active_education,
   update_education
 } from "../../../../actions/profile";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
@@ -43,10 +42,6 @@ class EditEducation extends Component {
     if (this.state.is_current_study !== prevState.is_current_study) {
       setFieldValue("is_current_study", this.state.is_current_study);
     }
-  };
-
-  componentWillUnmount = () => {
-    this.props.clear_active_education();
   };
 
   handle_current_checkbox = () => {
@@ -331,7 +326,6 @@ export default compose(
   connect(mapStateToProps, {
     get_active_education,
     delete_education,
-    clear_active_education,
     update_education
   }),
   withRouter
