@@ -6,6 +6,8 @@ import {
 } from "../actions/types";
 
 const initial_state = {
+  experience_list: [],
+  loading_experience_list: true,
   active_experience_item: null,
   loading_active_experience: true
 };

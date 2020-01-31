@@ -128,7 +128,7 @@ class Dashboard extends Component {
         <div className="row">
           <div className="col m9 offset-m1 s6 offset-s3">
             <div className="profile-subheading">Social Media</div>
-            <div className="row mt-15">
+            <div className="row mt-50">
               <div className="col m2 offset-m1 s12 social-media-col">
                 <a href={youtube} target="_blank">
                   <IconContext.Provider
@@ -202,132 +202,140 @@ class Dashboard extends Component {
   };
 
   output_experience = () => {
-    const { loading_profile } = this.props.profile;
 
-    if (loading_profile) {
-      return (
-        <div className="row">
-          <div className="col m12 center-align">
-            <Loader />
-          </div>
-        </div>
-      );
-    } else {
-      const { first_name, last_name } = this.props.auth.user;
-      const { experience } = this.props.profile.profile;
-      let experience_output = null;
-      if (experience.length > 0) {
-        experience_output = experience.map(item => (
-          <div className="row" key={item._id}>
-            <div className="col m12 s12 card">
-              <div className="card-content">
-                <Link to={`/experience/${item._id}`}>
-                  <span className="card-title profile-title">{item.title}</span>
-                </Link>
-                <div className="company">{item.company}</div>
-                <div className="job-location">{item.job_location}</div>
-                <div className="description">{item.description}</div>
-                <div className="era right fw-600">
-                  {Moment(item.from_date).format("YYYY")} -
-                  {item.to_date
-                    ? Moment(item.to_date).format(" YYYY")
-                    : " Current"}
-                </div>
-              </div>
-            </div>
-          </div>
-        ));
-      } else {
-        experience_output = "You haven't defined your experience";
-      }
-      return (
-        <div className="container dashboard-container mt-50">
-          <div className="row valign-wrapper">
-            <div className="col m8 offset-m1 s6 offset-s3">
-              <div className="component-heading">
-                {first_name} {last_name}
-              </div>
-            </div>
-            <div className="col m1">
-              <Link to={"/experience/create"} className="btn btn-mernbook">
-                <i className="material-icons">add</i>
-              </Link>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col m9 offset-m1 s6 offset-s3">
-              {experience_output}
-            </div>
-          </div>
-        </div>
-      );
-    }
+    return null;
+
+    
+    // const { loading_profile } = this.props.profile;
+
+    // if (loading_profile) {
+    //   return (
+    //     <div className="row">
+    //       <div className="col m12 center-align">
+    //         <Loader />
+    //       </div>
+    //     </div>
+    //   );
+    // } else {
+    //   const { first_name, last_name } = this.props.auth.user;
+    //   const { experience } = this.props.profile.profile;
+    //   let experience_output = null;
+    //   if (experience.length > 0) {
+    //     experience_output = experience.map(item => (
+    //       <div className="row" key={item._id}>
+    //         <div className="col m12 s12 card">
+    //           <div className="card-content">
+    //             <Link to={`/experience/${item._id}`}>
+    //               <span className="card-title profile-title">{item.title}</span>
+    //             </Link>
+    //             <div className="company">{item.company}</div>
+    //             <div className="job-location">{item.job_location}</div>
+    //             <div className="description">{item.description}</div>
+    //             <div className="era right fw-600">
+    //               {Moment(item.from_date).format("YYYY")} -
+    //               {item.to_date
+    //                 ? Moment(item.to_date).format(" YYYY")
+    //                 : " Current"}
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     ));
+    //   } else {
+    //     experience_output = "You haven't defined your experience";
+    //   }
+    //   return (
+    //     <div className="container dashboard-container mt-50">
+    //       <div className="row valign-wrapper">
+    //         <div className="col m8 offset-m1 s6 offset-s3">
+    //           <div className="component-heading">
+    //             {first_name} {last_name}
+    //           </div>
+    //         </div>
+    //         <div className="col m1">
+    //           <Link to={"/experience/create"} className="btn btn-mernbook">
+    //             <i className="material-icons">add</i>
+    //           </Link>
+    //         </div>
+    //       </div>
+    //       <div className="row">
+    //         <div className="col m9 offset-m1 s6 offset-s3">
+    //           {experience_output}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   );
+    // }
   };
 
   output_education = () => {
-    const { loading_profile } = this.props.profile;
 
-    if (loading_profile) {
-      return (
-        <div className="row">
-          <div className="col m12 center-align">
-            <Loader />
-          </div>
-        </div>
-      );
-    } else {
-      const { first_name, last_name } = this.props.auth.user;
-      const { education } = this.props.profile.profile;
-      let education_output = null;
-      if (education.length > 0) {
-        education_output = education.map(item => (
-          <div className="row" key={item._id}>
-            <div className="col m12 s12 card">
-              <div className="card-content">
-                <Link to={`/education/${item._id}`}>
-                  <span className="card-title profile-title">
-                    {item.institution}
-                  </span>
-                </Link>
-                <div className="company">{item.credential}</div>
-                <div className="job-location">{item.field_of_study}</div>
-                <div className="description">{item.description}</div>
-                <div className="era right">
-                  {Moment(item.from_date).format("YYYY")} -
-                  {item.to_date
-                    ? Moment(item.to_date).format(" YYYY")
-                    : " Current"}
-                </div>
-              </div>
-            </div>
-          </div>
-        ));
-      } else {
-        education_output = "You haven't defined your education";
-      }
 
-      return (
-        <div className="container dashboard-container mt-50">
-          <div className="row valign-wrapper">
-            <div className="col m8 offset-m1 s6 offset-s3">
-              <div className="component-heading">
-                {first_name} {last_name}
-              </div>
-            </div>
-            <div className="col m1 right-align">
-              <Link to={"/education/create"} className="btn btn-mernbook">
-                <i className="material-icons">add</i>
-              </Link>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col m9 offset-m1 s6 offset-s3">
-              {education_output}
-            </div>
-          </div>
-        </div>
-      );
-    }
+    return null;
+
+    // const { loading_profile } = this.props.profile;
+
+    // if (loading_profile) {
+    //   return (
+    //     <div className="row">
+    //       <div className="col m12 center-align">
+    //         <Loader />
+    //       </div>
+    //     </div>
+    //   );
+    // } else {
+    //   const { first_name, last_name } = this.props.auth.user;
+    //   const { education } = this.props.profile.profile;
+    //   let education_output = null;
+    //   if (education.length > 0) {
+    //     education_output = education.map(item => (
+    //       <div className="row" key={item._id}>
+    //         <div className="col m12 s12 card">
+    //           <div className="card-content">
+    //             <Link to={`/education/${item._id}`}>
+    //               <span className="card-title profile-title">
+    //                 {item.institution}
+    //               </span>
+    //             </Link>
+    //             <div className="company">{item.credential}</div>
+    //             <div className="job-location">{item.field_of_study}</div>
+    //             <div className="description">{item.description}</div>
+    //             <div className="era right">
+    //               {Moment(item.from_date).format("YYYY")} -
+    //               {item.to_date
+    //                 ? Moment(item.to_date).format(" YYYY")
+    //                 : " Current"}
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     ));
+    //   } else {
+    //     education_output = "You haven't defined your education";
+    //   }
+
+    //   return (
+    //     <div className="container dashboard-container mt-50">
+    //       <div className="row valign-wrapper">
+    //         <div className="col m8 offset-m1 s6 offset-s3">
+    //           <div className="component-heading">
+    //             {first_name} {last_name}
+    //           </div>
+    //         </div>
+    //         <div className="col m1 right-align">
+    //           <Link to={"/education/create"} className="btn btn-mernbook">
+    //             <i className="material-icons">add</i>
+    //           </Link>
+    //         </div>
+    //       </div>
+    //       <div className="row">
+    //         <div className="col m9 offset-m1 s6 offset-s3">
+    //           {education_output}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   );
+    // }
   };
 
   output_social_media = () => {

@@ -5,9 +5,9 @@ import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import {
   update_experience,
-  get_active_experience,
+  get_experience_by_id,
   delete_experience
-} from "../../../../actions/profile";
+} from "../../../../actions/experience";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
 import M from "materialize-css";
@@ -340,7 +340,7 @@ const mapStateToProps = state => ({
 export default compose(
   connect(mapStateToProps, {
     update_experience,
-    get_active_experience,
+    get_experience_by_id,
     delete_experience
   }),
   withRouter

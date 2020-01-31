@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
-import {
-  get_active_education
-} from "../../../../actions/profile";
+import { get_active_education } from "../../../../actions/education";
 import Loader from "../../../layout/loader/Loader";
 import Moment from "moment";
 

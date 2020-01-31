@@ -7,7 +7,7 @@ import {
   get_active_education,
   delete_education,
   update_education
-} from "../../../../actions/profile";
+} from "../../../../actions/education";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
 import M from "materialize-css";

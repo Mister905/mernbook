@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
-import { get_active_experience } from "../../../../actions/profile";
+import { get_experience_by_id } from "../../../../actions/experience";
 import Loader from "../../../layout/loader/Loader";
 import Moment from "moment";
 
@@ -12,7 +12,7 @@ class ViewExperience extends Component {
 
     const { active_experience_item } = this.props.profile;
 
-    this.props.get_active_experience(id);
+    this.props.get_experience_by_id(id);
   }
 
   output_experience_item = () => {
@@ -86,5 +86,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  get_active_experience
+  get_experience_by_id
 })(ViewExperience);

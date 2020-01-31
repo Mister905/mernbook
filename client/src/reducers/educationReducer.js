@@ -6,6 +6,8 @@ import {
 } from "../actions/types";
 
 const initial_state = {
+  education_list: [],
+  loading_education_list: true,
   active_education_item: null,
   loading_active_education: true
 };

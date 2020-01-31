@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
-import { create_education } from "../../../../actions/profile";
+import { create_education } from "../../../../actions/education";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
 import M from "materialize-css";
