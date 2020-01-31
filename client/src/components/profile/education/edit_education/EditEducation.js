@@ -4,10 +4,10 @@ import { compose } from "redux";
 import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import {
-  update_profile,
   get_active_education,
   delete_education,
-  clear_active_education
+  clear_active_education,
+  update_education
 } from "../../../../actions/profile";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
@@ -16,6 +16,11 @@ import * as Yup from "yup";
 import Loader from "../../../layout/loader/Loader";
 
 class EditEducation extends Component {
+  constructor(props) {
+    super(props);
+    this.Description = React.createRef();
+  }
+
   state = {
     is_current_study: true
   };
@@ -27,16 +32,16 @@ class EditEducation extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
+    if (
+      this.props.profile.active_education_item !==
+      prevProps.profile.active_education_item
+    ) {
+      M.textareaAutoResize(this.Description.current);
+    }
+
     const { setFieldValue } = this.props;
     if (this.state.is_current_study !== prevState.is_current_study) {
       setFieldValue("is_current_study", this.state.is_current_study);
-    }
-    if (
-      this.props.profile.loading_active_education !==
-      prevProps.profile.loading_active_education
-    ) {
-      let description = document.getElementById("description");
-      M.textareaAutoResize(description);
     }
   };
 
@@ -90,13 +95,13 @@ class EditEducation extends Component {
               </div>
               <div className="modal-footer">
                 <a className="modal-close btn btn-mernbook">
-                  <i class="material-icons">cancel</i>
+                  <i className="material-icons">cancel</i>
                 </a>
                 <a
                   onClick={this.handle_delete_education}
                   className="modal-close btn red btn-delete"
                 >
-                  <i class="material-icons">delete</i>
+                  <i className="material-icons">delete</i>
                 </a>
               </div>
             </div>
@@ -249,6 +254,7 @@ class EditEducation extends Component {
                       id="description"
                       name="description"
                       className="materialize-textarea"
+                      innerRef={this.Description}
                     />
                   </div>
                 </div>
@@ -313,7 +319,7 @@ const FormikForm = withFormik({
   validateOnChange: false,
   enableReinitialize: true,
   handleSubmit: (values, props) => {
-    // props.props.create_education(values, props.props.history);
+    props.props.update_education(values, props.props.history);
   }
 })(EditEducation);
 
@@ -323,10 +329,10 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps, {
-    update_profile,
     get_active_education,
     delete_education,
-    clear_active_education
+    clear_active_education,
+    update_education
   }),
   withRouter
 )(FormikForm);

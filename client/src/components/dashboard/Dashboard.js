@@ -14,7 +14,7 @@ import {
   FaLinkedin,
   FaInstagram
 } from "react-icons/fa";
-import moment from "moment";
+import Moment from "moment";
 
 class Dashboard extends Component {
   componentDidMount = () => {
@@ -100,7 +100,7 @@ class Dashboard extends Component {
               {first_name} {last_name}
             </div>
           </div>
-          <div className="col">
+          <div className="col m1 right-align">
             <Link to={"/edit-profile"} className="btn btn-mernbook">
               <i className="material-icons">mode_edit</i>
             </Link>
@@ -222,16 +222,16 @@ class Dashboard extends Component {
           <div className="row" key={item._id}>
             <div className="col m12 s12 card">
               <div className="card-content">
-                <Link to={`/edit-experience/${item._id}`}>
+                <Link to={`/experience/${item._id}`}>
                   <span className="card-title profile-title">{item.title}</span>
                 </Link>
                 <div className="company">{item.company}</div>
                 <div className="job-location">{item.job_location}</div>
                 <div className="description">{item.description}</div>
-                <div className="era right">
-                  {moment(item.from_date).format("YYYY")} -
+                <div className="era right fw-600">
+                  {Moment(item.from_date).format("YYYY")} -
                   {item.to_date
-                    ? moment(item.to_date).format(" YYYY")
+                    ? Moment(item.to_date).format(" YYYY")
                     : " Current"}
                 </div>
               </div>
@@ -250,7 +250,7 @@ class Dashboard extends Component {
               </div>
             </div>
             <div className="col">
-              <Link to={"/create-experience"} className="btn btn-mernbook">
+              <Link to={"/experience/create"} className="btn btn-mernbook">
                 <i className="material-icons">add</i>
               </Link>
             </div>
@@ -285,16 +285,18 @@ class Dashboard extends Component {
           <div className="row" key={item._id}>
             <div className="col m12 s12 card">
               <div className="card-content">
-                <Link to={`/edit-education/${item._id}`}>
-                  <span className="card-title profile-title">{item.institution}</span>
+                <Link to={`/education/${item._id}`}>
+                  <span className="card-title profile-title">
+                    {item.institution}
+                  </span>
                 </Link>
                 <div className="company">{item.credential}</div>
                 <div className="job-location">{item.field_of_study}</div>
                 <div className="description">{item.description}</div>
                 <div className="era right">
-                  {moment(item.from_date).format("YYYY")} -
+                  {Moment(item.from_date).format("YYYY")} -
                   {item.to_date
-                    ? moment(item.to_date).format(" YYYY")
+                    ? Moment(item.to_date).format(" YYYY")
                     : " Current"}
                 </div>
               </div>
@@ -313,8 +315,8 @@ class Dashboard extends Component {
                 {first_name} {last_name}
               </div>
             </div>
-            <div className="col">
-              <Link to={"/create-education"} className="btn btn-mernbook">
+            <div className="col m1 right-align">
+              <Link to={"/education/create"} className="btn btn-mernbook">
                 <i className="material-icons">add</i>
               </Link>
             </div>

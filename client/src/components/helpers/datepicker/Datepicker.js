@@ -21,6 +21,7 @@ class Datepicker extends Component {
       autoClose: true,
       defaultDate: default_date,
       setDefaultDate: true,
+      yearRange: [1920, 2025],
       onSelect: date => {
         setFieldValue(field_name, date);
       }

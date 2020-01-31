@@ -9,7 +9,9 @@ import {
   DELETE_EXPERIENCE_ITEM,
   DELETE_EDUCATION_ITEM,
   CLEAR_ACTIVE_EXPERIENCE,
-  CLEAR_ACTIVE_EDUCATION
+  CLEAR_ACTIVE_EDUCATION,
+  UPDATE_EXPERIENCE_ITEM,
+  UPDATE_EDUCATION_ITEM
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
@@ -137,6 +139,44 @@ export const delete_experience = (
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Experience Item"));
+  }
+};
+
+export const update_experience = (
+  experience_item_id,
+  history
+) => async dispatch => {
+  try {
+    const res = await axios.put(
+      `/profiles/experience/${experience_item_id}`
+    );
+    dispatch({
+      type: UPDATE_EXPERIENCE_ITEM,
+      payload: res.data
+    });
+    history.push("/");
+  } catch (error) {
+    console.log(error.message);
+    dispatch(create_alert("error", "Failed to Update Experience Item"));
+  }
+};
+
+export const update_education = (
+  education_item_id,
+  history
+) => async dispatch => {
+  try {
+    const res = await axios.put(
+      `/profiles/education/${education_item_id}`
+    );
+    dispatch({
+      type: UPDATE_EDUCATION_ITEM,
+      payload: res.data
+    });
+    history.push("/");
+  } catch (error) {
+    console.log(error.message);
+    dispatch(create_alert("error", "Failed to Update Education Item"));
   }
 };
 

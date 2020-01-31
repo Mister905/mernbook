@@ -234,33 +234,33 @@ router.put(
     const {
       title,
       company,
-      location,
-      from,
-      to,
-      current,
+      job_location,
+      from_date,
+      to_date,
+      is_current_job,
       description
     } = req.body;
 
     const experience_build = {
       title,
       company,
-      location,
-      from,
-      to,
-      current,
+      job_location,
+      from_date,
+      to_date,
+      is_current_job,
       description
     };
 
     const { experience_id } = req.params;
 
     try {
-      let profile = await Profile.findOneAndUpdate(
+      let updated_experience = await Profile.findOneAndUpdate(
         { user: req.user.id, "experience._id": experience_id },
         { $set: { "experience.$": experience_build } },
         { new: true }
       );
 
-      return res.send(profile);
+      return res.send(updated_experience);
     } catch (error) {
       console.log(error.message);
       return res.status(500).send("Server Error");
@@ -408,33 +408,33 @@ router.put(
     const {
       institution,
       credential,
-      field,
-      from,
-      to,
-      current,
+      field_of_study,
+      from_date,
+      to_date,
+      is_current_study,
       description
     } = req.body;
 
     const education_build = {
       institution,
       credential,
-      field,
-      from,
-      to,
-      current,
+      field_of_study,
+      from_date,
+      to_date,
+      is_current_study,
       description
     };
 
     const { education_id } = req.params;
 
     try {
-      const education = await Profile.findOneAndUpdate(
+      const updated_education = await Profile.findOneAndUpdate(
         { user: req.user.id, "education._id": education_id },
         { $set: { "education.$": education_build } },
         { new: true }
       );
 
-      return res.send(education);
+      return res.send(updated_education);
     } catch (error) {
       console.log(error.message);
       return res.status(500).send("Server Error");

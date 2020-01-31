@@ -200,7 +200,7 @@ class CreateExperience extends Component {
 
               <div className="row">
                 <div className="col m6 offset-m3">
-                  <button className="btn btn-mernbook right">Update</button>
+                  <button className="btn btn-mernbook right">Create</button>
                 </div>
               </div>
             </div>

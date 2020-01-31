@@ -18,6 +18,8 @@ import CreateEducation from "./components/profile/education/create_education/Cre
 import EditEducation from "./components/profile/education/edit_education/EditEducation";
 import Sidenav from "./components/layout/sidenav/Sidenav";
 import UpdateProfileImage from "./components/profile/update_profile_image/UpdateProfileImage";
+import ViewExperience from "./components/profile/experience/view_experience/ViewExperience";
+import ViewEducation from "./components/profile/education/view_education/ViewEducation";
 import PrivateRoute from "./components/private_route/PrivateRoute";
 
 class App extends Component {
@@ -50,27 +52,38 @@ class App extends Component {
             <PrivateRoute exact path="/edit-profile" component={EditProfile} />
             <PrivateRoute
               exact
-              path="/create-experience"
+              path="/experience/create"
               component={CreateExperience}
             />
             <PrivateRoute
               exact
-              path="/edit-experience/:id"
+              path="/experience/:id/edit"
               component={EditExperience}
             />
             <PrivateRoute
               exact
-              path="/create-education"
+              path="/experience/:id"
+              component={ViewExperience}
+            />
+            <PrivateRoute
+              exact
+              path="/education/create"
               component={CreateEducation}
             />
             <PrivateRoute
               exact
-              path="/edit-education/:id"
+              path="/education/:id/edit"
               component={EditEducation}
             />
             <PrivateRoute
               exact
-              path="/profiles/image/update"
+              path="/education/:id"
+              component={ViewEducation}
+            />
+
+            <PrivateRoute
+              exact
+              path="/profile_image"
               component={UpdateProfileImage}
             />
           </Switch>

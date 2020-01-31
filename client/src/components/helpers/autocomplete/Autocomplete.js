@@ -39,7 +39,6 @@ class Autocomplete extends Component {
   output = () => {
     const { field_name } = this.props;
     const { errors } = this.props.form;
-
     return (
       <div>
         <AutocompleteHelper

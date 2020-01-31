@@ -19,8 +19,14 @@
   }
 
   .datepicker-day-button:active {
-      background-color: #224480 !important;
-      color: #FFF !important;
+    background-color: #224480 !important;
+    color: #fff !important;
   }
+}
 
+#datepicker-wrapper {
+  .month-prev,
+  .month-next {
+    background-color: transparent !important;
+  }
 }
