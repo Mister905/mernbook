@@ -5,11 +5,11 @@ const auth = require("../middleware/auth");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-// @route POST profile/education
-// @desc Create profile education
+// @route POST /education
+// @desc Create education
 // @access  Private
 router.post(
-  "/education",
+  "/",
   [
     auth,
     [
@@ -68,11 +68,11 @@ router.post(
   }
 );
 
-// @route PUT /profiles/education/education_id
-// @desc Update profile education
+// @route PUT /education/education_id
+// @desc Update education
 // @access  Private
 router.put(
-  "/education/:education_id",
+  "/:education_id",
   [
     auth,
     [
@@ -133,10 +133,10 @@ router.put(
   }
 );
 
-// @route GET /profiles/education/education_id
-// @desc Get profile education item
+// @route GET /education/education_id
+// @desc Get education item
 // @access  Private
-router.get("/education/:education_id", auth, async (req, res) => {
+router.get("/:education_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 
@@ -155,10 +155,10 @@ router.get("/education/:education_id", auth, async (req, res) => {
   }
 });
 
-// @route DELETE /profiles/education/education_id
-// @desc Delete profile education item
+// @route DELETE /education/education_id
+// @desc Delete education
 // @access  Private
-router.delete("/education/:education_id", auth, async (req, res) => {
+router.delete("/:education_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 

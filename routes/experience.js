@@ -2,14 +2,33 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
-const Profile = require("../models/Profile");
+const Experience = require("../models/Experience");
 const User = require("../models/User");
 
-// @route POST /profiles/experience
-// @desc Create profile experience
+// @route GET /experience
+// @desc Get experience
+// @access  Private
+router.get("/", auth, async (req, res) => {
+  // try {
+  //   const profile = await Profile.findOne({ user: req.user.id });
+  //   const { experience_id } = req.params;
+  //   const experience_item = profile.experience.filter(item => {
+  //     if (item._id.toString() === experience_id) {
+  //       return item;
+  //     }
+  //   });
+  //   return res.send(experience_item[0]);
+  // } catch (error) {
+  //   console.log(error.message);
+  //   return res.status(500).send("Server Error");
+  // }
+});
+
+// @route POST /experience
+// @desc Create experience
 // @access  Private
 router.post(
-  "/experience",
+  "/",
   [
     auth,
     [
@@ -69,11 +88,11 @@ router.post(
   }
 );
 
-// @route PUT /profiles/experience/experience_id
-// @desc Update profile experience
+// @route PUT /experience/experience_id
+// @desc Update experience
 // @access  Private
 router.put(
-  "/experience/:experience_id",
+  "/:experience_id",
   [
     auth,
     [
@@ -132,10 +151,10 @@ router.put(
   }
 );
 
-// @route GET /profiles/experience/experience_id
-// @desc Get profile experience item
+// @route GET /experience/experience_id
+// @desc Get experience item
 // @access  Private
-router.get("/experience/:experience_id", auth, async (req, res) => {
+router.get("/:experience_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 
@@ -154,10 +173,10 @@ router.get("/experience/:experience_id", auth, async (req, res) => {
   }
 });
 
-// @route DELETE /profiles/experience/experience_id
-// @desc Delete profile experience item
+// @route DELETE /experience/experience_id
+// @desc Delete experience
 // @access  Private
-router.delete("/experience/:experience_id", auth, async (req, res) => {
+router.delete("/:experience_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 

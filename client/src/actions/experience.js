@@ -8,6 +8,18 @@ import {
 import axios from "axios";
 import { create_alert } from "../actions/alert";
 
+export const get_experience = () => async dispatch => {
+  // try {
+  //   const res = await axios.post("/profiles/experience", request_body, config);
+  //   dispatch({
+  //     type: CREATE_EXPERIENCE,
+  //     payload: res.data
+  //   });
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
+};
+
 export const create_experience = (form_data, history) => async dispatch => {
   const config = {
     headers: {
