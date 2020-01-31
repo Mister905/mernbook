@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
-import { get_current_profile, update_profile } from "../../../actions/profile";
+import { get_profile, update_profile } from "../../../actions/profile";
 import Autocomplete from "../../../components/helpers/autocomplete/Autocomplete";
 import ProfileStatusSelect from "../../../components/helpers/profile_status_select/ProfileStatusSelect";
 import { IconContext } from "react-icons";
@@ -25,7 +25,7 @@ class EditProfile extends Component {
   }
 
   render() {
-    const { user_location } = this.props.profile.active_profile;
+    const { user_location } = this.props.profile.profile;
     return (
       <div className="container mt-50">
         <div className="row">
@@ -301,7 +301,7 @@ const FormikForm = withFormik({
       skills,
       interests,
       biography
-    } = props.profile.active_profile;
+    } = props.profile.profile;
 
     const {
       youtube,
@@ -309,7 +309,7 @@ const FormikForm = withFormik({
       facebook,
       linkedin,
       instagram
-    } = props.profile.active_profile.social_media;
+    } = props.profile.profile.social_media;
     return {
       user_location: user_location || "",
       status: status || "",
@@ -336,7 +336,7 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps, {
-    get_current_profile,
+    get_profile,
     update_profile
   }),
   withRouter

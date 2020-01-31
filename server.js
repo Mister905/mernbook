@@ -22,8 +22,16 @@ mongoose
 // ROUTES
 const auth = require("./routes/auth");
 app.use("/auth", auth);
+
 const profiles = require("./routes/profiles");
 app.use("/profiles", profiles);
+
+const experience = require("./routes/experience");
+app.use("/experience", experience);
+
+const education = require("./routes/education");
+app.use("/education", education);
+
 const posts = require("./routes/posts");
 app.use("/posts", posts);
 

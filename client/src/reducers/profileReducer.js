@@ -14,14 +14,10 @@ import {
 } from "../actions/types";
 
 const initial_state = {
-  active_profile: null,
+  profile: null,
   profiles: [],
   loading_profile: true,
-  loading_profiles: true,
-  active_experience_item: null,
-  loading_active_experience: true,
-  active_education_item: null,
-  loading_active_education: true
+  loading_profiles: true
 };
 
 export default function(state = initial_state, action) {
@@ -30,71 +26,16 @@ export default function(state = initial_state, action) {
     case GET_PROFILE:
       return {
         ...state,
-        active_profile: payload,
+        profile: payload,
         loading_profile: false
       };
     case UPDATE_PROFILE:
       return {
         ...state,
-        active_profile: payload,
+        profile: payload,
         loading_profile: false
       };
-    case CREATE_EXPERIENCE:
-      return {
-        ...state,
-        active_profile: payload,
-        loading_profile: false
-      };
-    case CREATE_EXPERIENCE:
-      return {
-        ...state,
-        active_profile: payload,
-        loading_profile: false
-      };
-    case GET_EXPERIENCE_ITEM:
-      return {
-        ...state,
-        active_experience_item: payload,
-        loading_active_experience: false
-      };
-    case GET_EDUCATION_ITEM:
-      return {
-        ...state,
-        active_education_item: payload,
-        loading_active_education: false
-      };
-    case DELETE_EXPERIENCE_ITEM:
-      return {
-        ...state,
-        loading_profile: true
-      };
-    case DELETE_EDUCATION_ITEM:
-      return {
-        ...state,
-        loading_profile: true
-      };
-    case UPDATE_EXPERIENCE_ITEM:
-      return {
-        ...state,
-        active_profile: payload
-      };
-    case UPDATE_EDUCATION_ITEM:
-      return {
-        ...state,
-        active_profile: payload
-      };
-    case CLEAR_ACTIVE_EXPERIENCE:
-      return {
-        ...state,
-        active_experience_item: null,
-        loading_active_experience: true
-      };
-    case CLEAR_ACTIVE_EDUCATION:
-      return {
-        ...state,
-        active_education_item: null,
-        loading_active_education: true
-      };
+
     default:
       return state;
   }

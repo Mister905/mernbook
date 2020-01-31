@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 import { create_alert } from "../actions/alert";
 
-export const get_current_profile = () => async dispatch => {
+export const get_profile = () => async dispatch => {
   try {
     const res = await axios.get("/profiles/active");
     dispatch({

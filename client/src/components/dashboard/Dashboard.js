@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { get_current_profile } from "../../actions/profile";
+import { get_profile } from "../../actions/profile";
 import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
@@ -15,16 +15,10 @@ import {
   FaInstagram
 } from "react-icons/fa";
 import Moment from "moment";
-import {
-  clear_active_experience,
-  clear_active_education
-} from "../../actions/profile";
 
 class Dashboard extends Component {
   componentDidMount = () => {
-    this.props.get_current_profile();
-    this.props.clear_active_experience();
-    this.props.clear_active_education();
+    this.props.get_profile();
   };
 
   display_dashboard_component = () => {
@@ -65,9 +59,9 @@ class Dashboard extends Component {
       facebook,
       linkedin,
       instagram
-    } = this.props.profile.active_profile.social_media;
+    } = this.props.profile.profile.social_media;
 
-    const { skills } = this.props.profile.active_profile;
+    const { skills } = this.props.profile.profile;
 
     let skills_output = null;
 
@@ -81,7 +75,7 @@ class Dashboard extends Component {
       skills_output = "You haven't defined any skills";
     }
 
-    const { interests } = this.props.profile.active_profile;
+    const { interests } = this.props.profile.profile;
 
     let interests_output = null;
 
@@ -95,7 +89,7 @@ class Dashboard extends Component {
       interests_output = "You haven't defined any interests";
     }
 
-    const { biography } = this.props.profile.active_profile;
+    const { biography } = this.props.profile.profile;
 
     return (
       <div className="container dashboard-container mt-50">
@@ -220,7 +214,7 @@ class Dashboard extends Component {
       );
     } else {
       const { first_name, last_name } = this.props.auth.user;
-      const { experience } = this.props.profile.active_profile;
+      const { experience } = this.props.profile.profile;
       let experience_output = null;
       if (experience.length > 0) {
         experience_output = experience.map(item => (
@@ -283,7 +277,7 @@ class Dashboard extends Component {
       );
     } else {
       const { first_name, last_name } = this.props.auth.user;
-      const { education } = this.props.profile.active_profile;
+      const { education } = this.props.profile.profile;
       let education_output = null;
       if (education.length > 0) {
         education_output = education.map(item => (
@@ -357,7 +351,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  get_current_profile,
-  clear_active_education,
-  clear_active_experience
+  get_profile
 })(Dashboard);

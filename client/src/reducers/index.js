@@ -3,10 +3,14 @@ import authReducer from "./authReducer";
 import alertReducer from "./alertReducer";
 import profileReducer from "./profileReducer";
 import sidenavReducer from "./sidenavReducer";
+import experienceReducer from "./experienceReducer";
+import educationReducer from "./educationReducer";
 
 export default combineReducers({
   auth: authReducer,
   alert: alertReducer,
   profile: profileReducer,
-  sidenav: sidenavReducer
+  sidenav: sidenavReducer,
+  experience: experienceReducer,
+  education: educationReducer
 });

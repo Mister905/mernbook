@@ -25,65 +25,6 @@ const ProfileSchema = new mongoose.Schema({
     type: [String],
     default: null
   },
-  experience: [
-    {
-      title: {
-        type: String,
-        required: true
-      },
-      company: {
-        type: String,
-        required: true
-      },
-      job_location: {
-        type: String,
-        required: true
-      },
-      from_date: {
-        type: Date,
-        required: true
-      },
-      to_date: {
-        type: Date
-      },
-      is_current_job: {
-        type: Boolean,
-        default: true
-      },
-      description: {
-        type: String
-      }
-    }
-  ],
-  education: [
-    {
-      institution: {
-        type: String,
-        required: true
-      },
-      credential: {
-        type: String,
-        required: true
-      },
-      field_of_study: {
-        type: String
-      },
-      from_date: {
-        type: Date,
-        required: true
-      },
-      to_date: {
-        type: Date
-      },
-      is_current_study: {
-        type: Boolean,
-        default: true
-      },
-      description: {
-        type: String
-      }
-    }
-  ],
   social_media: {
     youtube: {
       type: String,
