@@ -220,7 +220,7 @@ router.put(
       check("company", "Company is Required")
         .not()
         .isEmpty(),
-      check("from", "From Date is Required")
+      check("from_date", "From Date is Required")
         .not()
         .isEmpty()
     ]
@@ -228,6 +228,7 @@ router.put(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors);
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -258,7 +259,7 @@ router.put(
         { user: req.user.id, "experience._id": experience_id },
         { $set: { "experience.$": experience_build } },
         { new: true }
-      );
+      ).populate("user", ["first_name", "last_name"], User);
 
       return res.send(updated_experience);
     } catch (error) {

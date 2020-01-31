@@ -4,7 +4,7 @@ import { compose } from "redux";
 import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import {
-  update_profile,
+  update_experience,
   get_active_experience,
   delete_experience
 } from "../../../../actions/profile";
@@ -26,10 +26,13 @@ class EditExperience extends Component {
 
   componentDidMount() {
     M.Modal.init(this.Modal, null);
+    const { is_current_job } = this.props.profile.active_experience_item;
+    this.setState({
+      is_current_job
+    });
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-
     M.textareaAutoResize(this.description_textarea.current);
 
     const { setFieldValue } = this.props;
@@ -56,7 +59,7 @@ class EditExperience extends Component {
 
     return (
       <div>
-        <div className="row">
+        <div className="row valign-wrapper">
           <div className="col m2 center-align">
             <Link to={`/experience/${_id}`} className="btn btn-mernbook">
               <i className="material-icons">arrow_back</i>
@@ -66,10 +69,7 @@ class EditExperience extends Component {
             <div className="component-heading">Edit Experience</div>
           </div>
           <div className="col m2 offset-m1 center-align">
-            <a
-              className="btn modal-trigger red"
-              data-target="mernbook-modal"
-            >
+            <a className="btn modal-trigger red" data-target="mernbook-modal">
               <i className="material-icons">delete</i>
             </a>
 
@@ -232,6 +232,9 @@ class EditExperience extends Component {
                         id="to_date"
                         name="to_date"
                         field_name={"to_date"}
+                        to_date={
+                          this.props.profile.active_experience_item.to_date
+                        }
                       />
                     </div>
                   </div>
@@ -291,50 +294,42 @@ class EditExperience extends Component {
 
 const FormikForm = withFormik({
   mapPropsToValues: props => {
-    const { loading_active_experience } = props.profile;
-    if (!loading_active_experience) {
-      const {
-        title,
-        company,
-        job_location,
-        from_date,
-        to_date,
-        is_current_job,
-        description
-      } = props.profile.active_experience_item;
-      return {
-        title: title || "",
-        company: company || "",
-        job_location: job_location || "",
-        from_date: from_date || "",
-        to_date: to_date || "",
-        is_current_job: is_current_job || true,
-        description: description || ""
-      };
-    } else {
-      return {
-        title: "",
-        company: "",
-        job_location: "",
-        from_date: "",
-        to_date: "",
-        is_current_job: true,
-        description: ""
-      };
-    }
+    const {
+      title,
+      company,
+      job_location,
+      from_date,
+      to_date,
+      is_current_job,
+      description
+    } = props.profile.active_experience_item;
+
+    return {
+      title: title || "",
+      company: company || "",
+      job_location: job_location || "",
+      from_date: from_date || "",
+      to_date: to_date || "",
+      is_current_job: is_current_job || true,
+      description: description || ""
+    };
   },
   validationSchema: Yup.object().shape({
     title: Yup.string().required("Title is Required"),
     company: Yup.string().required("Company is Required"),
-    job_location: Yup.string().required("Location is Required"),
     from_date: Yup.string().required("From Date is Required")
   }),
   validateOnBlur: false,
   validateOnChange: false,
   enableReinitialize: true,
   handleSubmit: (values, props) => {
-    console.log(values);
-    // props.props.create_experience(values, props.props.history);
+    const experience_item_id = props.props.profile.active_experience_item._id;
+
+    props.props.update_experience(
+      experience_item_id,
+      values,
+      props.props.history
+    );
   }
 })(EditExperience);
 
@@ -344,7 +339,7 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps, {
-    update_profile,
+    update_experience,
     get_active_experience,
     delete_experience
   }),

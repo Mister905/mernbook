@@ -15,11 +15,16 @@ import {
   FaInstagram
 } from "react-icons/fa";
 import Moment from "moment";
+import {
+  clear_active_experience,
+  clear_active_education
+} from "../../actions/profile";
 
 class Dashboard extends Component {
   componentDidMount = () => {
     this.props.get_current_profile();
-    M.Tabs.init(this.Tabs);
+    this.props.clear_active_experience();
+    this.props.clear_active_education();
   };
 
   display_dashboard_component = () => {
@@ -94,7 +99,7 @@ class Dashboard extends Component {
 
     return (
       <div className="container dashboard-container mt-50">
-        <div className="row">
+        <div className="row valign-wrapper">
           <div className="col m8 offset-m1 s8 offset-s2">
             <div className="component-heading">
               {first_name} {last_name}
@@ -243,13 +248,13 @@ class Dashboard extends Component {
       }
       return (
         <div className="container dashboard-container mt-50">
-          <div className="row">
+          <div className="row valign-wrapper">
             <div className="col m8 offset-m1 s6 offset-s3">
               <div className="component-heading">
                 {first_name} {last_name}
               </div>
             </div>
-            <div className="col">
+            <div className="col m1">
               <Link to={"/experience/create"} className="btn btn-mernbook">
                 <i className="material-icons">add</i>
               </Link>
@@ -309,7 +314,7 @@ class Dashboard extends Component {
 
       return (
         <div className="container dashboard-container mt-50">
-          <div className="row">
+          <div className="row valign-wrapper">
             <div className="col m8 offset-m1 s6 offset-s3">
               <div className="component-heading">
                 {first_name} {last_name}
@@ -351,4 +356,8 @@ const mapStateToProps = state => ({
   sidenav: state.sidenav
 });
 
-export default connect(mapStateToProps, { get_current_profile })(Dashboard);
+export default connect(mapStateToProps, {
+  get_current_profile,
+  clear_active_education,
+  clear_active_experience
+})(Dashboard);

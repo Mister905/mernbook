@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
-import {
-  get_active_experience
-} from "../../../../actions/profile";
+import { get_active_experience } from "../../../../actions/profile";
 import Loader from "../../../layout/loader/Loader";
 import Moment from "moment";
 
 class ViewExperience extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
+
+    const { active_experience_item } = this.props.profile;
+
     this.props.get_active_experience(id);
   }
 
@@ -25,9 +26,10 @@ class ViewExperience extends Component {
       is_current_job,
       description
     } = this.props.profile.active_experience_item;
+
     return (
       <div>
-        <div className="row">
+        <div className="row valign-wrapper">
           <div className="col m2 center-align">
             <Link to={"/"} className="btn btn-mernbook">
               <i className="material-icons">arrow_back</i>

@@ -6,7 +6,11 @@ import {
   GET_EXPERIENCE_ITEM,
   GET_EDUCATION_ITEM,
   DELETE_EXPERIENCE_ITEM,
-  DELETE_EDUCATION_ITEM
+  DELETE_EDUCATION_ITEM,
+  UPDATE_EXPERIENCE_ITEM,
+  UPDATE_EDUCATION_ITEM,
+  CLEAR_ACTIVE_EXPERIENCE,
+  CLEAR_ACTIVE_EDUCATION
 } from "../actions/types";
 
 const initial_state = {
@@ -68,6 +72,28 @@ export default function(state = initial_state, action) {
       return {
         ...state,
         loading_profile: true
+      };
+    case UPDATE_EXPERIENCE_ITEM:
+      return {
+        ...state,
+        active_profile: payload
+      };
+    case UPDATE_EDUCATION_ITEM:
+      return {
+        ...state,
+        active_profile: payload
+      };
+    case CLEAR_ACTIVE_EXPERIENCE:
+      return {
+        ...state,
+        active_experience_item: null,
+        loading_active_experience: true
+      };
+    case CLEAR_ACTIVE_EDUCATION:
+      return {
+        ...state,
+        active_education_item: null,
+        loading_active_education: true
       };
     default:
       return state;

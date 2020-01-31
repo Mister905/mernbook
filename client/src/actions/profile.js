@@ -9,7 +9,9 @@ import {
   DELETE_EXPERIENCE_ITEM,
   DELETE_EDUCATION_ITEM,
   UPDATE_EXPERIENCE_ITEM,
-  UPDATE_EDUCATION_ITEM
+  UPDATE_EDUCATION_ITEM,
+  CLEAR_ACTIVE_EXPERIENCE,
+  CLEAR_ACTIVE_EDUCATION
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
@@ -142,15 +144,34 @@ export const delete_experience = (
 
 export const update_experience = (
   experience_item_id,
+  form_data,
   history
 ) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let request_body = JSON.stringify(form_data);
+
   try {
-    const res = await axios.put(`/profiles/experience/${experience_item_id}`);
+    const res = await axios.put(
+      `/profiles/experience/${experience_item_id}`,
+      request_body,
+      config
+    );
+
     dispatch({
       type: UPDATE_EXPERIENCE_ITEM,
       payload: res.data
     });
-    history.push("/");
+
+    // const updated_experience_id = res.data._id;
+
+    console.log(res.data)
+
+    // history.push(`/experience/${updated_experience_id}`);
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Update Experience Item"));
@@ -188,5 +209,25 @@ export const delete_education = (
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Education Item"));
+  }
+};
+
+export const clear_active_experience = () => async dispatch => {
+  try {
+    dispatch({
+      type: CLEAR_ACTIVE_EXPERIENCE
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const clear_active_education = () => async dispatch => {
+  try {
+    dispatch({
+      type: CLEAR_ACTIVE_EDUCATION
+    });
+  } catch (error) {
+    console.log(error.message);
   }
 };
