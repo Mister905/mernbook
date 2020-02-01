@@ -6,7 +6,7 @@ import { get_active_education } from "../../../../actions/education";
 import Loader from "../../../layout/loader/Loader";
 import Moment from "moment";
 
-class ViewExperience extends Component {
+class ViewEducation extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.get_active_education(id);
@@ -22,7 +22,8 @@ class ViewExperience extends Component {
       to_date,
       is_current_study,
       description
-    } = this.props.profile.active_education_item;
+    } = this.props.education.active_education_item;
+
     return (
       <div>
         <div className="row">
@@ -60,7 +61,7 @@ class ViewExperience extends Component {
   };
 
   render() {
-    const { loading_active_education } = this.props.profile;
+    const { loading_active_education } = this.props.education;
     return (
       <div className="container mt-50">
         {loading_active_education ? (
@@ -78,9 +79,9 @@ class ViewExperience extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  education: state.education
 });
 
 export default connect(mapStateToProps, {
   get_active_education
-})(ViewExperience);
+})(ViewEducation);

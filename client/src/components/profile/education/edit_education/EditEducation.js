@@ -32,10 +32,14 @@ class EditEducation extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (
-      this.props.profile.active_education_item !==
-      prevProps.profile.active_education_item
+      this.props.education.active_education_item !==
+      prevProps.education.active_education_item
     ) {
-      M.textareaAutoResize(this.Description.current);
+      try {
+        M.textareaAutoResize(this.Description.current);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     const { setFieldValue } = this.props;
@@ -51,7 +55,7 @@ class EditEducation extends Component {
   };
 
   handle_delete_education = () => {
-    const { _id } = this.props.profile.active_education_item;
+    const { _id } = this.props.education.active_education_item;
     this.props.delete_education(_id, this.props.history);
   };
 
@@ -70,10 +74,7 @@ class EditEducation extends Component {
             <div className="component-heading">Edit Education</div>
           </div>
           <div className="col m2 offset-m1 center-align">
-            <a
-              className="btn btn-mernbook modal-trigger"
-              data-target="mernbook-modal"
-            >
+            <a className="btn red modal-trigger" data-target="mernbook-modal">
               <i className="material-icons">delete</i>
             </a>
 
@@ -272,7 +273,7 @@ class EditEducation extends Component {
 
 const FormikForm = withFormik({
   mapPropsToValues: props => {
-    const { loading_active_education } = props.profile;
+    const { loading_active_education } = props.education;
     if (!loading_active_education) {
       const {
         institution,
@@ -282,7 +283,7 @@ const FormikForm = withFormik({
         to_date,
         is_current_study,
         description
-      } = props.profile.active_education_item;
+      } = props.education.active_education_item;
       return {
         institution: institution || "",
         credential: credential || "",
@@ -314,12 +315,18 @@ const FormikForm = withFormik({
   validateOnChange: false,
   enableReinitialize: true,
   handleSubmit: (values, props) => {
-    props.props.update_education(values, props.props.history);
+    const education_item_id = props.props.education.active_education_item._id;
+
+    props.props.update_education(
+      education_item_id,
+      values,
+      props.props.history
+    );
   }
 })(EditEducation);
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  education: state.education
 });
 
 export default compose(

@@ -26,8 +26,8 @@ export default function(state = initial_state, action) {
     case CREATE_EXPERIENCE:
       return {
         ...state,
-        profile: payload,
-        loading_profile: false
+        experience_list: payload,
+        loading_experience_list: true
       };
 
     case GET_EXPERIENCE_ITEM:
@@ -40,14 +40,16 @@ export default function(state = initial_state, action) {
     case DELETE_EXPERIENCE_ITEM:
       return {
         ...state,
-        loading_profile: true
+        loading_active_experience: true,
+        loading_experience_list: true
       };
 
     case UPDATE_EXPERIENCE_ITEM:
       return {
         ...state,
-        active_experience_item: payload,
-        loading_active_experience: false
+        active_education_item: payload,
+        loading_active_experience: true,
+        loading_experience_list: true
       };
     default:
       return state;

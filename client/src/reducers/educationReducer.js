@@ -27,8 +27,8 @@ export default function(state = initial_state, action) {
     case CREATE_EDUCATION:
       return {
         ...state,
-        profile: payload,
-        loading_profile: false
+        education_list: payload,
+        loading_education_list: true
       };
 
     case GET_EDUCATION_ITEM:
@@ -41,13 +41,16 @@ export default function(state = initial_state, action) {
     case DELETE_EDUCATION_ITEM:
       return {
         ...state,
-        loading_profile: true
+        loading_active_education: true,
+        loading_education_list: true
       };
 
     case UPDATE_EDUCATION_ITEM:
       return {
         ...state,
-        profile: payload
+        active_education_item: payload,
+        loading_active_education: true,
+        loading_education_list: true
       };
 
     default:

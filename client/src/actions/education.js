@@ -45,7 +45,8 @@ export const create_education = (form_data, history) => async dispatch => {
 
 export const get_active_education = education_item_id => async dispatch => {
   try {
-    const res = await axios.get(`/api/profiles/education/${education_item_id}`);
+    const res = await axios.get(`/api/education/${education_item_id}`);
+
     dispatch({
       type: GET_EDUCATION_ITEM,
       payload: res.data
@@ -58,18 +59,35 @@ export const get_active_education = education_item_id => async dispatch => {
 
 export const update_education = (
   education_item_id,
+  form_data,
   history
 ) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let request_body = JSON.stringify(form_data);
+
   try {
-    const res = await axios.put(`/api/profiles/education/${education_item_id}`);
+    const res = await axios.put(
+      `/api/education/${education_item_id}`,
+      request_body,
+      config
+    );
+
     dispatch({
       type: UPDATE_EDUCATION_ITEM,
       payload: res.data
     });
-    history.push("/");
+
+    history.push(`/education/${education_item_id}`);
+
+    dispatch(create_alert("success", "Updated Education Record"));
   } catch (error) {
     console.log(error.message);
-    dispatch(create_alert("error", "Failed to Update Education Item"));
+    dispatch(create_alert("error", "Failed to Update Education Record"));
   }
 };
 
@@ -78,14 +96,13 @@ export const delete_education = (
   history
 ) => async dispatch => {
   try {
-    const res = await axios.delete(
-      `/api/profiles/education/${education_item_id}`
-    );
+    const res = await axios.delete(`/api/education/${education_item_id}`);
     dispatch({
       type: DELETE_EDUCATION_ITEM,
       payload: res.data
     });
     history.push("/");
+    dispatch(create_alert("success", "Experience Record Deleted"));
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Education Item"));

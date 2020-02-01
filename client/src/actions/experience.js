@@ -46,7 +46,6 @@ export const create_experience = (form_data, history) => async dispatch => {
 export const get_experience_by_id = experience_item_id => async dispatch => {
   try {
     const res = await axios.get(`/api/experience/${experience_item_id}`);
-    console.log(res.data);
     dispatch({
       type: GET_EXPERIENCE_ITEM,
       payload: res.data
@@ -62,14 +61,13 @@ export const delete_experience = (
   history
 ) => async dispatch => {
   try {
-    const res = await axios.delete(
-      `/api/experience/${experience_item_id}`
-    );
+    const res = await axios.delete(`/api/experience/${experience_item_id}`);
     dispatch({
       type: DELETE_EXPERIENCE_ITEM,
       payload: res.data
     });
     history.push("/");
+    dispatch(create_alert("success", "Experience Record Deleted"));
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Experience Item"));
@@ -102,8 +100,9 @@ export const update_experience = (
     });
 
     history.push(`/experience/${experience_item_id}`);
+    dispatch(create_alert("success", "Experience Record Updated"));
   } catch (error) {
     console.log(error.message);
-    dispatch(create_alert("error", "Failed to Update Experience Item"));
+    dispatch(create_alert("error", "Failed to Update Experience Record"));
   }
 };

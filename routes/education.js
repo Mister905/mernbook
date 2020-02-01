@@ -93,10 +93,10 @@ router.put(
       check("credential", "Credential is Required")
         .not()
         .isEmpty(),
-      check("field", "Field is Required")
+      check("field_of_study", "Field of Study is Required")
         .not()
         .isEmpty(),
-      check("from", "From Date is Required")
+      check("from_date", "From Date is Required")
         .not()
         .isEmpty()
     ]
@@ -104,6 +104,7 @@ router.put(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors);
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -130,12 +131,11 @@ router.put(
     const { education_id } = req.params;
 
     try {
-      const updated_education = await Profile.findOneAndUpdate(
-        { user: req.user.id, "education._id": education_id },
-        { $set: { "education.$": education_build } },
+      let updated_education = await Education.findOneAndUpdate(
+        { _id: education_id },
+        { education_build },
         { new: true }
       );
-
       return res.send(updated_education);
     } catch (error) {
       console.log(error.message);
@@ -149,17 +149,9 @@ router.put(
 // @access  Private
 router.get("/:education_id", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
-
     const { education_id } = req.params;
-
-    const education_item = profile.education.filter(item => {
-      if (item._id.toString() === education_id) {
-        return item;
-      }
-    });
-
-    return res.send(education_item[0]);
+    const education = await Education.findById(education_id);
+    return res.send(education);
   } catch (error) {
     console.log(error.message);
     return res.status(500).send("Server Error");
@@ -171,19 +163,11 @@ router.get("/:education_id", auth, async (req, res) => {
 // @access  Private
 router.delete("/:education_id", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
-
     const { education_id } = req.params;
 
-    const deletion_index = profile.education
-      .map(item => item.id)
-      .indexOf(education_id);
+    await Education.remove({ _id: education_id });
 
-    profile.education.splice(deletion_index, 1);
-
-    await profile.save();
-
-    return res.send("Education Deleted");
+    return res.send("Experience Deleted");
   } catch (error) {
     console.log(error.message);
     return res.status(500).send("Server Error");

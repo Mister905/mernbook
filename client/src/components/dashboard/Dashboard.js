@@ -210,13 +210,15 @@ class Dashboard extends Component {
   };
 
   output_experience = () => {
-    const { loading_experience_list } = this.props.profile;
+    const { loading_experience_list } = this.props.experience;
 
     if (loading_experience_list) {
       return (
-        <div className="row">
-          <div className="col m12 center-align">
-            <Loader />
+        <div className="container mt-50">
+          <div className="row">
+            <div className="col m12 center-align">
+              <Loader />
+            </div>
           </div>
         </div>
       );
@@ -230,7 +232,7 @@ class Dashboard extends Component {
             <div className="col m12 s12 card">
               <div className="card-content">
                 <Link to={`/experience/${item._id}`}>
-                  <span className="card-title profile-title">{item.title}</span>
+                  <span className="profile-title">{item.title}</span>
                 </Link>
                 <div className="company">{item.company}</div>
                 <div className="job-location">{item.job_location}</div>
@@ -273,13 +275,14 @@ class Dashboard extends Component {
   };
 
   output_education = () => {
-    const { loading_education_list } = this.props.experience;
-
+    const { loading_education_list } = this.props.education;
     if (loading_education_list) {
       return (
-        <div className="row">
-          <div className="col m12 center-align">
-            <Loader />
+        <div className="container mt-50">
+          <div className="row">
+            <div className="col m12 center-align">
+              <Loader />
+            </div>
           </div>
         </div>
       );
@@ -293,9 +296,7 @@ class Dashboard extends Component {
             <div className="col m12 s12 card">
               <div className="card-content">
                 <Link to={`/education/${item._id}`}>
-                  <span className="card-title profile-title">
-                    {item.institution}
-                  </span>
+                  <span className="profile-title">{item.institution}</span>
                 </Link>
                 <div className="company">{item.credential}</div>
                 <div className="job-location">{item.field_of_study}</div>

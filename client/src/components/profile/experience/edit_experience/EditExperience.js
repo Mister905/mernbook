@@ -32,7 +32,16 @@ class EditExperience extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    M.textareaAutoResize(this.description_textarea.current);
+    if (
+      this.props.experience.active_experience_item !==
+      prevProps.experience.active_experience_item
+    ) {
+      try {
+        M.textareaAutoResize(this.Description.current);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
     const { setFieldValue } = this.props;
     if (this.state.is_current_job !== prevState.is_current_job) {
@@ -84,14 +93,14 @@ class EditExperience extends Component {
                 <p>Are you sure you want to delete this record?</p>
               </div>
               <div className="modal-footer">
-                <a className="modal-close waves-effect waves-red btn-flat">
-                  Disagree
+                <a className="modal-close btn btn-mernbook">
+                  <i className="material-icons">cancel</i>
                 </a>
                 <a
                   onClick={this.handle_delete_experience}
-                  className="modal-close waves-effect waves-green btn-flat"
+                  className="modal-close btn red btn-delete"
                 >
-                  Agree
+                  <i className="material-icons">delete</i>
                 </a>
               </div>
             </div>
@@ -162,7 +171,8 @@ class EditExperience extends Component {
                       name="job_location"
                       field_name={"job_location"}
                       job_location={
-                        this.props.experience.active_experience_item.job_location
+                        this.props.experience.active_experience_item
+                          .job_location
                       }
                     />
                     {errors.job_location && (
