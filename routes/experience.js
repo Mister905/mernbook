@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 const Experience = require("../models/Experience");
 const User = require("../models/User");
 
-// @route GET /experience
+// @route GET /api/experience
 // @desc Get experience
 // @access  Private
 router.get("/", auth, async (req, res) => {
@@ -24,7 +24,7 @@ router.get("/", auth, async (req, res) => {
   // }
 });
 
-// @route POST /experience
+// @route POST /api/experience
 // @desc Create experience
 // @access  Private
 router.post(
@@ -63,7 +63,10 @@ router.post(
       description
     } = req.body;
 
-    const experience_build = {
+    const user = await User.findById(req.user.id).select("-password");
+
+    const experience_build = new Experience({
+      user: req.user.id,
       title,
       company,
       job_location,
@@ -71,16 +74,11 @@ router.post(
       to_date,
       is_current_job,
       description
-    };
+    });
 
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
-      if (!profile) {
-        return res.send("Server Error");
-      }
-      profile.experience.push(experience_build);
-      await profile.save();
-      return res.send(profile);
+      const experience = await experience_build.save();
+      return res.send(experience);
     } catch (error) {
       console.log(error.message);
       return res.status(500).send("Server Error");
@@ -88,7 +86,7 @@ router.post(
   }
 );
 
-// @route PUT /experience/experience_id
+// @route PUT /api/experience/experience_id
 // @desc Update experience
 // @access  Private
 router.put(
@@ -151,7 +149,7 @@ router.put(
   }
 );
 
-// @route GET /experience/experience_id
+// @route GET /api/experience/experience_id
 // @desc Get experience item
 // @access  Private
 router.get("/:experience_id", auth, async (req, res) => {
@@ -173,7 +171,7 @@ router.get("/:experience_id", auth, async (req, res) => {
   }
 });
 
-// @route DELETE /experience/experience_id
+// @route DELETE /api/experience/experience_id
 // @desc Delete experience
 // @access  Private
 router.delete("/:experience_id", auth, async (req, res) => {

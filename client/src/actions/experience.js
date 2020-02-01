@@ -30,7 +30,7 @@ export const create_experience = (form_data, history) => async dispatch => {
   let request_body = JSON.stringify(form_data);
 
   try {
-    const res = await axios.post("/profiles/experience", request_body, config);
+    const res = await axios.post("/api/profiles/experience", request_body, config);
     dispatch({
       type: CREATE_EXPERIENCE,
       payload: res.data
@@ -45,7 +45,7 @@ export const create_experience = (form_data, history) => async dispatch => {
 
 export const get_experience_by_id = experience_item_id => async dispatch => {
   try {
-    const res = await axios.get(`/profiles/experience/${experience_item_id}`);
+    const res = await axios.get(`/api/profiles/experience/${experience_item_id}`);
     dispatch({
       type: GET_EXPERIENCE_ITEM,
       payload: res.data
@@ -62,7 +62,7 @@ export const delete_experience = (
 ) => async dispatch => {
   try {
     const res = await axios.delete(
-      `/profiles/experience/${experience_item_id}`
+      `/api/profiles/experience/${experience_item_id}`
     );
     dispatch({
       type: DELETE_EXPERIENCE_ITEM,
@@ -90,7 +90,7 @@ export const update_experience = (
 
   try {
     const res = await axios.put(
-      `/profiles/experience/${experience_item_id}`,
+      `/api/profiles/experience/${experience_item_id}`,
       request_body,
       config
     );

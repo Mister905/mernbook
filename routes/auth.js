@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Profile = require("../models/Profile");
 
-// @route GET /auth/active_user
+// @route GET /api/auth/active_user
 // @desc Get Active User
 // @access  Private
 router.get("/active_user", auth, async (req, res) => {
@@ -21,7 +21,7 @@ router.get("/active_user", auth, async (req, res) => {
   }
 });
 
-// @route POST /auth/register
+// @route POST /api/auth/register
 // @desc User Registration
 // @access  Public
 router.post(
@@ -89,7 +89,7 @@ router.post(
   }
 );
 
-// @route POST /auth/login
+// @route POST /api/auth/login
 // @desc User Login
 // @access  Public
 router.post(

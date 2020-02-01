@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-// @route GET /profiles/active
+// @route GET /api/profiles/active
 // @desc Get Active User's Profile
 // @access  Private
 router.get("/active", auth, async (req, res) => {
@@ -25,7 +25,7 @@ router.get("/active", auth, async (req, res) => {
   }
 });
 
-// @route PUT /profiles/update
+// @route PUT /api/profiles/update
 // @desc Update User Profile
 // @access  Private
 router.put("/update", auth, async (req, res) => {
@@ -89,7 +89,7 @@ router.put("/update", auth, async (req, res) => {
   }
 });
 
-// @route DELETE /profiles
+// @route DELETE /api/profiles
 // @desc Deletes related user, profile and posts
 // @access  Private
 router.delete("/", auth, async (req, res) => {
@@ -104,7 +104,7 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
-// @route GET /profiles
+// @route GET /api/profiles
 // @desc GET ALL User Profiles
 // @access  Public
 router.get("/", auth, async (req, res) => {
@@ -122,7 +122,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// @route GET /profiles/user/:user_id
+// @route GET /api/profiles/user/:user_id
 // @desc Get Profiles by User ID
 // @access  Public
 router.get("/user/:user_id", async (req, res) => {

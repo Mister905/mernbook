@@ -21,19 +21,19 @@ mongoose
 
 // ROUTES
 const auth = require("./routes/auth");
-app.use("/auth", auth);
+app.use("/api/auth", auth);
 
 const profiles = require("./routes/profiles");
-app.use("/profiles", profiles);
+app.use("/api/profiles", profiles);
 
 const experience = require("./routes/experience");
-app.use("/experience", experience);
+app.use("/api/experience", experience);
 
 const education = require("./routes/education");
-app.use("/education", education);
+app.use("/api/education", education);
 
 const posts = require("./routes/posts");
-app.use("/posts", posts);
+app.use("/api/posts", posts);
 
 if (process.env.NODE_ENV === "production") {
   // Express serves production assets like main.js

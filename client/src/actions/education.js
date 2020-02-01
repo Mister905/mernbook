@@ -8,6 +8,18 @@ import {
 import axios from "axios";
 import { create_alert } from "../actions/alert";
 
+export const get_education = () => async dispatch => {
+  try {
+    const res = await axios.post("/api/profiles/experience", request_body, config);
+    dispatch({
+      type: CREATE_EXPERIENCE,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const create_education = (form_data, history) => async dispatch => {
   const config = {
     headers: {
@@ -18,7 +30,7 @@ export const create_education = (form_data, history) => async dispatch => {
   let request_body = JSON.stringify(form_data);
 
   try {
-    const res = await axios.post("/profiles/education", request_body, config);
+    const res = await axios.post("/api/profiles/education", request_body, config);
     dispatch({
       type: CREATE_EDUCATION,
       payload: res.data
@@ -33,7 +45,7 @@ export const create_education = (form_data, history) => async dispatch => {
 
 export const get_active_education = education_item_id => async dispatch => {
   try {
-    const res = await axios.get(`/profiles/education/${education_item_id}`);
+    const res = await axios.get(`/api/profiles/education/${education_item_id}`);
     dispatch({
       type: GET_EDUCATION_ITEM,
       payload: res.data
@@ -49,7 +61,7 @@ export const update_education = (
   history
 ) => async dispatch => {
   try {
-    const res = await axios.put(`/profiles/education/${education_item_id}`);
+    const res = await axios.put(`/api/profiles/education/${education_item_id}`);
     dispatch({
       type: UPDATE_EDUCATION_ITEM,
       payload: res.data
@@ -66,7 +78,7 @@ export const delete_education = (
   history
 ) => async dispatch => {
   try {
-    const res = await axios.delete(`/profiles/education/${education_item_id}`);
+    const res = await axios.delete(`/api/profiles/education/${education_item_id}`);
     dispatch({
       type: DELETE_EDUCATION_ITEM,
       payload: res.data

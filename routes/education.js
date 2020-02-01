@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
-const Profile = require("../models/Profile");
+const Education = require("../models/Experience");
 const User = require("../models/User");
 
-// @route POST /education
+// @route POST /api/education
 // @desc Create education
 // @access  Private
 router.post(
@@ -43,7 +43,10 @@ router.post(
       description
     } = req.body;
 
-    const education_build = {
+    const user = await User.findById(req.user.id).select("-password");
+
+    const education_build = new Education({
+      user: req.user.id,
       institution,
       credential,
       field_of_study,
@@ -51,16 +54,11 @@ router.post(
       to_date,
       is_current_study,
       description
-    };
+    });
 
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
-      if (!profile) {
-        return res.send("Server Error");
-      }
-      profile.education.push(education_build);
-      await profile.save();
-      return res.send(profile);
+      const education = await education_build.save();
+      return res.send(education);
     } catch (error) {
       console.log(error.message);
       return res.status(500).send("Server Error");
@@ -68,7 +66,7 @@ router.post(
   }
 );
 
-// @route PUT /education/education_id
+// @route PUT /api/education/education_id
 // @desc Update education
 // @access  Private
 router.put(
@@ -133,7 +131,7 @@ router.put(
   }
 );
 
-// @route GET /education/education_id
+// @route GET /api/education/education_id
 // @desc Get education item
 // @access  Private
 router.get("/:education_id", auth, async (req, res) => {
@@ -155,7 +153,7 @@ router.get("/:education_id", auth, async (req, res) => {
   }
 });
 
-// @route DELETE /education/education_id
+// @route DELETE /api/education/education_id
 // @desc Delete education
 // @access  Private
 router.delete("/:education_id", auth, async (req, res) => {

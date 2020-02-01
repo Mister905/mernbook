@@ -6,7 +6,7 @@ const Post = require("../models/Post");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-// @route POST /posts
+// @route POST /api/posts
 // @desc Create a Post
 // @access  Private
 router.post(
@@ -46,7 +46,7 @@ router.post(
   }
 );
 
-// @route PUT /posts/:post_id
+// @route PUT /api/posts/:post_id
 // @desc Update Post
 // @access  Private
 router.put(
@@ -95,7 +95,7 @@ router.put(
   }
 );
 
-// @route GET /posts
+// @route GET /api/posts
 // @desc Get All Posts
 // @access  Private
 router.get("/", auth, async (req, res) => {
@@ -108,7 +108,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// @route GET /posts/:post_id
+// @route GET /api/posts/:post_id
 // @desc Get Post by ID
 // @access  Private
 router.get("/:post_id", auth, async (req, res) => {
@@ -127,7 +127,7 @@ router.get("/:post_id", auth, async (req, res) => {
   }
 });
 
-// @route DELETE /posts/:post_id
+// @route DELETE /api/posts/:post_id
 // @desc Delete Post
 // @access  Private
 router.delete("/:post_id", auth, async (req, res) => {
@@ -153,7 +153,7 @@ router.delete("/:post_id", auth, async (req, res) => {
   }
 });
 
-// @route PUT /posts/:post_id/like
+// @route PUT /api/posts/:post_id/like
 // @desc Like a Post
 // @access  Private
 router.put("/:post_id/like", auth, async (req, res) => {
@@ -180,7 +180,7 @@ router.put("/:post_id/like", auth, async (req, res) => {
   }
 });
 
-// @route PUT /posts/:post_id/like
+// @route PUT /api/posts/:post_id/like
 // @desc Like a Post
 // @access  Private
 router.put("/:post_id/unlike", auth, async (req, res) => {
@@ -210,7 +210,7 @@ router.put("/:post_id/unlike", auth, async (req, res) => {
   }
 });
 
-// @route POST /posts/:post_id/comment
+// @route POST /api/posts/:post_id/comment
 // @desc Comment on a Post
 // @access  Private
 router.post(
@@ -257,7 +257,7 @@ router.post(
   }
 );
 
-// @route DELETE /posts/:post_id/comment
+// @route DELETE /api/posts/:post_id/comment
 // @desc Delete Comment
 // @access  Private
 router.delete("/:post_id/comments/:comment_id", auth, async (req, res) => {
