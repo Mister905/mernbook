@@ -125,7 +125,7 @@ router.get("/", auth, async (req, res) => {
 // @route GET /api/profiles/user/:user_id
 // @desc Get Profiles by User ID
 // @access  Public
-router.get("/user/:user_id", async (req, res) => {
+router.get("/user/:user_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id
@@ -145,11 +145,24 @@ router.get("/user/:user_id", async (req, res) => {
 // @route GET /api/profiles
 // @desc Delete Profile and Account
 // @access  Public
-router.delete("/", async (req, res) => {
+router.delete("/", auth, async (req, res) => {
   try {
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
     return res.send("Profile and Accounted Delete");
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
+// @route GET /api/profiles
+// @desc Get all profiles
+// @access  Public
+router.get("/", auth, async (req, res) => {
+  try {
+    const res = await Profile.find();
+    return res.send(res);
   } catch (error) {
     console.log(error.message);
     return res.status(500).send("Server Error");

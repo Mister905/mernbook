@@ -31,18 +31,17 @@ class Sidenav extends Component {
     if (this.state !== prevState) {
       const { width } = this.state;
       if (width <= 1466) {
-
       }
     }
-  }
+  };
 
   componentWillUnmount = () => {
     window.removeEventListener("resize", this.updateWindowDimensions);
-  }
+  };
 
   updateWindowDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
-  }
+  };
 
   handle_sidenav_click = e => {
     this.props.sidenav_click(e.target.name);
@@ -97,21 +96,6 @@ class Sidenav extends Component {
               <a
                 onClick={e => this.handle_sidenav_click(e)}
                 className={
-                  active_component === "posts"
-                    ? "waves-effect sidenav-link active-sidenav-link"
-                    : "waves-effect sidenav-link"
-                }
-                name="posts"
-              >
-                Posts
-              </a>
-            </li>
-          </div>
-          <div className="sidenav-section">
-            <li>
-              <a
-                onClick={e => this.handle_sidenav_click(e)}
-                className={
                   active_component === "experience"
                     ? "waves-effect sidenav-link active-sidenav-link"
                     : "waves-effect sidenav-link"
@@ -134,6 +118,21 @@ class Sidenav extends Component {
                 name="education"
               >
                 Education
+              </a>
+            </li>
+          </div>
+          <div className="sidenav-section">
+            <li>
+              <a
+                onClick={e => this.handle_sidenav_click(e)}
+                className={
+                  active_component === "profiles"
+                    ? "waves-effect sidenav-link active-sidenav-link"
+                    : "waves-effect sidenav-link"
+                }
+                name="profiles"
+              >
+                Profiles
               </a>
             </li>
           </div>

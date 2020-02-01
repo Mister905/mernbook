@@ -1,4 +1,4 @@
-import { GET_PROFILE, UPDATE_PROFILE, CLEAR_PROFILE } from "./types";
+import { GET_PROFILE, UPDATE_PROFILE, CLEAR_PROFILE, GET_PROFILES } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
 
@@ -7,6 +7,18 @@ export const get_profile = () => async dispatch => {
     const res = await axios.get("/api/profiles/active");
     dispatch({
       type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const get_profiles = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/profiles");
+    dispatch({
+      type: GET_PROFILES,
       payload: res.data
     });
   } catch (error) {
