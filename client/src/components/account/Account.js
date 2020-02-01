@@ -4,6 +4,10 @@ import { delete_account } from "../../actions/account";
 import { clear_profile } from "../../actions/profile";
 import { delete_account_experience } from "../../actions/experience";
 import { delete_account_education } from "../../actions/education";
+import { logout_user } from "../../actions/auth";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 
 class Account extends Component {
   componentDidMount() {
@@ -13,8 +17,9 @@ class Account extends Component {
   handle_delete_account = () => {
     this.props.delete_account_experience();
     this.props.delete_account_education();
-    this.props.delete_account();
     this.props.clear_profile();
+    this.props.delete_account();
+    this.props.logout_user(this.props.history);
   };
 
   render() {
@@ -27,7 +32,10 @@ class Account extends Component {
         </div>
         <div className="row">
           <div className="col m6 offset-m3 center-align">
-            <a className="btn modal-trigger red" data-target="mernbook-modal">
+            <a
+              className="btn modal-trigger red fw-600 btn-large"
+              data-target="mernbook-modal"
+            >
               <i className="material-icons right">delete</i>
               <span>Delete Account and Profile</span>
             </a>
@@ -62,4 +70,13 @@ class Account extends Component {
   }
 }
 
-export default Account;
+export default compose(
+  connect(null, {
+    delete_account_experience,
+    delete_account_education,
+    delete_account,
+    clear_profile,
+    logout_user
+  }),
+  withRouter
+)(Account);
