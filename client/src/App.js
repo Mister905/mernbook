@@ -20,6 +20,7 @@ import Sidenav from "./components/layout/sidenav/Sidenav";
 import UpdateProfileImage from "./components/profile/update_profile_image/UpdateProfileImage";
 import ViewExperience from "./components/profile/experience/view_experience/ViewExperience";
 import ViewEducation from "./components/profile/education/view_education/ViewEducation";
+import Account from "./components/account/Account";
 import PrivateRoute from "./components/private_route/PrivateRoute";
 
 class App extends Component {
@@ -83,8 +84,14 @@ class App extends Component {
 
             <PrivateRoute
               exact
-              path="/profile_image"
+              path="/profile-image"
               component={UpdateProfileImage}
+            />
+
+            <PrivateRoute
+              exact
+              path="/account"
+              component={Account}
             />
           </Switch>
         </BrowserRouter>

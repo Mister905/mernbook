@@ -174,4 +174,17 @@ router.delete("/:education_id", auth, async (req, res) => {
   }
 });
 
+// @route DELETE /api/education
+// @desc Delete account education
+// @access  Private
+router.delete("/", auth, async (req, res) => {
+  try {
+    await Education.remove({ user: req.user.id });
+    return res.send("Experience Deleted");
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

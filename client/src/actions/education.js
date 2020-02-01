@@ -3,7 +3,8 @@ import {
   GET_EDUCATION_ITEM,
   DELETE_EDUCATION_ITEM,
   UPDATE_EDUCATION_ITEM,
-  GET_EDUCATION
+  GET_EDUCATION,
+  ACCOUNT_EDUCATION_DELETED
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
@@ -106,5 +107,16 @@ export const delete_education = (
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Education Item"));
+  }
+};
+
+export const delete_account_education = history => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/education`);
+    dispatch({
+      type: ACCOUNT_EDUCATION_DELETED
+    });
+  } catch (error) {
+    console.log(error.message);
   }
 };

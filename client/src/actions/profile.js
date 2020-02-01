@@ -36,3 +36,9 @@ export const update_profile = (form_data, history) => async dispatch => {
     dispatch(create_alert("error", "Update Failed"));
   }
 };
+
+export const clear_profile = () => async dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  });
+};

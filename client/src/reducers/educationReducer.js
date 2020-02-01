@@ -4,7 +4,8 @@ import {
   GET_EDUCATION_ITEM,
   DELETE_EDUCATION_ITEM,
   UPDATE_EDUCATION_ITEM,
-  GET_EDUCATION
+  GET_EDUCATION,
+  ACCOUNT_EDUCATION_DELETED
 } from "../actions/types";
 
 const initial_state = {
@@ -52,7 +53,13 @@ export default function(state = initial_state, action) {
         loading_active_education: true,
         loading_education_list: true
       };
-
+    case ACCOUNT_EDUCATION_DELETED:
+      return {
+        education_list: [],
+        loading_education_list: true,
+        active_education_item: null,
+        loading_active_education: true
+      };
     default:
       return state;
   }

@@ -173,4 +173,17 @@ router.delete("/:experience_id", auth, async (req, res) => {
   }
 });
 
+// @route DELETE /api/experience
+// @desc Delete account experience
+// @access  Private
+router.delete("/", auth, async (req, res) => {
+  try {
+    await Experience.remove({ user: req.user.id });
+    return res.send("Experience Deleted");
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

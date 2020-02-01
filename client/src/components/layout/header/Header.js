@@ -22,10 +22,7 @@ class Header extends Component {
         <nav className="landing-nav">
           <div className="container">
             <div className="nav-wrapper">
-              <Link
-                className="brand-logo custom-brand-logo"
-                to={"/"}
-              >
+              <Link className="brand-logo custom-brand-logo" to={"/"}>
                 <img className="logo-nav" src={logo_nav} alt="" />
               </Link>
               {is_authenticated ? (
@@ -49,12 +46,12 @@ class Header extends Component {
                             </Link>
                           </li>
                           <li className="dropdown_submenu-item ">
-                            <a>
+                            <Link to={"/account"}>
                               <i className="material-icons left account-icon">
                                 settings
                               </i>
                               Account
-                            </a>
+                            </Link>
                           </li>
                           <li className="dropdown_submenu-item ">
                             <a onClick={this.handle_logout}>

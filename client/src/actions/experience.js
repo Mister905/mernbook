@@ -3,7 +3,8 @@ import {
   GET_EXPERIENCE_ITEM,
   DELETE_EXPERIENCE_ITEM,
   UPDATE_EXPERIENCE_ITEM,
-  GET_EXPERIENCE
+  GET_EXPERIENCE,
+  ACCOUNT_EXPERIENCE_DELETED
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
@@ -104,5 +105,16 @@ export const update_experience = (
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Update Experience Record"));
+  }
+};
+
+export const delete_account_experience = history => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/experience`);
+    dispatch({
+      type: ACCOUNT_EXPERIENCE_DELETED
+    });
+  } catch (error) {
+    console.log(error.message);
   }
 };
