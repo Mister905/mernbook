@@ -3,7 +3,6 @@ import {
   GET_EXPERIENCE_ITEM,
   DELETE_EXPERIENCE_ITEM,
   UPDATE_EXPERIENCE_ITEM,
-  CLEAR_ACTIVE_EXPERIENCE,
   GET_EXPERIENCE
 } from "./types";
 import axios from "axios";
@@ -31,11 +30,7 @@ export const create_experience = (form_data, history) => async dispatch => {
   let request_body = JSON.stringify(form_data);
 
   try {
-    const res = await axios.post(
-      "/api/experience",
-      request_body,
-      config
-    );
+    const res = await axios.post("/api/experience", request_body, config);
     dispatch({
       type: CREATE_EXPERIENCE,
       payload: res.data
@@ -50,9 +45,8 @@ export const create_experience = (form_data, history) => async dispatch => {
 
 export const get_experience_by_id = experience_item_id => async dispatch => {
   try {
-    const res = await axios.get(
-      `/api/profiles/experience/${experience_item_id}`
-    );
+    const res = await axios.get(`/api/experience/${experience_item_id}`);
+    console.log(res.data);
     dispatch({
       type: GET_EXPERIENCE_ITEM,
       payload: res.data
@@ -69,7 +63,7 @@ export const delete_experience = (
 ) => async dispatch => {
   try {
     const res = await axios.delete(
-      `/api/profiles/experience/${experience_item_id}`
+      `/api/experience/${experience_item_id}`
     );
     dispatch({
       type: DELETE_EXPERIENCE_ITEM,
@@ -97,7 +91,7 @@ export const update_experience = (
 
   try {
     const res = await axios.put(
-      `/api/profiles/experience/${experience_item_id}`,
+      `/api/experience/${experience_item_id}`,
       request_body,
       config
     );
@@ -107,23 +101,9 @@ export const update_experience = (
       payload: res.data
     });
 
-    // const updated_experience_id = res.data._id;
-
-    console.log(res.data);
-
-    // history.push(`/experience/${updated_experience_id}`);
+    history.push(`/experience/${experience_item_id}`);
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Update Experience Item"));
-  }
-};
-
-export const clear_active_experience = () => async dispatch => {
-  try {
-    dispatch({
-      type: CLEAR_ACTIVE_EXPERIENCE
-    });
-  } catch (error) {
-    console.log(error.message);
   }
 };

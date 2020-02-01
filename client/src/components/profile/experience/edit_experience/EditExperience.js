@@ -5,7 +5,6 @@ import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import {
   update_experience,
-  get_experience_by_id,
   delete_experience
 } from "../../../../actions/experience";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
@@ -26,7 +25,7 @@ class EditExperience extends Component {
 
   componentDidMount() {
     M.Modal.init(this.Modal, null);
-    const { is_current_job } = this.props.profile.active_experience_item;
+    const { is_current_job } = this.props.experience.active_experience_item;
     this.setState({
       is_current_job
     });
@@ -48,14 +47,14 @@ class EditExperience extends Component {
   };
 
   handle_delete_experience = () => {
-    const { _id } = this.props.profile.active_experience_item;
+    const { _id } = this.props.experience.active_experience_item;
     this.props.delete_experience(_id, this.props.history);
   };
 
   output_form = () => {
     const { values, errors } = this.props;
     const { is_current_job } = this.state;
-    const { _id } = this.props.profile.active_experience_item;
+    const { _id } = this.props.experience.active_experience_item;
 
     return (
       <div>
@@ -163,7 +162,7 @@ class EditExperience extends Component {
                       name="job_location"
                       field_name={"job_location"}
                       job_location={
-                        this.props.profile.active_experience_item.job_location
+                        this.props.experience.active_experience_item.job_location
                       }
                     />
                     {errors.job_location && (
@@ -189,7 +188,7 @@ class EditExperience extends Component {
                       name="from_date"
                       field_name={"from_date"}
                       from_date={
-                        this.props.profile.active_experience_item.from_date
+                        this.props.experience.active_experience_item.from_date
                       }
                     />
                     {errors.from_date && (
@@ -233,7 +232,7 @@ class EditExperience extends Component {
                         name="to_date"
                         field_name={"to_date"}
                         to_date={
-                          this.props.profile.active_experience_item.to_date
+                          this.props.experience.active_experience_item.to_date
                         }
                       />
                     </div>
@@ -275,7 +274,7 @@ class EditExperience extends Component {
   };
 
   render() {
-    const { loading_active_experience } = this.props.profile;
+    const { loading_active_experience } = this.props.experience;
     return (
       <div className="container mt-50">
         {loading_active_experience ? (
@@ -302,7 +301,7 @@ const FormikForm = withFormik({
       to_date,
       is_current_job,
       description
-    } = props.profile.active_experience_item;
+    } = props.experience.active_experience_item;
 
     return {
       title: title || "",
@@ -323,7 +322,8 @@ const FormikForm = withFormik({
   validateOnChange: false,
   enableReinitialize: true,
   handleSubmit: (values, props) => {
-    const experience_item_id = props.props.profile.active_experience_item._id;
+    const experience_item_id =
+      props.props.experience.active_experience_item._id;
 
     props.props.update_experience(
       experience_item_id,
@@ -334,13 +334,12 @@ const FormikForm = withFormik({
 })(EditExperience);
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  experience: state.experience
 });
 
 export default compose(
   connect(mapStateToProps, {
     update_experience,
-    get_experience_by_id,
     delete_experience
   }),
   withRouter

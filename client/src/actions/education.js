@@ -3,7 +3,6 @@ import {
   GET_EDUCATION_ITEM,
   DELETE_EDUCATION_ITEM,
   UPDATE_EDUCATION_ITEM,
-  CLEAR_ACTIVE_EDUCATION,
   GET_EDUCATION
 } from "./types";
 import axios from "axios";
@@ -12,7 +11,6 @@ import { create_alert } from "../actions/alert";
 export const get_education = () => async dispatch => {
   try {
     const res = await axios.get("/api/education");
-    console.log(res.data)
     dispatch({
       type: GET_EDUCATION,
       payload: res.data
@@ -32,11 +30,7 @@ export const create_education = (form_data, history) => async dispatch => {
   let request_body = JSON.stringify(form_data);
 
   try {
-    const res = await axios.post(
-      "/api/education",
-      request_body,
-      config
-    );
+    const res = await axios.post("/api/education", request_body, config);
     dispatch({
       type: CREATE_EDUCATION,
       payload: res.data
@@ -95,15 +89,5 @@ export const delete_education = (
   } catch (error) {
     console.log(error.message);
     dispatch(create_alert("error", "Failed to Delete Education Item"));
-  }
-};
-
-export const clear_active_education = () => async dispatch => {
-  try {
-    dispatch({
-      type: CLEAR_ACTIVE_EDUCATION
-    });
-  } catch (error) {
-    console.log(error.message);
   }
 };

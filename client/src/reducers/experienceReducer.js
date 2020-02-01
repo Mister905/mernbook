@@ -46,7 +46,8 @@ export default function(state = initial_state, action) {
     case UPDATE_EXPERIENCE_ITEM:
       return {
         ...state,
-        profile: payload
+        active_experience_item: payload,
+        loading_active_experience: false
       };
     default:
       return state;

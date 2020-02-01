@@ -10,8 +10,6 @@ class ViewExperience extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
 
-    const { active_experience_item } = this.props.profile;
-
     this.props.get_experience_by_id(id);
   }
 
@@ -25,7 +23,7 @@ class ViewExperience extends Component {
       to_date,
       is_current_job,
       description
-    } = this.props.profile.active_experience_item;
+    } = this.props.experience.active_experience_item;
 
     return (
       <div>
@@ -64,7 +62,7 @@ class ViewExperience extends Component {
   };
 
   render() {
-    const { loading_active_experience } = this.props.profile;
+    const { loading_active_experience } = this.props.experience;
     return (
       <div className="container mt-50">
         {loading_active_experience ? (
@@ -82,7 +80,7 @@ class ViewExperience extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  experience: state.experience
 });
 
 export default connect(mapStateToProps, {

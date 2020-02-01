@@ -129,11 +129,11 @@ router.put(
     const { experience_id } = req.params;
 
     try {
-      let updated_experience = await Profile.findOneAndUpdate(
-        { user: req.user.id, "experience._id": experience_id },
-        { $set: { "experience.$": experience_build } },
+      let updated_experience = await Experience.findOneAndUpdate(
+        { _id: experience_id },
+        { experience_build },
         { new: true }
-      ).populate("user", ["first_name", "last_name"], User);
+      );
 
       return res.send(updated_experience);
     } catch (error) {
@@ -148,17 +148,9 @@ router.put(
 // @access  Private
 router.get("/:experience_id", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
-
     const { experience_id } = req.params;
-
-    const experience_item = profile.experience.filter(item => {
-      if (item._id.toString() === experience_id) {
-        return item;
-      }
-    });
-
-    return res.send(experience_item[0]);
+    const experience = await Experience.findById(experience_id);
+    return res.send(experience);
   } catch (error) {
     console.log(error.message);
     return res.status(500).send("Server Error");
@@ -170,17 +162,9 @@ router.get("/:experience_id", auth, async (req, res) => {
 // @access  Private
 router.delete("/:experience_id", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
-
     const { experience_id } = req.params;
 
-    const deletion_index = profile.experience
-      .map(item => item.id)
-      .indexOf(experience_id);
-
-    profile.experience.splice(deletion_index, 1);
-
-    await profile.save();
+    await Experience.remove({ _id: experience_id });
 
     return res.send("Experience Deleted");
   } catch (error) {
