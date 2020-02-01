@@ -32,7 +32,7 @@ export const create_experience = (form_data, history) => async dispatch => {
 
   try {
     const res = await axios.post(
-      "/api/profiles/experience",
+      "/api/experience",
       request_body,
       config
     );

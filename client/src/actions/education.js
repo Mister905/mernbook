@@ -12,6 +12,7 @@ import { create_alert } from "../actions/alert";
 export const get_education = () => async dispatch => {
   try {
     const res = await axios.get("/api/education");
+    console.log(res.data)
     dispatch({
       type: GET_EDUCATION,
       payload: res.data
@@ -32,7 +33,7 @@ export const create_education = (form_data, history) => async dispatch => {
 
   try {
     const res = await axios.post(
-      "/api/profiles/education",
+      "/api/education",
       request_body,
       config
     );

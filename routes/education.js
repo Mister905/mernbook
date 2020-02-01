@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
-const Education = require("../models/Experience");
+const Education = require("../models/Education");
 const User = require("../models/User");
 
 // @route GET /api/education

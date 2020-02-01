@@ -5,7 +5,7 @@ import AutocompleteHelper from "react-google-autocomplete";
 
 class Autocomplete extends Component {
   state = {
-    current_value: null,
+    current_value: "",
     places_script_loading: true
   };
 
