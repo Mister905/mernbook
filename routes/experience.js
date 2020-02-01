@@ -9,19 +9,13 @@ const User = require("../models/User");
 // @desc Get experience
 // @access  Private
 router.get("/", auth, async (req, res) => {
-  // try {
-  //   const profile = await Profile.findOne({ user: req.user.id });
-  //   const { experience_id } = req.params;
-  //   const experience_item = profile.experience.filter(item => {
-  //     if (item._id.toString() === experience_id) {
-  //       return item;
-  //     }
-  //   });
-  //   return res.send(experience_item[0]);
-  // } catch (error) {
-  //   console.log(error.message);
-  //   return res.status(500).send("Server Error");
-  // }
+  try {
+    const experience = await Experience.find({ user: req.user.id });
+    return res.send(experience);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
 });
 
 // @route POST /api/experience

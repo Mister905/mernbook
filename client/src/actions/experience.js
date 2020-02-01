@@ -3,21 +3,22 @@ import {
   GET_EXPERIENCE_ITEM,
   DELETE_EXPERIENCE_ITEM,
   UPDATE_EXPERIENCE_ITEM,
-  CLEAR_ACTIVE_EXPERIENCE
+  CLEAR_ACTIVE_EXPERIENCE,
+  GET_EXPERIENCE
 } from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
 
 export const get_experience = () => async dispatch => {
-  // try {
-  //   const res = await axios.post("/profiles/experience", request_body, config);
-  //   dispatch({
-  //     type: CREATE_EXPERIENCE,
-  //     payload: res.data
-  //   });
-  // } catch (error) {
-  //   console.log(error.message);
-  // }
+  try {
+    const res = await axios.get("/api/experience");
+    dispatch({
+      type: GET_EXPERIENCE,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export const create_experience = (form_data, history) => async dispatch => {
@@ -30,7 +31,11 @@ export const create_experience = (form_data, history) => async dispatch => {
   let request_body = JSON.stringify(form_data);
 
   try {
-    const res = await axios.post("/api/profiles/experience", request_body, config);
+    const res = await axios.post(
+      "/api/profiles/experience",
+      request_body,
+      config
+    );
     dispatch({
       type: CREATE_EXPERIENCE,
       payload: res.data
@@ -45,7 +50,9 @@ export const create_experience = (form_data, history) => async dispatch => {
 
 export const get_experience_by_id = experience_item_id => async dispatch => {
   try {
-    const res = await axios.get(`/api/profiles/experience/${experience_item_id}`);
+    const res = await axios.get(
+      `/api/profiles/experience/${experience_item_id}`
+    );
     dispatch({
       type: GET_EXPERIENCE_ITEM,
       payload: res.data

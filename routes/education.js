@@ -5,6 +5,19 @@ const auth = require("../middleware/auth");
 const Education = require("../models/Experience");
 const User = require("../models/User");
 
+// @route GET /api/education
+// @desc Get education
+// @access  Private
+router.get("/", auth, async (req, res) => {
+  try {
+    const education = await Education.find({ user: req.user.id });
+    return res.send(education);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 // @route POST /api/education
 // @desc Create education
 // @access  Private
