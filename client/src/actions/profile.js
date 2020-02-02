@@ -1,4 +1,10 @@
-import { GET_PROFILE, UPDATE_PROFILE, CLEAR_PROFILE, GET_PROFILES } from "./types";
+import {
+  GET_PROFILE,
+  UPDATE_PROFILE,
+  CLEAR_PROFILE,
+  GET_PROFILES,
+  GET_PROFILE_BY_ID
+} from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
 
@@ -53,4 +59,16 @@ export const clear_profile = () => async dispatch => {
   dispatch({
     type: CLEAR_PROFILE
   });
+};
+
+export const get_profile_by_id = profile_id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/profiles/${profile_id}`);
+    dispatch({
+      type: GET_PROFILE_BY_ID,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };

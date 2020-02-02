@@ -161,8 +161,26 @@ router.delete("/", auth, async (req, res) => {
 // @access  Public
 router.get("/", auth, async (req, res) => {
   try {
-    const res = await Profile.find();
-    return res.send(res);
+    const profiles = await Profile.find();
+    return res.send(profiles);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
+// @route GET /api/profiles/:profile_id
+// @desc Get profile by ID
+// @access  Public
+router.get("/:profile_id", auth, async (req, res) => {
+  try {
+    const { profile_id } = req.params;
+    const profile = await Profile.findById(profile_id).populate(
+      "user",
+      ["first_name", "last_name"],
+      User
+    );
+    return res.send(profile);
   } catch (error) {
     console.log(error.message);
     return res.status(500).send("Server Error");

@@ -120,3 +120,15 @@ export const delete_account_education = history => async dispatch => {
     console.log(error.message);
   }
 };
+
+export const get_education_by_user_id = user_id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/education/${user_id}`);
+    dispatch({
+      type: GET_EDUCATION,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};

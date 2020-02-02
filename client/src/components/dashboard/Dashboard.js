@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { get_profile, get_profiles } from "../../actions/profile";
 import { get_experience } from "../../actions/experience";
 import { get_education } from "../../actions/education";
+import { reset_sidenav } from "../../actions/sidenav";
 import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
@@ -14,7 +15,8 @@ import {
   FaTwitterSquare,
   FaFacebookSquare,
   FaLinkedin,
-  FaInstagram
+  FaInstagram,
+  FaRProject
 } from "react-icons/fa";
 import Moment from "moment";
 
@@ -25,6 +27,10 @@ class Dashboard extends Component {
     this.props.get_experience();
     this.props.get_education();
   };
+
+  componentWillUnmount = () => {
+    this.props.reset_sidenav();
+  }
 
   display_dashboard_component = () => {
     const { active_component } = this.props.sidenav;
@@ -421,5 +427,6 @@ export default connect(mapStateToProps, {
   get_profile,
   get_experience,
   get_education,
-  get_profiles
+  get_profiles,
+  reset_sidenav
 })(Dashboard);

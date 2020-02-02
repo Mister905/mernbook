@@ -50,6 +50,8 @@ class Sidenav extends Component {
   render() {
     const { active_component } = this.props.sidenav;
 
+    const { browsing } = this.props;
+
     return (
       <div>
         <a
@@ -106,6 +108,7 @@ class Sidenav extends Component {
               </a>
             </li>
           </div>
+
           <div className="sidenav-section">
             <li>
               <a
@@ -121,21 +124,23 @@ class Sidenav extends Component {
               </a>
             </li>
           </div>
-          <div className="sidenav-section">
-            <li>
-              <a
-                onClick={e => this.handle_sidenav_click(e)}
-                className={
-                  active_component === "profiles"
-                    ? "waves-effect sidenav-link active-sidenav-link"
-                    : "waves-effect sidenav-link"
-                }
-                name="profiles"
-              >
-                Profiles
-              </a>
-            </li>
-          </div>
+          {!browsing && (
+            <div className="sidenav-section">
+              <li>
+                <a
+                  onClick={e => this.handle_sidenav_click(e)}
+                  className={
+                    active_component === "profiles"
+                      ? "waves-effect sidenav-link active-sidenav-link"
+                      : "waves-effect sidenav-link"
+                  }
+                  name="profiles"
+                >
+                  Profiles
+                </a>
+              </li>
+            </div>
+          )}
         </ul>
       </div>
     );

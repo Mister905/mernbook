@@ -187,4 +187,18 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
+// @route GET /api/education/:user_id
+// @desc Get education by user ID
+// @access  Private
+router.get("/:user_id", auth, async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const education = await Education.find({ user: user_id });
+    return res.send(education);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

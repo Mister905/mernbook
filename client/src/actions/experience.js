@@ -118,3 +118,15 @@ export const delete_account_experience = history => async dispatch => {
     console.log(error.message);
   }
 };
+
+export const get_experience_by_user_id = user_id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/experience/${user_id}`);
+    dispatch({
+      type: GET_EXPERIENCE,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
