@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { get_profile, get_profiles } from "../../actions/profile";
+import {
+  get_profile,
+  get_profiles,
+  clear_profile
+} from "../../actions/profile";
 import { get_experience } from "../../actions/experience";
 import { get_education } from "../../actions/education";
+import { get_posts } from "../../actions/post";
 import { reset_sidenav } from "../../actions/sidenav";
 import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
@@ -26,16 +31,20 @@ class Dashboard extends Component {
     this.props.get_profiles();
     this.props.get_experience();
     this.props.get_education();
+    this.props.get_posts();
   };
 
   componentWillUnmount = () => {
     this.props.reset_sidenav();
-  }
+    this.props.clear_profile();
+  };
 
   display_dashboard_component = () => {
     const { active_component } = this.props.sidenav;
 
     switch (active_component) {
+      case "news_feed":
+        return this.output_news_feed();
       case "profile":
         return this.output_profile();
       case "experience":
@@ -46,6 +55,39 @@ class Dashboard extends Component {
         return this.output_profile_list();
       default:
         break;
+    }
+  };
+
+  output_news_feed = () => {
+    const { loading_posts } = this.props.post;
+
+    if (loading_posts) {
+      return (
+        <div className="container mt-50">
+          <div className="row">
+            <div className="col m12 center-align">
+              <Loader />
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="container dashboard-container mt-50">
+          <div className="row valign-wrapper">
+            <div className="col m8 offset-m1 s8 offset-s2">
+              <div className="component-heading">
+                News Feed
+              </div>
+            </div>
+            <div className="col m1 right-align">
+              <Link to={"/post/create"} className="btn btn-mernbook">
+                <i className="material-icons">add</i>
+              </Link>
+            </div>
+          </div>
+        </div>
+      );
     }
   };
 
@@ -234,25 +276,26 @@ class Dashboard extends Component {
       );
     } else {
       const { profiles } = this.props.profile;
-
+      const active_profile_id = this.props.profile.profile._id;
       let profiles_output = null;
       if (profiles.length > 0) {
         profiles_output = profiles.map(profile => {
-          const { first_name, last_name } = profile.user;
-
-          return (
-            <div className="row" key={profile._id}>
-              <div className="col m12 s12 card">
-                <div className="card-content">
-                  <Link to={`/profile/${profile._id}`}>
-                    <span className="profile-title">
-                      {first_name} {last_name}
-                    </span>
-                  </Link>
+          if (profile._id !== active_profile_id) {
+            const { first_name, last_name } = profile.user;
+            return (
+              <div className="row" key={profile._id}>
+                <div className="col m12 s12 card">
+                  <div className="card-content">
+                    <Link to={`/profile/${profile._id}`}>
+                      <span className="profile-title">
+                        {first_name} {last_name}
+                      </span>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
+            );
+          }
         });
       } else {
         profiles_output = "No Profiles Found";
@@ -420,7 +463,8 @@ const mapStateToProps = state => ({
   auth: state.auth,
   sidenav: state.sidenav,
   experience: state.experience,
-  education: state.education
+  education: state.education,
+  post: state.post
 });
 
 export default connect(mapStateToProps, {
@@ -428,5 +472,7 @@ export default connect(mapStateToProps, {
   get_experience,
   get_education,
   get_profiles,
-  reset_sidenav
+  reset_sidenav,
+  clear_profile,
+  get_posts
 })(Dashboard);

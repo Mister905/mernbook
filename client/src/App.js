@@ -22,6 +22,7 @@ import ViewExperience from "./components/profile/experience/view_experience/View
 import ViewEducation from "./components/profile/education/view_education/ViewEducation";
 import Account from "./components/account/Account";
 import ViewProfile from "./components/profile/view_profile/ViewProfile";
+import CreatePost from "./components/post/create_post/CreatePost";
 import PrivateRoute from "./components/private_route/PrivateRoute";
 
 class App extends Component {
@@ -94,6 +95,8 @@ class App extends Component {
               path="/profile/:profile_id"
               component={ViewProfile}
             />
+
+            <PrivateRoute exact path="/post/create" component={CreatePost} />
 
             <PrivateRoute exact path="/account" component={Account} />
           </Switch>

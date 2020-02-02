@@ -26,9 +26,11 @@ class ViewProfile extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props.profile !== prevProps.profile) {
-      const { _id } = this.props.profile.profile.user;
-      this.props.get_experience_by_user_id(_id);
-      this.props.get_education_by_user_id(_id);
+      if (!this.props.profile.loading_profile) {
+        const { _id } = this.props.profile.profile.user;
+        this.props.get_experience_by_user_id(_id);
+        this.props.get_education_by_user_id(_id);
+      }
     }
   };
 

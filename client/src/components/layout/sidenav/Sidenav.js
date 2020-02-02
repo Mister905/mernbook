@@ -69,15 +69,34 @@ class Sidenav extends Component {
           className="sidenav sidenav-fixed custom-sidenav-fixed"
         >
           <li className="center-align">
-            <div className="sidenav-img-container">
+            {browsing ? (
               <img src={default_profile} alt="Avatar" className="image" />
-              <div className="sidenav-img-update-wrapper">
-                <Link to={"/profiles/image/update"}>
-                  <i className="material-icons add-photo-icon">add_a_photo</i>
-                </Link>
+            ) : (
+              <div className="sidenav-img-container">
+                <img src={default_profile} alt="Avatar" className="image" />
+                <div className="sidenav-img-update-wrapper">
+                  <Link to={"/profiles/image/update"}>
+                    <i className="material-icons add-photo-icon">add_a_photo</i>
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </li>
+          <div className="sidenav-section">
+            <li>
+              <a
+                onClick={e => this.handle_sidenav_click(e)}
+                className={
+                  active_component === "news_feed"
+                    ? "waves-effect sidenav-link active-sidenav-link"
+                    : "waves-effect sidenav-link"
+                }
+                name="news_feed"
+              >
+                News Feed
+              </a>
+            </li>
+          </div>
           <div className="sidenav-section">
             <li>
               <a

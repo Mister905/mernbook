@@ -32,8 +32,8 @@ app.use("/api/experience", experience);
 const education = require("./routes/education");
 app.use("/api/education", education);
 
-const posts = require("./routes/posts");
-app.use("/api/posts", posts);
+const post = require("./routes/post");
+app.use("/api/post", post);
 
 if (process.env.NODE_ENV === "production") {
   // Express serves production assets like main.js

@@ -6,7 +6,7 @@ const Post = require("../models/Post");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-// @route POST /api/posts
+// @route POST /api/post
 // @desc Create a Post
 // @access  Private
 router.post(
@@ -22,6 +22,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors)
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -37,8 +38,8 @@ router.post(
         text
       });
 
-      const post = await post_build.save();
-      return res.send(post);
+      const new_post = await post_build.save();
+      return res.send(new_post);
     } catch (error) {
       console.log(error.message);
       res.status(500).send("Server Error");
@@ -46,7 +47,7 @@ router.post(
   }
 );
 
-// @route PUT /api/posts/:post_id
+// @route PUT /api/post/:post_id
 // @desc Update Post
 // @access  Private
 router.put(
@@ -95,7 +96,7 @@ router.put(
   }
 );
 
-// @route GET /api/posts
+// @route GET /api/post
 // @desc Get All Posts
 // @access  Private
 router.get("/", auth, async (req, res) => {
@@ -108,7 +109,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// @route GET /api/posts/:post_id
+// @route GET /api/post/:post_id
 // @desc Get Post by ID
 // @access  Private
 router.get("/:post_id", auth, async (req, res) => {
@@ -127,7 +128,7 @@ router.get("/:post_id", auth, async (req, res) => {
   }
 });
 
-// @route DELETE /api/posts/:post_id
+// @route DELETE /api/post/:post_id
 // @desc Delete Post
 // @access  Private
 router.delete("/:post_id", auth, async (req, res) => {
@@ -153,7 +154,7 @@ router.delete("/:post_id", auth, async (req, res) => {
   }
 });
 
-// @route PUT /api/posts/:post_id/like
+// @route PUT /api/post/:post_id/like
 // @desc Like a Post
 // @access  Private
 router.put("/:post_id/like", auth, async (req, res) => {
@@ -180,7 +181,7 @@ router.put("/:post_id/like", auth, async (req, res) => {
   }
 });
 
-// @route PUT /api/posts/:post_id/like
+// @route PUT /api/post/:post_id/like
 // @desc Like a Post
 // @access  Private
 router.put("/:post_id/unlike", auth, async (req, res) => {
@@ -210,7 +211,7 @@ router.put("/:post_id/unlike", auth, async (req, res) => {
   }
 });
 
-// @route POST /api/posts/:post_id/comment
+// @route POST /api/post/:post_id/comment
 // @desc Comment on a Post
 // @access  Private
 router.post(
@@ -257,7 +258,7 @@ router.post(
   }
 );
 
-// @route DELETE /api/posts/:post_id/comment
+// @route DELETE /api/post/:post_id/comment
 // @desc Delete Comment
 // @access  Private
 router.delete("/:post_id/comments/:comment_id", auth, async (req, res) => {

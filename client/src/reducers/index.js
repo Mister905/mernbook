@@ -5,6 +5,7 @@ import profileReducer from "./profileReducer";
 import sidenavReducer from "./sidenavReducer";
 import experienceReducer from "./experienceReducer";
 import educationReducer from "./educationReducer";
+import postReducer from "./postReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   profile: profileReducer,
   sidenav: sidenavReducer,
   experience: experienceReducer,
-  education: educationReducer
+  education: educationReducer,
+  post: postReducer
 });
