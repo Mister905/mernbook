@@ -9,6 +9,7 @@ import { get_experience } from "../../actions/experience";
 import { get_education } from "../../actions/education";
 import { get_posts } from "../../actions/post";
 import { reset_sidenav } from "../../actions/sidenav";
+import { add_like, remove_like } from "../../actions/post";
 import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
@@ -72,19 +73,85 @@ class Dashboard extends Component {
         </div>
       );
     } else {
+      const { posts } = this.props.post;
+      let posts_output = null;
+      const active_user_id = this.props.auth.user._id;
+      if (posts.length > 0) {
+        posts_output = posts.map(post => {
+          return (
+            <div className="row" key={post._id}>
+              <div className="col m12 s12 card">
+                <div className="card-content">
+                  <div className="row">
+                    <div className="col m6">
+                      <div className="fw-600">
+                        {post.first_name} {post.last_name}
+                      </div>
+                      <div className="post-text">{post.text}</div>
+                    </div>
+                    <div className="col m6">
+                      <Link
+                        to={`/post/${post._id}`}
+                        className="btn btn-mernbook right btn-like flex"
+                      >
+                        <i className="material-icons">chat</i>
+                        {post.comments.length > 0 && (
+                          <span className="length-count">
+                            {post.comments.length}
+                          </span>
+                        )}
+                      </Link>
+                      {active_user_id === post.user && (
+                        <button className="btn right red">
+                          <i className="material-icons">delete</i>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col m12">
+                      <button
+                        onClick={e => this.props.add_like(post._id)}
+                        className="btn btn-mernbook right btn-like flex"
+                      >
+                        <i className="material-icons">thumb_up</i>
+                        {post.likes.length > 0 && (
+                          <span className="length-count">
+                            {post.likes.length}
+                          </span>
+                        )}
+                      </button>
+                      <button
+                        onClick={e => this.props.remove_like(post._id)}
+                        className="btn btn-mernbook right "
+                      >
+                        <i className="material-icons">thumb_down</i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        });
+      } else {
+        posts_output = "No posts found...";
+      }
+
       return (
         <div className="container dashboard-container mt-50">
           <div className="row valign-wrapper">
-            <div className="col m8 offset-m1 s8 offset-s2">
-              <div className="component-heading">
-                News Feed
-              </div>
+            <div className="col m8 offset-m1 s6 offset-s3">
+              <div className="component-heading">News Feed</div>
             </div>
             <div className="col m1 right-align">
-              <Link to={"/post/create"} className="btn btn-mernbook">
+              <Link to={"/education/create"} className="btn btn-mernbook">
                 <i className="material-icons">add</i>
               </Link>
             </div>
+          </div>
+          <div className="row">
+            <div className="col m9 offset-m1 s6 offset-s3">{posts_output}</div>
           </div>
         </div>
       );
@@ -474,5 +541,7 @@ export default connect(mapStateToProps, {
   get_profiles,
   reset_sidenav,
   clear_profile,
+  add_like,
+  remove_like,
   get_posts
 })(Dashboard);

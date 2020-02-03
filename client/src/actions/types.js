@@ -27,3 +27,4 @@ export const GET_PROFILE_BY_ID = "GET_PROFILE_BY_ID";
 export const RESET_SIDENAV = "RESET_SIDENAV";
 export const GET_POSTS = "GET_POSTS";
 export const CREATE_POST = "CREATE_POST";
+export const UPDATE_LIKES = "UPDATE_LIKES";
