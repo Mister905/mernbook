@@ -9,7 +9,7 @@ import { get_experience } from "../../actions/experience";
 import { get_education } from "../../actions/education";
 import { get_posts } from "../../actions/post";
 import { reset_sidenav } from "../../actions/sidenav";
-import { add_like, remove_like } from "../../actions/post";
+import { add_like, remove_like, delete_post } from "../../actions/post";
 import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
@@ -33,6 +33,7 @@ class Dashboard extends Component {
     this.props.get_experience();
     this.props.get_education();
     this.props.get_posts();
+    M.Modal.init(this.Modal, null);
   };
 
   componentWillUnmount = () => {
@@ -84,7 +85,7 @@ class Dashboard extends Component {
                 <div className="card-content">
                   <div className="row">
                     <div className="col m6">
-                      <div className="fw-600">
+                      <div className="fw-600 post-user">
                         {post.first_name} {post.last_name}
                       </div>
                       <div className="post-text">{post.text}</div>
@@ -101,11 +102,6 @@ class Dashboard extends Component {
                           </span>
                         )}
                       </Link>
-                      {active_user_id === post.user && (
-                        <button className="btn right red">
-                          <i className="material-icons">delete</i>
-                        </button>
-                      )}
                     </div>
                   </div>
                   <div className="row">
@@ -499,7 +495,7 @@ class Dashboard extends Component {
                 {first_name} {last_name}
               </div>
             </div>
-            <div className="col m1 right-align">
+            <div className="col m1">
               <Link to={"/education/create"} className="btn btn-mernbook">
                 <i className="material-icons">add</i>
               </Link>
@@ -543,5 +539,6 @@ export default connect(mapStateToProps, {
   clear_profile,
   add_like,
   remove_like,
-  get_posts
+  get_posts,
+  delete_post
 })(Dashboard);
