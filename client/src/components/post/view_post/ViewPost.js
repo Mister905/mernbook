@@ -20,6 +20,13 @@ class ViewPost extends Component {
       const post_id = this.props.post.post._id;
       this.props.get_comments(post_id);
     }
+
+    if (
+      this.props.comment.loading_comments !== prevProps.comment.loading_comments
+    ) {
+      const post_id = this.props.post.post._id;
+      this.props.get_comments(post_id);
+    }
   };
 
   handle_delete_post = post_id => {
@@ -28,6 +35,7 @@ class ViewPost extends Component {
 
   output_post = () => {
     const { post } = this.props.post;
+    const { comments } = this.props.comment;
     return (
       <div className="container mt-100">
         <div className="row">
@@ -44,37 +52,55 @@ class ViewPost extends Component {
               <div className="post-text">{post.text}</div>
             </div>
           </div>
+          {this.props.auth.user._id === this.props.post.post.user && (
+            <div className="col m2 offset-m1 center-align">
+              <a className="btn modal-trigger red" data-target="mernbook-modal">
+                <i className="material-icons">delete</i>
+              </a>
 
-          <div className="col m2 offset-m1 center-align">
-            <a className="btn modal-trigger red" data-target="mernbook-modal">
-              <i className="material-icons">delete</i>
-            </a>
-
-            <div
-              ref={Modal => {
-                this.Modal = Modal;
-              }}
-              id="mernbook-modal"
-              className="modal"
-            >
-              <div className="modal-content">
-                <h4>Warning</h4>
-                <p>Are you sure you want to delete this record?</p>
-              </div>
-              <div className="modal-footer">
-                <a className="modal-close btn btn-mernbook">
-                  <i className="material-icons">cancel</i>
-                </a>
-                <a
-                  onClick={e => this.handle_delete_post(post._id)}
-                  className="modal-close btn red btn-delete"
-                >
-                  <i className="material-icons">delete</i>
-                </a>
+              <div
+                ref={Modal => {
+                  this.Modal = Modal;
+                }}
+                id="mernbook-modal"
+                className="modal"
+              >
+                <div className="modal-content">
+                  <h4>Warning</h4>
+                  <p>Are you sure you want to delete this record?</p>
+                </div>
+                <div className="modal-footer">
+                  <a className="modal-close btn btn-mernbook">
+                    <i className="material-icons">cancel</i>
+                  </a>
+                  <a
+                    onClick={e => this.handle_delete_post(post._id)}
+                    className="modal-close btn red btn-delete"
+                  >
+                    <i className="material-icons">delete</i>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
+
+        {comments.length > 0 &&
+          comments.map(comment => {
+            return (
+              <div className="row" key={comment._id}>
+                <div className="col m6 offset-m3 card">
+                  <div className="card-content">
+                    <div className="post-user fw-600">
+                      {comment.first_name} {comment.last_name}
+                    </div>
+                    <div className="post-text">{comment.text}</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
         <div className="row">
           <div className="col m12">
             <CreateComment />
@@ -86,7 +112,8 @@ class ViewPost extends Component {
 
   render() {
     const { loading_post } = this.props.post;
-    if (loading_post) {
+    const { loading_comments } = this.props.comment;
+    if (loading_post || loading_comments) {
       return (
         <div className="container mt-100">
           <div className="row">
@@ -104,7 +131,8 @@ class ViewPost extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  post: state.post
+  post: state.post,
+  comment: state.comment
 });
 
 export default compose(

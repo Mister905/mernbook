@@ -20,7 +20,11 @@ export default function(state = initial_state, action) {
         comments: payload,
         loading_comments: false
       };
-
+      case COMMENT_CREATED:
+        return {
+          ...state,
+          loading_comments: true
+        }
     default:
       return state;
   }

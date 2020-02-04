@@ -36,7 +36,7 @@ class CreateComment extends Component {
 const FormikForm = withFormik({
   mapPropsToValues({ text }) {
     return {
-      post: text || ""
+      text: text || ""
     };
   },
   validationSchema: Yup.object().shape({
@@ -62,6 +62,10 @@ const FormikForm = withFormik({
     };
 
     props.props.create_comment(comment_data, props.props.history);
+
+    console.log(props)
+
+    props.resetForm();
   }
 })(CreateComment);
 

@@ -43,3 +43,7 @@ export const create_comment = (comment_data, history) => async dispatch => {
     dispatch(create_alert("error", "Failed to Post Comment"));
   }
 };
+
+export const delete_comment = (comment_id, history) => async dispatch => {
+  
+};

@@ -5,6 +5,7 @@ const auth = require("../middleware/auth");
 const Post = require("../models/Post");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 
 // @route POST /api/post
 // @desc Create a Post
@@ -144,6 +145,8 @@ router.delete("/:post_id", auth, async (req, res) => {
     if (post.user.toString() !== req.user.id) {
       return res.status(401).send("Unauthorized");
     }
+
+    await Comment.deleteMany({ post_id });
 
     await post.remove();
 
