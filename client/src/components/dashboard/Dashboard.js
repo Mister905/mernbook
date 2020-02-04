@@ -224,14 +224,14 @@ class Dashboard extends Component {
             <div className="col m9 offset-m1 s6 offset-s3">
               <div className="profile-subheading">Skills</div>
               {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
-              <ul className="comma-list">{skills_output}</ul>
+              <ul className="skills-list">{skills_output}</ul>
             </div>
           </div>
           <div className="row">
             <div className="col m9 offset-m1 s6 offset-s3">
               <div className="profile-subheading">Interests</div>
               {/* https://codepen.io/RobotsPlay/pen/zNQKmd */}
-              <ul className="comma-list">{interests_output}</ul>
+              <ul className="interests-list">{interests_output}</ul>
             </div>
           </div>
           <div className="row">

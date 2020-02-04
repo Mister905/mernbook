@@ -116,24 +116,34 @@ router.put(
       description
     } = req.body;
 
-    const experience_build = {
-      title,
-      company,
-      job_location,
-      from_date,
-      to_date,
-      is_current_job,
-      description
-    };
+    // const experience_build = {
+    //   title,
+    //   company,
+    //   job_location,
+    //   from_date,
+    //   to_date,
+    //   is_current_job,
+    //   description
+    // };
 
     const { experience_id } = req.params;
 
     try {
       let updated_experience = await Experience.findOneAndUpdate(
         { _id: experience_id },
-        { experience_build },
+        {
+          title,
+          company,
+          job_location,
+          from_date,
+          to_date,
+          is_current_job,
+          description
+        },
         { new: true }
       );
+
+      console.log(updated_experience);
 
       return res.send(updated_experience);
     } catch (error) {

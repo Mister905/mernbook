@@ -9,7 +9,6 @@ import Moment from "moment";
 class ViewExperience extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
-
     this.props.get_experience_by_id(id);
   }
 

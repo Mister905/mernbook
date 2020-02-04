@@ -18,6 +18,11 @@ import M from "materialize-css";
 import Loader from "../../layout/loader/Loader";
 
 class EditProfileForm extends Component {
+  componentDidMount = () => {
+    const biography = document.getElementById("biography");
+    M.textareaAutoResize(biography);
+  };
+
   render() {
     return (
       <div className="container mt-50">
@@ -119,6 +124,7 @@ class EditProfileForm extends Component {
                       id="biography"
                       name="biography"
                       className="materialize-textarea"
+                      innerRef={this.biography_textarea}
                     />
                   </div>
                 </div>

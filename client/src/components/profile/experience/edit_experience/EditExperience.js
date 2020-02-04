@@ -13,36 +13,24 @@ import M from "materialize-css";
 import * as Yup from "yup";
 import Loader from "../../../layout/loader/Loader";
 
-class EditExperience extends Component {
-  constructor(props) {
-    super(props);
-    this.description_textarea = React.createRef();
-  }
-
+class EditExperienceForm extends Component {
   state = {
     is_current_job: true
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
+    const description = document.getElementById("description");
+    M.textareaAutoResize(description);
     M.Modal.init(this.Modal, null);
-    const { is_current_job } = this.props.experience.active_experience_item;
+    const {
+      is_current_job
+    } = this.props.props.experience.active_experience_item;
     this.setState({
       is_current_job
     });
-  }
+  };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (
-      this.props.experience.active_experience_item !==
-      prevProps.experience.active_experience_item
-    ) {
-      try {
-        M.textareaAutoResize(this.Description.current);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
     const { setFieldValue } = this.props;
     if (this.state.is_current_job !== prevState.is_current_job) {
       setFieldValue("is_current_job", this.state.is_current_job);
@@ -56,17 +44,17 @@ class EditExperience extends Component {
   };
 
   handle_delete_experience = () => {
-    const { _id } = this.props.experience.active_experience_item;
-    this.props.delete_experience(_id, this.props.history);
+    const { _id } = this.props.props.experience.active_experience_item;
+    const { delete_experience, history } = this.props.props;
+    delete_experience(_id, history);
   };
 
-  output_form = () => {
+  render() {
     const { values, errors } = this.props;
     const { is_current_job } = this.state;
-    const { _id } = this.props.experience.active_experience_item;
-
+    const { _id } = this.props.props.experience.active_experience_item;
     return (
-      <div>
+      <div className="container mt-50">
         <div className="row valign-wrapper">
           <div className="col m2 center-align">
             <Link to={`/experience/${_id}`} className="btn btn-mernbook">
@@ -171,7 +159,7 @@ class EditExperience extends Component {
                       name="job_location"
                       field_name={"job_location"}
                       job_location={
-                        this.props.experience.active_experience_item
+                        this.props.props.experience.active_experience_item
                           .job_location
                       }
                     />
@@ -198,7 +186,8 @@ class EditExperience extends Component {
                       name="from_date"
                       field_name={"from_date"}
                       from_date={
-                        this.props.experience.active_experience_item.from_date
+                        this.props.props.experience.active_experience_item
+                          .from_date
                       }
                     />
                     {errors.from_date && (
@@ -242,7 +231,8 @@ class EditExperience extends Component {
                         name="to_date"
                         field_name={"to_date"}
                         to_date={
-                          this.props.experience.active_experience_item.to_date
+                          this.props.props.experience.active_experience_item
+                            .to_date
                         }
                       />
                     </div>
@@ -263,7 +253,6 @@ class EditExperience extends Component {
                       id="description"
                       name="description"
                       className="materialize-textarea"
-                      innerRef={this.description_textarea}
                     />
                   </div>
                 </div>
@@ -281,27 +270,10 @@ class EditExperience extends Component {
         </Form>
       </div>
     );
-  };
-
-  render() {
-    const { loading_active_experience } = this.props.experience;
-    return (
-      <div className="container mt-50">
-        {loading_active_experience ? (
-          <div className="row">
-            <div className="col m12 center-align">
-              <Loader />
-            </div>
-          </div>
-        ) : (
-          this.output_form()
-        )}
-      </div>
-    );
   }
 }
 
-const FormikForm = withFormik({
+const EditExperienceHOC = withFormik({
   mapPropsToValues: props => {
     const {
       title,
@@ -311,7 +283,7 @@ const FormikForm = withFormik({
       to_date,
       is_current_job,
       description
-    } = props.experience.active_experience_item;
+    } = props.props.experience.active_experience_item;
 
     return {
       title: title || "",
@@ -323,25 +295,94 @@ const FormikForm = withFormik({
       description: description || ""
     };
   },
-  validationSchema: Yup.object().shape({
-    title: Yup.string().required("Title is Required"),
-    company: Yup.string().required("Company is Required"),
-    from_date: Yup.string().required("From Date is Required")
-  }),
-  validateOnBlur: false,
-  validateOnChange: false,
-  enableReinitialize: true,
-  handleSubmit: (values, props) => {
-    const experience_item_id =
-      props.props.experience.active_experience_item._id;
 
-    props.props.update_experience(
-      experience_item_id,
-      values,
-      props.props.history
-    );
+  handleSubmit: (values, props) => {
+    const { update_experience, history } = props.props.props;
+
+    const experience_item_id =
+      props.props.props.experience.active_experience_item._id;
+
+    update_experience(experience_item_id, values, history);
   }
-})(EditExperience);
+})(EditExperienceForm);
+
+class EditExperience extends Component {
+  render() {
+    const { loading_active_experience } = this.props.experience;
+    if (loading_active_experience) {
+      return (
+        <div className="container mt-100">
+          <div className="row">
+            <div className="col m12 center-align">
+              <Loader />
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return <EditExperienceHOC props={this.props} />;
+    }
+  }
+}
+
+// render() {
+//   const { loading_active_experience } = this.props.experience;
+//   return (
+//     <div className="container mt-50">
+//       {loading_active_experience ? (
+//         <div className="row">
+//           <div className="col m12 center-align">
+//             <Loader />
+//           </div>
+//         </div>
+//       ) : (
+//         this.output_form()
+//       )}
+//     </div>
+//   );
+// }
+
+// const FormikForm = withFormik({
+//   mapPropsToValues: props => {
+//     const {
+//       title,
+//       company,
+//       job_location,
+//       from_date,
+//       to_date,
+//       is_current_job,
+//       description
+//     } = props.experience.active_experience_item;
+
+//     return {
+//       title: title || "",
+//       company: company || "",
+//       job_location: job_location || "",
+//       from_date: from_date || "",
+//       to_date: to_date || "",
+//       is_current_job: is_current_job || true,
+//       description: description || ""
+//     };
+//   },
+//   validationSchema: Yup.object().shape({
+//     title: Yup.string().required("Title is Required"),
+//     company: Yup.string().required("Company is Required"),
+//     from_date: Yup.string().required("From Date is Required")
+//   }),
+//   validateOnBlur: false,
+//   validateOnChange: false,
+//   enableReinitialize: true,
+//   handleSubmit: (values, props) => {
+//     const experience_item_id =
+//       props.props.experience.active_experience_item._id;
+
+//     props.props.update_experience(
+//       experience_item_id,
+//       values,
+//       props.props.history
+//     );
+//   }
+// })(EditExperience);
 
 const mapStateToProps = state => ({
   experience: state.experience
@@ -353,4 +394,4 @@ export default compose(
     delete_experience
   }),
   withRouter
-)(FormikForm);
+)(EditExperience);

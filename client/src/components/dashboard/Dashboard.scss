@@ -22,21 +22,6 @@
   }
 }
 
-@media (min-width: 800px) {
-  .comma-list {
-    list-style: square;
-    padding-left: 30px;
-    & > * {
-      display: block;
-      width: 33%;
-      float: left;
-      &:after {
-        content: "";
-      }
-    }
-  }
-}
-
 @media (max-width: 601px) {
   .social-media-col {
     text-align: center !important;
@@ -84,4 +69,14 @@
 
 .post-user {
   font-size: 1.2rem;
+}
+
+.skills-list, .interests-list {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  list-style-type: none;
+  li {
+    text-align: center;
+  }
 }
