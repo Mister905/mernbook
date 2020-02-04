@@ -46,10 +46,18 @@ class ViewPost extends Component {
           </div>
           <div className="col m6 offset-m1 card">
             <div className="card-content">
-              <div className="post-user fw-600">
-                {post.first_name} {post.last_name}
+              <div className="row">
+                <div className="col m12">
+                  <div className="post-user fw-600">
+                    {post.first_name} {post.last_name}
+                  </div>
+                </div>
               </div>
-              <div className="post-text">{post.text}</div>
+              <div className="row">
+                <div className="col m12">
+                  <div className="post-text">{post.text}</div>
+                </div>
+              </div>
             </div>
           </div>
           {this.props.auth.user._id === this.props.post.post.user && (
@@ -91,10 +99,26 @@ class ViewPost extends Component {
               <div className="row" key={comment._id}>
                 <div className="col m6 offset-m3 card">
                   <div className="card-content">
-                    <div className="post-user fw-600">
-                      {comment.first_name} {comment.last_name}
+                    <div className="row">
+                      <div className="col m6">
+                        <div className="post-user fw-600">
+                          {comment.first_name} {comment.last_name}
+                        </div>
+                      </div>
+                      <div className="col m6">
+                        <Link
+                          to={`/comment/${comment._id}`}
+                          className="btn btn-mernbook right"
+                        >
+                          <i className="material-icons">mode_edit</i>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="post-text">{comment.text}</div>
+                    <div className="row">
+                      <div className="col m12">
+                        <div className="post-text">{comment.text}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

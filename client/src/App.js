@@ -24,6 +24,7 @@ import Account from "./components/account/Account";
 import ViewProfile from "./components/profile/view_profile/ViewProfile";
 import CreatePost from "./components/post/create_post/CreatePost";
 import ViewPost from "./components/post/view_post/ViewPost";
+import EditComment from "./components/comment/edit_comment/EditComment";
 import PrivateRoute from "./components/private_route/PrivateRoute";
 
 class App extends Component {
@@ -100,6 +101,12 @@ class App extends Component {
             <PrivateRoute exact path="/post/create" component={CreatePost} />
 
             <PrivateRoute exact path="/post/:post_id" component={ViewPost} />
+
+            <PrivateRoute
+              exact
+              path="/comment/:comment_id"
+              component={EditComment}
+            />
 
             <PrivateRoute exact path="/account" component={Account} />
           </Switch>
