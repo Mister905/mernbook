@@ -19,6 +19,20 @@ router.get("/post/:post_id", auth, async (req, res) => {
   }
 });
 
+// @route GET /api/comment/:comment_id
+// @desc Get comment by ID
+// @access  Private
+router.get("/:comment_id", auth, async (req, res) => {
+  try {
+    const { comment_id } = req.params;
+    const comment = await Comment.findById(comment_id);
+    return res.send(comment);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 // @route POST /api/comment/post/:post_id
 // @desc Create a Comment
 // @access  Private
@@ -113,49 +127,6 @@ router.post(
 //   }
 // );
 
-// @route DELETE /api/post/:post_id/comment
-// @desc Delete Comment
-// @access  Private
-router.delete("/:post_id/comments/:comment_id", auth, async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
 
-  try {
-    const { post_id, comment_id } = req.params;
-    const post = await Post.findById(post_id);
-    if (!post) {
-      return res.status(404).send("Post Not Found");
-    }
-
-    let comment = post.comments.find(
-      comment => comment.id.toString() === comment_id
-    );
-
-    if (!comment) {
-      return res.status(404).send("Comment Not Found");
-    }
-
-    // Authorize
-    if (comment.user.toString() !== req.user.id) {
-      return res.status(401).send("Unauthorized");
-    }
-
-    const deletion_index = post.comments
-      .map(item => item.id)
-      .indexOf(comment_id);
-
-    post.comments.splice(deletion_index, 1);
-
-    await post.save();
-
-    return res.json(post.comments);
-    res.status(200).json(post);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send(" Server Error");
-  }
-});
 
 module.exports = router;

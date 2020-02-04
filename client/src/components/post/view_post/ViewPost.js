@@ -18,7 +18,9 @@ class ViewPost extends Component {
     M.Modal.init(this.Modal, null);
     if (this.props.post.post !== prevProps.post.post) {
       const post_id = this.props.post.post._id;
-      this.props.get_comments(post_id);
+      if (post_id) {
+        this.props.get_comments(post_id);
+      }
     }
 
     if (
