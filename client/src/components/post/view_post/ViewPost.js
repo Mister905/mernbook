@@ -107,7 +107,7 @@ class ViewPost extends Component {
                       </div>
                       <div className="col m6">
                         <Link
-                          to={`/comment/${comment._id}`}
+                          to={`/post/${post._id}/comment/${comment._id}`}
                           className="btn btn-mernbook right"
                         >
                           <i className="material-icons">mode_edit</i>

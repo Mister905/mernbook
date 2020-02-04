@@ -61,7 +61,6 @@ export default function(state = initial_state, action) {
       };
     case CLEAR_POSTS:
       return {
-        ...state,
         posts: [],
         post: {},
         loading_posts: true,

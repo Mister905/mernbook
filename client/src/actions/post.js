@@ -108,3 +108,13 @@ export const get_posts_by_user_id = user_id => async dispatch => {
     console.log(error);
   }
 };
+
+export const clear_posts = () => async dispatch => {
+  try {
+    dispatch({
+      type: CLEAR_POSTS
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

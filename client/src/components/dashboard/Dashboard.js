@@ -40,6 +40,7 @@ class Dashboard extends Component {
   componentWillUnmount = () => {
     this.props.reset_sidenav();
     this.props.clear_profile();
+    this.props.clear_posts();
   };
 
   display_dashboard_component = () => {
@@ -213,7 +214,7 @@ class Dashboard extends Component {
                 {first_name} {last_name}
               </div>
             </div>
-            <div className="col m1 right-align">
+            <div className="col m1">
               <Link to={"/edit-profile"} className="btn btn-mernbook">
                 <i className="material-icons">mode_edit</i>
               </Link>
@@ -537,5 +538,6 @@ export default connect(mapStateToProps, {
   add_like,
   remove_like,
   get_posts,
-  delete_post
+  delete_post,
+  clear_posts
 })(Dashboard);

@@ -104,7 +104,7 @@ class App extends Component {
 
             <PrivateRoute
               exact
-              path="/comment/:comment_id"
+              path="/post/:post_id/comment/:comment_id"
               component={EditComment}
             />
 
