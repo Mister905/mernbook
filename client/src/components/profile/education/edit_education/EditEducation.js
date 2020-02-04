@@ -4,9 +4,8 @@ import { compose } from "redux";
 import { withRouter, Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import {
-  get_active_education,
-  delete_education,
-  update_education
+  update_education,
+  delete_education
 } from "../../../../actions/education";
 import Autocomplete from "../../../helpers/autocomplete/Autocomplete";
 import Datepicker from "../../../helpers/datepicker/Datepicker";
@@ -14,34 +13,24 @@ import M from "materialize-css";
 import * as Yup from "yup";
 import Loader from "../../../layout/loader/Loader";
 
-class EditEducation extends Component {
-  constructor(props) {
-    super(props);
-    this.Description = React.createRef();
-  }
-
+class EditEducationForm extends Component {
   state = {
     is_current_study: true
   };
 
-  componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.get_active_education(id);
+  componentDidMount = () => {
+    const description = document.getElementById("description");
+    M.textareaAutoResize(description);
     M.Modal.init(this.Modal, null);
-  }
+    const {
+      is_current_study
+    } = this.props.props.education.active_education_item;
+    this.setState({
+      is_current_study
+    });
+  };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (
-      this.props.education.active_education_item !==
-      prevProps.education.active_education_item
-    ) {
-      try {
-        M.textareaAutoResize(this.Description.current);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
     const { setFieldValue } = this.props;
     if (this.state.is_current_study !== prevState.is_current_study) {
       setFieldValue("is_current_study", this.state.is_current_study);
@@ -55,18 +44,20 @@ class EditEducation extends Component {
   };
 
   handle_delete_education = () => {
-    const { _id } = this.props.education.active_education_item;
-    this.props.delete_education(_id, this.props.history);
+    const { _id } = this.props.props.education.active_education_item;
+    const { delete_education, history } = this.props.props;
+    delete_education(_id, history);
   };
 
   render() {
     const { values, errors } = this.props;
     const { is_current_study } = this.state;
+    const { _id } = this.props.props.education.active_education_item;
     return (
       <div className="container mt-50">
-        <div className="row">
+        <div className="row valign-wrapper">
           <div className="col m2 center-align">
-            <Link to={"/"} className="btn btn-mernbook">
+            <Link to={`/education/${_id}`} className="btn btn-mernbook">
               <i className="material-icons">arrow_back</i>
             </Link>
           </div>
@@ -74,7 +65,7 @@ class EditEducation extends Component {
             <div className="component-heading">Edit Education</div>
           </div>
           <div className="col m2 offset-m1 center-align">
-            <a className="btn red modal-trigger" data-target="mernbook-modal">
+            <a className="btn modal-trigger red" data-target="mernbook-modal">
               <i className="material-icons">delete</i>
             </a>
 
@@ -271,59 +262,57 @@ class EditEducation extends Component {
   }
 }
 
-const FormikForm = withFormik({
+const EditEducationHOC = withFormik({
   mapPropsToValues: props => {
-    const { loading_active_education } = props.education;
-    if (!loading_active_education) {
-      const {
-        institution,
-        credential,
-        field_of_study,
-        from_date,
-        to_date,
-        is_current_study,
-        description
-      } = props.education.active_education_item;
-      return {
-        institution: institution || "",
-        credential: credential || "",
-        field_of_study: field_of_study || "",
-        from_date: from_date || "",
-        to_date: to_date || "",
-        is_current_study: is_current_study || true,
-        description: description || ""
-      };
-    } else {
-      return {
-        institution: "",
-        credential: "",
-        field_of_study: "",
-        from_date: "",
-        to_date: "",
-        is_current_study: true,
-        description: ""
-      };
-    }
+    const {
+      institution,
+      credential,
+      field_of_study,
+      from_date,
+      to_date,
+      is_current_study,
+      description
+    } = props.props.education.active_education_item;
+
+    return {
+      institution: institution || "",
+      credential: credential || "",
+      field_of_study: field_of_study || "",
+      from_date: from_date || "",
+      to_date: to_date || "",
+      is_current_study: is_current_study || true,
+      description: description || ""
+    };
   },
 
-  validationSchema: Yup.object().shape({
-    institution: Yup.string().required("Institution is Required"),
-    credential: Yup.string().required("Credential is Required"),
-    from_date: Yup.string().required("From Date is Required")
-  }),
-  validateOnBlur: false,
-  validateOnChange: false,
-  enableReinitialize: true,
   handleSubmit: (values, props) => {
-    const education_item_id = props.props.education.active_education_item._id;
+    const { update_education, history } = props.props.props;
 
-    props.props.update_education(
-      education_item_id,
-      values,
-      props.props.history
-    );
+    const education_item_id =
+      props.props.props.education.active_education_item._id;
+
+    update_education(education_item_id, values, history);
   }
-})(EditEducation);
+})(EditEducationForm);
+
+class EditEducation extends Component {
+  render() {
+    const { loading_active_education } = this.props.education;
+    if (loading_active_education) {
+      return (
+        <div className="container mt-100">
+          <div className="row">
+            <div className="col m12 center-align">
+              <Loader />
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return <EditEducationHOC props={this.props} />;
+    }
+  }
+}
 
 const mapStateToProps = state => ({
   education: state.education
@@ -331,9 +320,8 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps, {
-    get_active_education,
-    delete_education,
-    update_education
+    update_education,
+    delete_education
   }),
   withRouter
-)(FormikForm);
+)(EditEducation);

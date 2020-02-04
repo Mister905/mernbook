@@ -26,7 +26,7 @@ class ViewEducation extends Component {
 
     return (
       <div>
-        <div className="row">
+        <div className="row valign-wrapper">
           <div className="col m2 center-align">
             <Link to={"/"} className="btn btn-mernbook">
               <i className="material-icons">arrow_back</i>

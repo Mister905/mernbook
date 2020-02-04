@@ -325,65 +325,6 @@ class EditExperience extends Component {
   }
 }
 
-// render() {
-//   const { loading_active_experience } = this.props.experience;
-//   return (
-//     <div className="container mt-50">
-//       {loading_active_experience ? (
-//         <div className="row">
-//           <div className="col m12 center-align">
-//             <Loader />
-//           </div>
-//         </div>
-//       ) : (
-//         this.output_form()
-//       )}
-//     </div>
-//   );
-// }
-
-// const FormikForm = withFormik({
-//   mapPropsToValues: props => {
-//     const {
-//       title,
-//       company,
-//       job_location,
-//       from_date,
-//       to_date,
-//       is_current_job,
-//       description
-//     } = props.experience.active_experience_item;
-
-//     return {
-//       title: title || "",
-//       company: company || "",
-//       job_location: job_location || "",
-//       from_date: from_date || "",
-//       to_date: to_date || "",
-//       is_current_job: is_current_job || true,
-//       description: description || ""
-//     };
-//   },
-//   validationSchema: Yup.object().shape({
-//     title: Yup.string().required("Title is Required"),
-//     company: Yup.string().required("Company is Required"),
-//     from_date: Yup.string().required("From Date is Required")
-//   }),
-//   validateOnBlur: false,
-//   validateOnChange: false,
-//   enableReinitialize: true,
-//   handleSubmit: (values, props) => {
-//     const experience_item_id =
-//       props.props.experience.active_experience_item._id;
-
-//     props.props.update_experience(
-//       experience_item_id,
-//       values,
-//       props.props.history
-//     );
-//   }
-// })(EditExperience);
-
 const mapStateToProps = state => ({
   experience: state.experience
 });

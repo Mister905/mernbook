@@ -118,22 +118,20 @@ router.put(
       description
     } = req.body;
 
-    const education_build = {
-      institution,
-      credential,
-      field_of_study,
-      from_date,
-      to_date,
-      is_current_study,
-      description
-    };
-
     const { education_id } = req.params;
 
     try {
       let updated_education = await Education.findOneAndUpdate(
         { _id: education_id },
-        { education_build },
+        {
+          institution,
+          credential,
+          field_of_study,
+          from_date,
+          to_date,
+          is_current_study,
+          description
+        },
         { new: true }
       );
       return res.send(updated_education);
