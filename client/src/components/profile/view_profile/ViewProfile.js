@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import { get_profile_by_id } from "../../../actions/profile";
 import { get_experience_by_user_id } from "../../../actions/experience";
 import { get_education_by_user_id } from "../../../actions/education";
+import { get_posts_by_user_id } from "../../../actions/post";
 import default_logo from "../../../assets/img/default_profile.png";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
 import Loader from "../../layout/loader/Loader";
 import Sidenav from "../../layout/sidenav/Sidenav";
+import CreatePost from "../../post/create_post/CreatePost";
 import { IconContext } from "react-icons";
 import {
   FaYoutubeSquare,
@@ -30,6 +32,7 @@ class ViewProfile extends Component {
         const { _id } = this.props.profile.profile.user;
         this.props.get_experience_by_user_id(_id);
         this.props.get_education_by_user_id(_id);
+        this.props.get_posts_by_user_id(_id);
       }
     }
   };
@@ -38,6 +41,8 @@ class ViewProfile extends Component {
     const { active_component } = this.props.sidenav;
 
     switch (active_component) {
+      case "news_feed":
+        return this.output_users_posts();
       case "profile":
         return this.output_profile();
       case "experience":
@@ -48,6 +53,95 @@ class ViewProfile extends Component {
         return this.output_profile_list();
       default:
         break;
+    }
+  };
+
+  output_users_posts = () => {
+    const { loading_posts } = this.props.post;
+    if (loading_posts) {
+      return (
+        <div className="container mt-50">
+          <div className="row">
+            <div className="col m12 center-align">
+              <Loader />
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      const { posts } = this.props.post;
+      let posts_output = null;
+      const active_user_id = this.props.auth.user._id;
+      if (posts.length > 0) {
+        posts_output = posts.map(post => {
+          return (
+            <div className="row" key={post._id}>
+              <div className="col m12 s12 card">
+                <div className="card-content">
+                  <div className="row">
+                    <div className="col m6">
+                      <div className="fw-600 post-user">
+                        {post.first_name} {post.last_name}
+                      </div>
+                      <div className="post-text">{post.text}</div>
+                    </div>
+                    <div className="col m6">
+                      <Link
+                        to={`/post/${post._id}`}
+                        className="btn btn-mernbook right btn-like flex"
+                      >
+                        <i className="material-icons">chat</i>
+                        {post.comments.length > 0 && (
+                          <span className="length-count">
+                            {post.comments.length}
+                          </span>
+                        )}
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col m12">
+                      <button
+                        onClick={e => this.props.add_like(post._id)}
+                        className="btn btn-mernbook right btn-like flex"
+                      >
+                        <i className="material-icons">thumb_up</i>
+                        {post.likes.length > 0 && (
+                          <span className="length-count">
+                            {post.likes.length}
+                          </span>
+                        )}
+                      </button>
+                      <button
+                        onClick={e => this.props.remove_like(post._id)}
+                        className="btn btn-mernbook right "
+                      >
+                        <i className="material-icons">thumb_down</i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        });
+      } else {
+        posts_output = "No posts found...";
+      }
+
+      return (
+        <div className="container dashboard-container mt-50">
+          <div className="row">
+            <div className="col m8 offset-m1 s6 offset-s3">
+              <div className="component-heading">News Feed</div>
+            </div>
+          </div>
+          <CreatePost />
+          <div className="row">
+            <div className="col m9 offset-m1 s6 offset-s3">{posts_output}</div>
+          </div>
+        </div>
+      );
     }
   };
 
@@ -222,7 +316,7 @@ class ViewProfile extends Component {
 
   output_profile_list = () => {
     const { loading_profiles } = this.props.profile;
-    const { first_name, last_name } = this.props.auth.user;
+    const { first_name, last_name } = this.props.profile.profile.user;
 
     if (loading_profiles) {
       return (
@@ -291,7 +385,7 @@ class ViewProfile extends Component {
         </div>
       );
     } else {
-      const { first_name, last_name } = this.props.auth.user;
+      const { first_name, last_name } = this.props.profile.profile.user;
       const { experience_list } = this.props.experience;
       let experience_output = null;
       if (experience_list.length > 0) {
@@ -355,7 +449,7 @@ class ViewProfile extends Component {
         </div>
       );
     } else {
-      const { first_name, last_name } = this.props.auth.user;
+      const { first_name, last_name } = this.props.profile.profile.user;
       const { education_list } = this.props.education;
       let education_output = null;
       if (education_list.length > 0) {
@@ -422,11 +516,13 @@ const mapStateToProps = state => ({
   auth: state.auth,
   sidenav: state.sidenav,
   experience: state.experience,
-  education: state.education
+  education: state.education,
+  post: state.post
 });
 
 export default connect(mapStateToProps, {
   get_profile_by_id,
   get_experience_by_user_id,
-  get_education_by_user_id
+  get_education_by_user_id,
+  get_posts_by_user_id
 })(ViewProfile);

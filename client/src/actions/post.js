@@ -1,4 +1,12 @@
-import { GET_POSTS, CREATE_POST, UPDATE_LIKES, DELETE_POST, GET_POST_BY_ID } from "./types";
+import {
+  GET_POSTS,
+  CREATE_POST,
+  UPDATE_LIKES,
+  DELETE_POST,
+  GET_POST_BY_ID,
+  GET_POSTS_BY_USER_ID,
+  CLEAR_POSTS
+} from "./types";
 import axios from "axios";
 import { create_alert } from "../actions/alert";
 
@@ -77,11 +85,23 @@ export const delete_post = (post_id, history) => async dispatch => {
   }
 };
 
-export const get_post_by_id = (post_id) => async dispatch => {
+export const get_post_by_id = post_id => async dispatch => {
   try {
     const res = await axios.get(`/api/post/${post_id}`);
     dispatch({
       type: GET_POST_BY_ID,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const get_posts_by_user_id = user_id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/post/user/${user_id}`);
+    dispatch({
+      type: GET_POSTS_BY_USER_ID,
       payload: res.data
     });
   } catch (error) {

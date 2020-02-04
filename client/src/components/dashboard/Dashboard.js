@@ -7,7 +7,7 @@ import {
 } from "../../actions/profile";
 import { get_experience } from "../../actions/experience";
 import { get_education } from "../../actions/education";
-import { get_posts } from "../../actions/post";
+import { get_posts, clear_posts } from "../../actions/post";
 import { reset_sidenav } from "../../actions/sidenav";
 import { add_like, remove_like, delete_post } from "../../actions/post";
 import default_logo from "../../assets/img/default_profile.png";
@@ -15,6 +15,7 @@ import M from "materialize-css";
 import { Link } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
 import Sidenav from "../layout/sidenav/Sidenav";
+import CreatePost from "../../components/post/create_post/CreatePost";
 import { IconContext } from "react-icons";
 import {
   FaYoutubeSquare,
@@ -136,16 +137,12 @@ class Dashboard extends Component {
 
       return (
         <div className="container dashboard-container mt-50">
-          <div className="row valign-wrapper">
+          <div className="row">
             <div className="col m8 offset-m1 s6 offset-s3">
               <div className="component-heading">News Feed</div>
             </div>
-            <div className="col m1 right-align">
-              <Link to={"/education/create"} className="btn btn-mernbook">
-                <i className="material-icons">add</i>
-              </Link>
-            </div>
           </div>
+          <CreatePost />
           <div className="row">
             <div className="col m9 offset-m1 s6 offset-s3">{posts_output}</div>
           </div>

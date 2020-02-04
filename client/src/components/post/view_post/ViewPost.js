@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { get_post_by_id, delete_post } from "../../../actions/post";
+import { get_comments } from "../../../actions/comment";
 import M from "materialize-css";
 import { withRouter, Link } from "react-router-dom";
 import Loader from "../../layout/loader/Loader";
+import CreateComment from "../../comment/create_comment/CreateComment";
 
 class ViewPost extends Component {
   componentDidMount = () => {
@@ -12,8 +14,12 @@ class ViewPost extends Component {
     this.props.get_post_by_id(post_id);
   };
 
-  componentDidUpdate = () => {
+  componentDidUpdate = prevProps => {
     M.Modal.init(this.Modal, null);
+    if (this.props.post.post !== prevProps.post.post) {
+      const post_id = this.props.post.post._id;
+      this.props.get_comments(post_id);
+    }
   };
 
   handle_delete_post = post_id => {
@@ -38,6 +44,7 @@ class ViewPost extends Component {
               <div className="post-text">{post.text}</div>
             </div>
           </div>
+
           <div className="col m2 offset-m1 center-align">
             <a className="btn modal-trigger red" data-target="mernbook-modal">
               <i className="material-icons">delete</i>
@@ -66,6 +73,11 @@ class ViewPost extends Component {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col m12">
+            <CreateComment />
           </div>
         </div>
       </div>
@@ -98,7 +110,8 @@ const mapStateToProps = state => ({
 export default compose(
   connect(mapStateToProps, {
     get_post_by_id,
-    delete_post
+    delete_post,
+    get_comments
   }),
   withRouter
 )(ViewPost);

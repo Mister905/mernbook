@@ -47,11 +47,26 @@ class Sidenav extends Component {
     this.props.sidenav_click(e.target.name);
   };
 
-  render() {
-    const { active_component } = this.props.sidenav;
-
+  render_news_feed_label = () => {
     const { browsing } = this.props;
 
+    const { loading_profile } = this.props.profile;
+
+    if (loading_profile) {
+      return "News Feed";
+    } else {
+      if (browsing) {
+        const { first_name, last_name } = this.props.profile.profile.user;
+        return `${first_name} ${last_name}`;
+      } else {
+        return "News Feed";
+      }
+    }
+  };
+
+  render() {
+    const { active_component } = this.props.sidenav;
+    const { browsing } = this.props;
     return (
       <div>
         <a
@@ -93,7 +108,7 @@ class Sidenav extends Component {
                 }
                 name="news_feed"
               >
-                News Feed
+                {this.render_news_feed_label()}
               </a>
             </li>
           </div>
@@ -167,7 +182,8 @@ class Sidenav extends Component {
 }
 
 const mapStateToProps = state => ({
-  sidenav: state.sidenav
+  sidenav: state.sidenav,
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, { sidenav_click })(Sidenav);

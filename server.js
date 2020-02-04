@@ -35,6 +35,9 @@ app.use("/api/education", education);
 const post = require("./routes/post");
 app.use("/api/post", post);
 
+const comment = require("./routes/comment");
+app.use("/api/comment", comment);
+
 if (process.env.NODE_ENV === "production") {
   // Express serves production assets like main.js
   app.use(express.static("client/build"));
