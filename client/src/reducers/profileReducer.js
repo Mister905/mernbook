@@ -52,7 +52,7 @@ export default function(state = initial_state, action) {
       return {
         ...state,
         profile: payload,
-        loading_profile: false
+        loading_profile: true
       };
     default:
       return state;

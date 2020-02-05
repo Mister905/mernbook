@@ -5,6 +5,7 @@ import default_profile from "../../../assets/img/default_profile.png";
 import { sidenav_click } from "../../../actions/sidenav";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import LoaderMini from "../loader_mini/LoaderMini";
 
 class Sidenav extends Component {
   state = {
@@ -23,25 +24,9 @@ class Sidenav extends Component {
     let instance = M.Sidenav.getInstance(this.Sidenav);
     instance.open();
 
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
+    // this.updateWindowDimensions();
+    // window.addEventListener("resize", this.updateWindowDimensions);
   }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    if (this.state !== prevState) {
-      const { width } = this.state;
-      if (width <= 1466) {
-      }
-    }
-  };
-
-  componentWillUnmount = () => {
-    window.removeEventListener("resize", this.updateWindowDimensions);
-  };
-
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-  };
 
   handle_sidenav_click = e => {
     this.props.sidenav_click(e.target.name);
@@ -64,9 +49,37 @@ class Sidenav extends Component {
     }
   };
 
+  render_profile_image = () => {
+    const { profile_image_id } = this.props.profile.profile;
+    if (this.props.browsing) {
+      return (
+        <img
+          className="responsive-img"
+          src={`/api/profile/profile_image/${profile_image_id}`}
+          alt="Profile Image"
+        />
+      );
+    } else {
+      return (
+        <div className="sidenav-img-container">
+          <img
+            className="responsive-img"
+            src={`/api/profile/profile_image/${profile_image_id}`}
+            alt="Profile Image"
+          />
+          <div className="sidenav-img-update-wrapper">
+            <Link to={"/profile/image/update"}>
+              <i className="material-icons add-photo-icon">add_a_photo</i>
+            </Link>
+          </div>
+        </div>
+      );
+    }
+  };
+
   render() {
     const { active_component } = this.props.sidenav;
-    const { browsing } = this.props;
+    const { loading_profile } = this.props.profile;
     return (
       <div>
         <a
@@ -84,18 +97,7 @@ class Sidenav extends Component {
           className="sidenav sidenav-fixed custom-sidenav-fixed"
         >
           <li className="center-align">
-            {browsing ? (
-              <img src={default_profile} alt="Avatar" className="image" />
-            ) : (
-              <div className="sidenav-img-container">
-                <img src={default_profile} alt="Avatar" className="image" />
-                <div className="sidenav-img-update-wrapper">
-                  <Link to={"/profile/image/update"}>
-                    <i className="material-icons add-photo-icon">add_a_photo</i>
-                  </Link>
-                </div>
-              </div>
-            )}
+            {loading_profile ? <LoaderMini /> : this.render_profile_image()}
           </li>
           <div className="sidenav-section">
             <li>
@@ -158,7 +160,7 @@ class Sidenav extends Component {
               </a>
             </li>
           </div>
-          {!browsing && (
+          {!this.props.browsing && (
             <div className="sidenav-section">
               <li>
                 <a

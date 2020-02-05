@@ -180,20 +180,6 @@ router.get("/:profile_id", auth, async (req, res) => {
   }
 });
 
-const conn = mongoose.createConnection(keys.mongo_uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-// init gfs
-let gfs;
-conn.once("open", () => {
-  // init stream
-  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
-    bucketName: "profile-images"
-  });
-});
-
 // Create storage engine
 const storage = new GridFsStorage({
   url: keys.mongo_uri,
@@ -216,9 +202,9 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-// @route POST /api/profile/
+// @route POST /api/profile/:profile_id/upload-profile-image/
 // @desc Upload Profile Image
-// @access
+// @access Private
 router.post(
   "/:profile_id/upload-profile-image",
   [auth, upload.single("profile_image")],
@@ -239,5 +225,42 @@ router.post(
     }
   }
 );
+
+const conn = mongoose.createConnection(keys.mongo_uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+// init gfs
+let gfs;
+conn.once("open", () => {
+  // init stream
+  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: "profile-images"
+  });
+});
+
+// @route GET /api/profile/profile_image/:profile_image_id
+// @desc Upload Profile Image
+// @access Private
+router.get("/profile_image/:profile_image_id", (req, res) => {
+
+  console.log('test')
+
+  let ObjectId = require("mongodb").ObjectID;
+
+  const file = gfs
+    .find({
+      _id: ObjectId(req.params.profile_image_id)
+    })
+    .toArray((err, files) => {
+      if (!files || files.length === 0) {
+        return res.status(404).json({
+          err: "no files exist"
+        });
+      }
+      gfs.openDownloadStream(ObjectId(req.params.profile_image_id)).pipe(res);
+    });
+});
 
 module.exports = router;

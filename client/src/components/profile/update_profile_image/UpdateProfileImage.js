@@ -10,6 +10,9 @@ import Loader from "../../layout/loader/Loader";
 class UpdateProfileImageForm extends Component {
   render() {
     const { values, errors, setFieldValue } = this.props;
+
+    const { profile_image_id } = this.props.props.profile.profile;
+
     return (
       <div className="container mt-50">
         <div className="row valign-wrapper">
@@ -35,9 +38,9 @@ class UpdateProfileImageForm extends Component {
                       Current Profile Image
                     </label>
                     <img
-                      src="//via.placeholder.com/350x150"
-                      alt=""
-                      className="placeholder responsive-img"
+                      className="responsive-img"
+                      src={`/api/profile/profile_image/${profile_image_id}`}
+                      alt="Current Profile Image"
                     />
                   </div>
                 </div>
