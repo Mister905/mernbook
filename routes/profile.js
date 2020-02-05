@@ -245,8 +245,6 @@ conn.once("open", () => {
 // @access Private
 router.get("/profile_image/:profile_image_id", (req, res) => {
 
-  console.log('test')
-
   let ObjectId = require("mongodb").ObjectID;
 
   const file = gfs

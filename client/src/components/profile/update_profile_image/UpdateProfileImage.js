@@ -54,7 +54,7 @@ class UpdateProfileImageForm extends Component {
                     >
                       Upload Profile Image
                     </label>
-                    <div className="file-field input-field col m8 offset-m2">
+                    <div className="file-field input-field col m12">
                       <div className="btn btn-mernbook">
                         <span>
                           <i className="material-icons">add_a_photo</i>
