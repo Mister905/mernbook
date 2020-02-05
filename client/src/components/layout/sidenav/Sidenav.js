@@ -90,7 +90,7 @@ class Sidenav extends Component {
               <div className="sidenav-img-container">
                 <img src={default_profile} alt="Avatar" className="image" />
                 <div className="sidenav-img-update-wrapper">
-                  <Link to={"/profiles/image/update"}>
+                  <Link to={"/profile/image/update"}>
                     <i className="material-icons add-photo-icon">add_a_photo</i>
                   </Link>
                 </div>

@@ -47,7 +47,9 @@ const ProfileSchema = new mongoose.Schema({
       default: "https://www.instagram.com/"
     }
   },
-  profile_image_id: String,
+  profile_image_id:{
+    type: String
+  },
   created_on: {
     type: Date,
     default: Date.now()

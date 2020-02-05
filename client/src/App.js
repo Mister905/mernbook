@@ -88,7 +88,7 @@ class App extends Component {
 
             <PrivateRoute
               exact
-              path="/profile-image"
+              path="/profile/image/update"
               component={UpdateProfileImage}
             />
 

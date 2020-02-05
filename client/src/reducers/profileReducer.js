@@ -3,7 +3,8 @@ import {
   UPDATE_PROFILE,
   CLEAR_PROFILE,
   GET_PROFILES,
-  GET_PROFILE_BY_ID
+  GET_PROFILE_BY_ID,
+  UPLOAD_PROFILE_IMAGE
 } from "../actions/types";
 
 const initial_state = {
@@ -42,6 +43,12 @@ export default function(state = initial_state, action) {
         loading_profiles: false
       };
     case GET_PROFILE_BY_ID:
+      return {
+        ...state,
+        profile: payload,
+        loading_profile: false
+      };
+    case UPLOAD_PROFILE_IMAGE:
       return {
         ...state,
         profile: payload,

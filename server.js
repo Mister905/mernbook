@@ -23,8 +23,8 @@ mongoose
 const auth = require("./routes/auth");
 app.use("/api/auth", auth);
 
-const profiles = require("./routes/profiles");
-app.use("/api/profiles", profiles);
+const profiles = require("./routes/profile");
+app.use("/api/profile", profiles);
 
 const experience = require("./routes/experience");
 app.use("/api/experience", experience);
