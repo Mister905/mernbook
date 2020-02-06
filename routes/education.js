@@ -10,7 +10,9 @@ const User = require("../models/User");
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
-    const education = await Education.find({ user: req.user.id });
+    const education = await Education.find({ user: req.user.id }).sort({
+      from_date: -1
+    });
     return res.send(education);
   } catch (error) {
     console.log(error.message);
@@ -191,7 +193,9 @@ router.delete("/", auth, async (req, res) => {
 router.get("/:user_id", auth, async (req, res) => {
   const { user_id } = req.params;
   try {
-    const education = await Education.find({ user: user_id });
+    const education = await Education.find({ user: user_id }).sort({
+      from_date: -1
+    });
     return res.send(education);
   } catch (error) {
     console.log(error.message);

@@ -10,7 +10,9 @@ const User = require("../models/User");
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
-    const experience = await Experience.find({ user: req.user.id });
+    const experience = await Experience.find({ user: req.user.id }).sort({
+      from_date: -1
+    });
     return res.send(experience);
   } catch (error) {
     console.log(error.message);
@@ -116,16 +118,6 @@ router.put(
       description
     } = req.body;
 
-    // const experience_build = {
-    //   title,
-    //   company,
-    //   job_location,
-    //   from_date,
-    //   to_date,
-    //   is_current_job,
-    //   description
-    // };
-
     const { experience_id } = req.params;
 
     try {
@@ -202,7 +194,9 @@ router.delete("/", auth, async (req, res) => {
 router.get("/:user_id", auth, async (req, res) => {
   const { user_id } = req.params;
   try {
-    const experience = await Experience.find({ user: user_id });
+    const experience = await Experience.find({ user: user_id }).sort({
+      from_date: -1
+    });
     return res.send(experience);
   } catch (error) {
     console.log(error.message);

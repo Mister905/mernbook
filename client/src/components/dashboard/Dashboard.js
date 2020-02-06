@@ -8,7 +8,6 @@ import {
 import { get_experience } from "../../actions/experience";
 import { get_education } from "../../actions/education";
 import { get_posts, clear_posts } from "../../actions/post";
-import { reset_sidenav } from "../../actions/sidenav";
 import { add_like, remove_like, delete_post } from "../../actions/post";
 import default_logo from "../../assets/img/default_profile.png";
 import M from "materialize-css";
@@ -38,7 +37,6 @@ class Dashboard extends Component {
   };
 
   componentWillUnmount = () => {
-    this.props.reset_sidenav();
     this.props.clear_profile();
     this.props.clear_posts();
   };
@@ -471,7 +469,7 @@ class Dashboard extends Component {
                 <div className="company">{item.credential}</div>
                 <div className="job-location">{item.field_of_study}</div>
                 <div className="description">{item.description}</div>
-                <div className="era right">
+                <div className="era right fw-600">
                   {Moment(item.from_date).format("YYYY")} -
                   {item.to_date
                     ? Moment(item.to_date).format(" YYYY")
@@ -533,7 +531,6 @@ export default connect(mapStateToProps, {
   get_experience,
   get_education,
   get_profiles,
-  reset_sidenav,
   clear_profile,
   add_like,
   remove_like,
