@@ -5,6 +5,7 @@ import { clear_profile } from "../../actions/profile";
 import { delete_account_experience } from "../../actions/experience";
 import { delete_account_education } from "../../actions/education";
 import { logout_user } from "../../actions/auth";
+import { reset_sidenav } from "../../actions/sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -19,6 +20,7 @@ class Account extends Component {
     this.props.delete_account_education();
     this.props.clear_profile();
     this.props.delete_account();
+    this.props.reset_sidenav();
     this.props.logout_user(this.props.history);
   };
 
@@ -76,7 +78,8 @@ export default compose(
     delete_account_education,
     delete_account,
     clear_profile,
-    logout_user
+    logout_user,
+    reset_sidenav
   }),
   withRouter
 )(Account);
