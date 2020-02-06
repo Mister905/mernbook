@@ -85,7 +85,7 @@ class Dashboard extends Component {
               <div className="col m12 s12 card">
                 <div className="card-content">
                   <div className="row">
-                    <div className="col m6">
+                    <div className="col m9">
                       <div className="fw-600 post-user">
                         {post.first_name} {post.last_name}
                       </div>
