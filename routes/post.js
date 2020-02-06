@@ -215,12 +215,12 @@ router.put("/:post_id/unlike", auth, async (req, res) => {
 });
 
 // @route GET /api/post/user/:user_id
-// @desc Get Post by ID
+// @desc Get Posts by User
 // @access  Private
 router.get("/user/:user_id", auth, async (req, res) => {
   const { user_id } = req.params;
   try {
-    const posts = await Post.find({ user: user_id });
+    const posts = await Post.find({ user: user_id }).sort({ created: -1 });
 
     if (!posts) {
       return res.status(404).send("Post Not Found");
