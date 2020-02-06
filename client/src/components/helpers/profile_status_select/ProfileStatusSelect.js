@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import M from "materialize-css";
 
 class ProfileStatusSelect extends Component {
   state = {
-    selected_status: "I'd Rather Not Say"
+    selected_status: ""
   };
 
   componentDidMount = () => {
     M.FormSelect.init(this.FormSelect);
-    const { setFieldValue } = this.props.form;
-    setFieldValue("status", this.state.selected_status);
+    const { status } = this.props.profile.profile;
+    this.setState({
+      selected_status: status
+    });
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -31,8 +34,9 @@ class ProfileStatusSelect extends Component {
           this.FormSelect = FormSelect;
         }}
         onChange={this.handle_change}
+        value={this.props.profile.profile.status}
       >
-        <option value="0" disabled defaultValue>
+        <option value="0" disabled>
           Choose your option
         </option>
         <option value="I'd Rather Not Say">I'd Rather Not Say</option>
@@ -54,4 +58,8 @@ class ProfileStatusSelect extends Component {
   }
 }
 
-export default ProfileStatusSelect;
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
+export default connect(mapStateToProps)(ProfileStatusSelect);

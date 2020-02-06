@@ -56,6 +56,8 @@ router.put("/update", auth, async (req, res) => {
     profile_build.user_location = user_location;
   }
 
+  profile_build.status = status;
+
   if (skills.length > 0) {
     profile_build.skills = skills.split(",").map(skill => skill.trim());
   } else {
@@ -74,18 +76,18 @@ router.put("/update", auth, async (req, res) => {
     profile_build.biography = biography;
   }
 
-  profile_build.social = {};
+  profile_build.social_media = {};
 
-  if (youtube) profile_build.youtube = youtube;
-  if (twitter) profile_build.twitter = twitter;
-  if (facebook) profile_build.facebook = facebook;
-  if (linkedin) profile_build.linkedin = linkedin;
-  if (instagram) profile_build.instagram = instagram;
+  if (youtube) profile_build.social_media.youtube = youtube;
+  if (twitter) profile_build.social_media.twitter = twitter;
+  if (facebook) profile_build.social_media.facebook = facebook;
+  if (linkedin) profile_build.social_media.linkedin = linkedin;
+  if (instagram) profile_build.social_media.instagram = instagram;
 
   try {
     let profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
-      profile_build,
+      { $set: profile_build },
       { new: true }
     );
     return res.send(profile);

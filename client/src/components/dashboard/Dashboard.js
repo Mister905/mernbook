@@ -202,7 +202,7 @@ class Dashboard extends Component {
         interests_output = "You haven't defined any interests";
       }
 
-      const { biography } = this.props.profile.profile;
+      const { biography, status } = this.props.profile.profile;
 
       return (
         <div className="container dashboard-container mt-50">
@@ -239,6 +239,16 @@ class Dashboard extends Component {
                 <p>{biography}</p>
               ) : (
                 <p>You haven't created your biography</p>
+              )}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col m9 offset-m1 s6 offset-s3">
+              <div className="profile-subheading">Romantic Status</div>
+              {status ? (
+                <p>{status}</p>
+              ) : (
+                <p>You haven't defined your romantic status</p>
               )}
             </div>
           </div>
