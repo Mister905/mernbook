@@ -30,10 +30,10 @@ class UpdateProfileImageForm extends Component {
             <div className="col m10 offset-m1">
               <div className="row">
                 <div className="col m6 offset-m3">
-                  <div className="custom-input-field">
+                  <div className="custom-input-field center-align">
                     <label
                       htmlFor="current_profile_image"
-                      className="custom-label mernbook-blue-text"
+                      className="custom-label mernbook-blue-text current-profile-label"
                     >
                       Current Profile Image
                     </label>

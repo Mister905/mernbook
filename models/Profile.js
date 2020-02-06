@@ -49,7 +49,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   profile_image_id: {
     type: String,
-    default: "5e3b22f25c270b003461a390"
+    default: "5e3c2cf8e8fe360034605d25"
   },
   created_on: {
     type: Date,
