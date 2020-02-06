@@ -2,6 +2,7 @@ import { LOGIN_USER, USER_LOADED, LOGOUT_USER, AUTH_ERROR } from "./types";
 import axios from "axios";
 import set_auth_token from "../utils/set_auth_token";
 import { create_alert } from "../actions/alert";
+import { reset_sidenav } from "../actions/sidenav";
 
 export const load_user = () => async dispatch => {
   if (localStorage.token) {
@@ -65,5 +66,6 @@ export const login_user = (form_data, history) => async dispatch => {
 
 export const logout_user = history => async dispatch => {
   dispatch({ type: LOGOUT_USER });
+  dispatch(reset_sidenav());
   history.push("/");
 };
