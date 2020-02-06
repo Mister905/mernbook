@@ -351,15 +351,25 @@ class Dashboard extends Component {
         profiles_output = profiles.map(profile => {
           if (profile._id !== active_profile_id) {
             const { first_name, last_name } = profile.user;
+            const { profile_image_id } = this.props.profile.profile;
             return (
               <div className="row" key={profile._id}>
-                <div className="col m12 s12 card">
-                  <div className="card-content">
-                    <Link to={`/profile/${profile._id}`}>
-                      <span className="profile-title">
-                        {first_name} {last_name}
-                      </span>
-                    </Link>
+                <div class="col s12 m10">
+                  <div class="card-panel grey lighten-5 z-depth-1">
+                    <div class="row valign-wrapper">
+                      <div class="col s2 m2">
+                        <img
+                          src={`/api/profile/profile_image/${profile_image_id}`}
+                          alt=""
+                          class="circle responsive-img"
+                        />
+                      </div>
+                      <div class="col s10 m10 offset-m1">
+                        <span class="profile-list-heading fw-600">
+                          {first_name} {last_name}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -474,7 +484,9 @@ class Dashboard extends Component {
             <div className="col m12 s12 card">
               <div className="card-content">
                 <Link to={`/education/${item._id}`}>
-                  <span className="profile-title card-title">{item.institution}</span>
+                  <span className="profile-title card-title">
+                    {item.institution}
+                  </span>
                 </Link>
                 <div className="company">{item.credential}</div>
                 <div className="job-location">{item.field_of_study}</div>
