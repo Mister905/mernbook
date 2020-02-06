@@ -351,21 +351,21 @@ class Dashboard extends Component {
         profiles_output = profiles.map(profile => {
           if (profile._id !== active_profile_id) {
             const { first_name, last_name } = profile.user;
-            const { profile_image_id } = this.props.profile.profile;
+            const { profile_image_id } = profile;
             return (
               <div className="row" key={profile._id}>
-                <div class="col s12 m10">
-                  <div class="card-panel grey lighten-5 z-depth-1">
-                    <div class="row valign-wrapper">
-                      <div class="col s2 m2">
+                <div className="col s12 m10">
+                  <div className="card-panel grey lighten-5 z-depth-1">
+                    <div className="row valign-wrapper">
+                      <div className="col s2 m2">
                         <img
                           src={`/api/profile/profile_image/${profile_image_id}`}
                           alt=""
-                          class="circle responsive-img"
+                          className="circle responsive-img"
                         />
                       </div>
-                      <div class="col s10 m10 offset-m1">
-                        <span class="profile-list-heading fw-600">
+                      <div className="col s10 m10 offset-m1">
+                        <span className="profile-list-heading fw-600">
                           {first_name} {last_name}
                         </span>
                       </div>
