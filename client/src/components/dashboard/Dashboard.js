@@ -79,6 +79,7 @@ class Dashboard extends Component {
       const active_user_id = this.props.auth.user._id;
       if (posts.length > 0) {
         posts_output = posts.map(post => {
+          console.log(post);
           return (
             <div className="row" key={post._id}>
               <div className="col m12 s12 card">
@@ -96,11 +97,6 @@ class Dashboard extends Component {
                         className="btn btn-mernbook right btn-like flex"
                       >
                         <i className="material-icons">chat</i>
-                        {post.comments.length > 0 && (
-                          <span className="length-count">
-                            {post.comments.length}
-                          </span>
-                        )}
                       </Link>
                     </div>
                   </div>
