@@ -9,6 +9,8 @@ class Datepicker extends Component {
 
     let default_date = null;
 
+    console.log(this.props)
+
     if (field_name === "from_date") {
       default_date = Moment(this.props.from_date).toDate();
       setFieldValue(field_name, Moment(this.props.from_date).toDate());
@@ -21,7 +23,7 @@ class Datepicker extends Component {
       autoClose: true,
       defaultDate: default_date,
       setDefaultDate: true,
-      yearRange: [1920, 2025],
+      yearRange: [1940, 2025],
       onSelect: date => {
         setFieldValue(field_name, date);
       }

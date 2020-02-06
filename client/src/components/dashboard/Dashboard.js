@@ -347,7 +347,7 @@ class Dashboard extends Component {
       const { profiles } = this.props.profile;
       const active_profile_id = this.props.profile.profile._id;
       let profiles_output = null;
-      if (profiles.length > 0) {
+      if (profiles.length > 1) {
         profiles_output = profiles.map(profile => {
           if (profile._id !== active_profile_id) {
             const { first_name, last_name } = profile.user;
@@ -410,7 +410,7 @@ class Dashboard extends Component {
             <div className="col m12 s12 card">
               <div className="card-content">
                 <Link to={`/experience/${item._id}`}>
-                  <span className="profile-title">{item.title}</span>
+                  <span className="profile-title card-title">{item.title}</span>
                 </Link>
                 <div className="company">{item.company}</div>
                 <div className="job-location">{item.job_location}</div>
@@ -474,7 +474,7 @@ class Dashboard extends Component {
             <div className="col m12 s12 card">
               <div className="card-content">
                 <Link to={`/education/${item._id}`}>
-                  <span className="profile-title">{item.institution}</span>
+                  <span className="profile-title card-title">{item.institution}</span>
                 </Link>
                 <div className="company">{item.credential}</div>
                 <div className="job-location">{item.field_of_study}</div>

@@ -181,6 +181,10 @@ class EditEducationForm extends Component {
                       id="from_date"
                       name="from_date"
                       field_name={"from_date"}
+                      from_date={
+                        this.props.props.education.active_education_item
+                          .from_date
+                      }
                     />
                     {errors.from_date && (
                       <span className="custom-helper-error">
@@ -222,6 +226,10 @@ class EditEducationForm extends Component {
                         id="to_date"
                         name="to_date"
                         field_name={"to_date"}
+                        to_date={
+                          this.props.props.education.active_education_item
+                            .to_date
+                        }
                       />
                     </div>
                   </div>
@@ -286,6 +294,7 @@ const EditEducationHOC = withFormik({
   },
 
   handleSubmit: (values, props) => {
+    console.log(values);
     const { update_education, history } = props.props.props;
 
     const education_item_id =

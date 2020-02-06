@@ -120,17 +120,21 @@ router.put(
 
     const { experience_id } = req.params;
 
+    const experience_build = {
+      title,
+      company,
+      job_location,
+      from_date,
+      to_date,
+      is_current_job,
+      description
+    };
+
     try {
       let updated_experience = await Experience.findOneAndUpdate(
         { _id: experience_id },
         {
-          title,
-          company,
-          job_location,
-          from_date,
-          to_date,
-          is_current_job,
-          description
+          $set: experience_build
         },
         { new: true }
       );
