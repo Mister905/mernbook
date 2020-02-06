@@ -36,6 +36,12 @@ class Dashboard extends Component {
     M.Modal.init(this.Modal, null);
   };
 
+  componentDidUpdate = prevProps => {
+    if (this.props.post !== prevProps.post) {
+      this.props.get_posts();
+    }
+  };
+
   componentWillUnmount = () => {
     this.props.clear_profile();
     this.props.clear_posts();
@@ -79,51 +85,107 @@ class Dashboard extends Component {
       const active_user_id = this.props.auth.user._id;
       if (posts.length > 0) {
         posts_output = posts.map(post => {
-          console.log(post);
+          const { profile_image_id } = post.profile_id;
+          const { first_name, last_name } = post;
           return (
             <div className="row" key={post._id}>
-              <div className="col m12 s12 card">
-                <div className="card-content">
-                  <div className="row">
-                    <div className="col m9">
-                      <div className="fw-600 post-user">
-                        {post.first_name} {post.last_name}
+              <div className="col s12 m12">
+                <div className="card-panel grey lighten-5 z-depth-1">
+                  <div className="row valign-wrapper">
+                    <div className="col s2 m2">
+                      <img
+                        src={`/api/profile/profile_image/${profile_image_id}`}
+                        alt=""
+                        className="circle responsive-img"
+                      />
+                    </div>
+                    <div className="col s10 m10 offset-m1">
+                      <div className="row">
+                        <div className="col m9">
+                          <div className="fw-600 post-user">
+                            {post.first_name} {post.last_name}
+                          </div>
+                          <div className="post-text">{post.text}</div>
+                        </div>
+                        <div className="col m3">
+                          <Link
+                            to={`/post/${post._id}`}
+                            className="btn btn-mernbook right btn-like flex"
+                          >
+                            <i className="material-icons">chat</i>
+                          </Link>
+                        </div>
                       </div>
-                      <div className="post-text">{post.text}</div>
-                    </div>
-                    <div className="col m3">
-                      <Link
-                        to={`/post/${post._id}`}
-                        className="btn btn-mernbook right btn-like flex"
-                      >
-                        <i className="material-icons">chat</i>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col m12">
-                      <button
-                        onClick={e => this.props.add_like(post._id)}
-                        className="btn btn-mernbook right btn-like flex"
-                      >
-                        <i className="material-icons">thumb_up</i>
-                        {post.likes.length > 0 && (
-                          <span className="length-count">
-                            {post.likes.length}
-                          </span>
-                        )}
-                      </button>
-                      <button
-                        onClick={e => this.props.remove_like(post._id)}
-                        className="btn btn-mernbook right "
-                      >
-                        <i className="material-icons">thumb_down</i>
-                      </button>
+                      <div className="row">
+                        <div className="col m12">
+                          <button
+                            onClick={e => this.props.add_like(post._id)}
+                            className="btn btn-mernbook right btn-like flex"
+                          >
+                            <i className="material-icons">thumb_up</i>
+                            {post.likes.length > 0 && (
+                              <span className="length-count">
+                                {post.likes.length}
+                              </span>
+                            )}
+                          </button>
+                          <button
+                            onClick={e => this.props.remove_like(post._id)}
+                            className="btn btn-mernbook right "
+                          >
+                            <i className="material-icons">thumb_down</i>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            // <div className="row" key={post._id}>
+            //   <div className="col m12 s12 card">
+            //     <div className="card-content">
+            // <div className="row">
+            //   <div className="col m9">
+            //     <div className="fw-600 post-user">
+            //       {post.first_name} {post.last_name}
+            //     </div>
+            //     <div className="post-text">{post.text}</div>
+            //   </div>
+            //   <div className="col m3">
+            //     <Link
+            //       to={`/post/${post._id}`}
+            //       className="btn btn-mernbook right btn-like flex"
+            //     >
+            //       <i className="material-icons">chat</i>
+            //     </Link>
+            //   </div>
+            // </div>
+            // <div className="row">
+            //   <div className="col m12">
+            //     <button
+            //       onClick={e => this.props.add_like(post._id)}
+            //       className="btn btn-mernbook right btn-like flex"
+            //     >
+            //       <i className="material-icons">thumb_up</i>
+            //       {post.likes.length > 0 && (
+            //         <span className="length-count">
+            //           {post.likes.length}
+            //         </span>
+            //       )}
+            //     </button>
+            //     <button
+            //       onClick={e => this.props.remove_like(post._id)}
+            //       className="btn btn-mernbook right "
+            //     >
+            //       <i className="material-icons">thumb_down</i>
+            //     </button>
+            //   </div>
+            // </div>
+            //     </div>
+            //   </div>
+            // </div>
           );
         });
       } else {

@@ -30,9 +30,10 @@ router.post(
     try {
       const user = await User.findById(req.user.id).select("-password");
 
-      const { text } = req.body;
+      const { text, profile_id } = req.body;
 
       const post_build = new Post({
+        profile_id,
         user: req.user.id,
         first_name: user.first_name,
         last_name: user.last_name,
@@ -102,7 +103,9 @@ router.put(
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
-    const posts = await Post.find().sort({ created: -1 });
+    const posts = await Post.find()
+      .sort({ created: -1 })
+      .populate("profile_id", "profile_image_id", Profile);
     return res.send(posts);
   } catch (error) {
     console.log(error.message);

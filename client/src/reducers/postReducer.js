@@ -51,7 +51,7 @@ export default function(state = initial_state, action) {
       return {
         ...state,
         posts: [payload, ...state.posts],
-        loading_posts: false
+        loading_posts: true
       };
     case GET_POSTS_BY_USER_ID:
       return {

@@ -5,7 +5,10 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  // We still want to show the post's user's name even if they've deleted their account
+  profile_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Profile"
+  },
   first_name: {
     type: String
   },

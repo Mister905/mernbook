@@ -34,9 +34,9 @@ class CreatePost extends Component {
 }
 
 const FormikForm = withFormik({
-  mapPropsToValues({ text }) {
+  mapPropsToValues: props => {
     return {
-      post: text || ""
+      text: ""
     };
   },
   validationSchema: Yup.object().shape({
@@ -45,12 +45,18 @@ const FormikForm = withFormik({
   validateOnBlur: false,
   validateOnChange: false,
   handleSubmit: (values, props) => {
-    props.props.create_post(values, props.props.history);
+    const profile_id = props.props.profile.profile._id;
+    props.props.create_post(profile_id, values, props.props.history);
+    props.resetForm();
   }
 })(CreatePost);
 
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
 export default compose(
-  connect(null, {
+  connect(mapStateToProps, {
     create_post
   }),
   withRouter

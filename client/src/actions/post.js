@@ -22,12 +22,18 @@ export const get_posts = () => async dispatch => {
   }
 };
 
-export const create_post = (form_data, history) => async dispatch => {
+export const create_post = (
+  profile_id,
+  form_data,
+  history
+) => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
+
+  form_data.profile_id = profile_id;
 
   let request_body = JSON.stringify(form_data);
 
