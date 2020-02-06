@@ -91,7 +91,7 @@ class Dashboard extends Component {
                       </div>
                       <div className="post-text">{post.text}</div>
                     </div>
-                    <div className="col m6">
+                    <div className="col m3">
                       <Link
                         to={`/post/${post._id}`}
                         className="btn btn-mernbook right btn-like flex"
